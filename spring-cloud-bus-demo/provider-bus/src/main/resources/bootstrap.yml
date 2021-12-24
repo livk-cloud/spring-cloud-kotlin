@@ -1,0 +1,19 @@
+server:
+  port: 6076
+spring:
+  application:
+    name: provider-bus
+#  rabbitmq:
+#    host: livk.com
+#    username: admin
+#    password: admin
+  kafka:
+    bootstrap-servers: livk.com:9092
+  cloud:
+    nacos:
+      discovery:
+        server-addr: livk.com:8848
+  profiles:
+    active: dev
+
+

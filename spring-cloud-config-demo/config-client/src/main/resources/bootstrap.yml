@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      //指向config-server地址
+      uri: http://localhost:8769
+      fail-fast: true
+      label: develop
+  profiles:
+    active: dev

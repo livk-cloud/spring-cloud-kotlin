@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'java-library'
+}
+
+group = 'com.livk'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+dependencies {
+    api project(':spring-common')
+    api 'org.springframework.cloud:spring-cloud-starter-bus-stream'
+//    api 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+    api 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    api 'org.springframework.boot:spring-boot-starter-webflux'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: jdbc
+  application:
+    name: config-jdbc-server
+  datasource:
+    url: jdbc:mysql://livk.com:3306/config_jdbc?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    config:
+      server:
+        jdbc:
+          enabled: true
+          sql: SELECT livk_key, livk_value from config_properties where APPLICATION=? and PROFILE=? and LABEL=?
+
+server:
+  port: 8769

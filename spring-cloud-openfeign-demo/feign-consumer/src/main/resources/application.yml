@@ -1,0 +1,22 @@
+spring:
+  redis:
+    host: livk.com
+    password: 123456
+  application:
+    name: feign-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: livk.com:8848
+server:
+  port: 8661
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+
+logging:
+  level:
+    com.livk.provider.api.feign: debug
