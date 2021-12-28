@@ -35,4 +35,5 @@ include 'spring-cloud-openfeign-demo:feign-provider:feign-provider-biz'
 findProject(':spring-cloud-openfeign-demo:feign-provider:feign-provider-biz')?.name = 'feign-provider-biz'
 include 'spring-cloud-openfeign-demo:feign-consumer'
 findProject(':spring-cloud-openfeign-demo:feign-consumer')?.name = 'feign-consumer'
+include 'spring-cloud-square-demo'
 

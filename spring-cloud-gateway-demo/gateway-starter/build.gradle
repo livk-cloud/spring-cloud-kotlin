@@ -14,6 +14,7 @@ dependencies {
     compileOnly 'org.springframework.cloud:spring-cloud-gateway-server'
     compileOnly 'org.springframework:spring-webflux'
     api 'org.springframework.cloud:spring-cloud-commons'
+    api 'com.fasterxml.jackson.core:jackson-databind'
 }
 
 test {
