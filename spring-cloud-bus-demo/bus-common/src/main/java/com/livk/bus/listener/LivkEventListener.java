@@ -1,5 +1,6 @@
-package com.livk.bus.event;
+package com.livk.bus.listener;
 
+import com.livk.bus.event.LivkBusEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.lang.Nullable;

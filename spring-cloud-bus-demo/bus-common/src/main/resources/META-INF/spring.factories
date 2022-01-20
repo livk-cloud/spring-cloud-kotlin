@@ -1,4 +1,3 @@
-org.springframework.context.ApplicationListener=\
-    com.livk.bus.event.LivkEventListener
+
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
     com.livk.bus.LivkBusConfiguration

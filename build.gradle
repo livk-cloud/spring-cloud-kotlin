@@ -9,7 +9,7 @@ apply plugin: 'java'
 apply plugin: 'java-library'
 group = 'com.livk'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 17
+sourceCompatibility = JavaVersion.VERSION_17
 
 buildscript {
     ext {
@@ -17,7 +17,7 @@ buildscript {
         set('springCloudVersion', "2021.0.0")
         set('springCloudAlibabaVersion', '2021.1')
         set('pagehelperVersion', '1.4.1')
-        set('mpVersion', "3.4.3.4")
+        set('mpVersion', "3.5.0")
         set('swaggerVersion', '3.0.0')
     }
 
@@ -36,6 +36,8 @@ allprojects {
         mavenCentral()
     }
 
+//    sourceSets.main.resources.srcDirs = ["src/main/java","src/main/resources"]
+
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
     }
@@ -44,7 +46,6 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'org.springframework.boot'
 
     dependencyManagement {
         imports {

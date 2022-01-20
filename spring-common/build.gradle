@@ -6,7 +6,13 @@ plugins {
 
 group = 'com.livk'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = JavaVersion.VERSION_17
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
 
 dependencies {
     compileOnly 'org.springframework.boot:spring-boot-starter'

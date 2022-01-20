@@ -22,11 +22,12 @@ import java.util.*;
 @Slf4j
 @RequiredArgsConstructor
 public class GatewaySwaggerProvider implements SwaggerResourcesProvider {
-    /**
-     * Swagger3默认的url后缀(v3有问题)
-     */
-    public static final String SWAGGER2URL = "/v2/api-docs";
 
+    public static final String SWAGGER2URL = "/v2/api-docs";
+    /**
+     * Swagger3默认的url后缀
+     * V3采用新的OPENAPI规则，这样缺失了BaseUrl
+     */
     public static final String SWAGGER3URL = "/v3/api-docs";
 
     private final RouteDefinitionRepository routeDefinitionRepository;
@@ -45,7 +46,7 @@ public class GatewaySwaggerProvider implements SwaggerResourcesProvider {
                         .filter(predicateDefinition -> "Path".equalsIgnoreCase(predicateDefinition.getName()))
                         .filter(predicateDefinition -> !predicateDefinition.getArgs().isEmpty())
                         .map(predicateDefinition -> {
-                            Map<String, String> args = predicateDefinition.getArgs();
+                            var args = predicateDefinition.getArgs();
                             var pattern = Optional.ofNullable(args.get("pattern"))
                                     .orElse(args.get(NameUtils.GENERATED_NAME_PREFIX + "0"));
                             return swaggerResource(routeDefinition.getId(), pattern.replace("/**", SWAGGER2URL));
@@ -55,7 +56,7 @@ public class GatewaySwaggerProvider implements SwaggerResourcesProvider {
     private SwaggerResource swaggerResource(String name, String location) {
         var swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
-        swaggerResource.setLocation(location);
+        swaggerResource.setUrl(location);
         swaggerResource.setSwaggerVersion("2.0");
         return swaggerResource;
     }

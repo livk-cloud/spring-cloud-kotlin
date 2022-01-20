@@ -4,8 +4,8 @@ import com.livk.provider.api.domain.Users;
 import com.livk.provider.api.feign.UserRemoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * <p>
@@ -23,12 +23,12 @@ public class UserController {
     private final UserRemoteService userRemoteService;
 
     @GetMapping
-    public List<Users> users() {
+    public Flux<Users> users() {
         return userRemoteService.users();
     }
 
     @PostMapping
-    public Boolean save(@RequestBody Users users) {
+    public Mono<Boolean> save(@RequestBody Users users) {
         return userRemoteService.save(users);
     }
 }

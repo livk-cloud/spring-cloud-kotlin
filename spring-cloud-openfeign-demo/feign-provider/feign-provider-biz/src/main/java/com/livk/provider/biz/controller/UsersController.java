@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * <p>
@@ -24,15 +24,15 @@ public class UsersController {
 
     private final UserMapper userMapper;
 
-    @Cacheable(value = "users", key = "'user:all'", unless = "#result.empty")
+    @Cacheable(value = "users", key = "'user:all'")
     @GetMapping
-    public List<Users> users() {
-        return userMapper.selectList(null);
+    public Flux<Users> users() {
+        return Flux.fromIterable(userMapper.selectList(null));
     }
 
     @PostMapping
-    public Boolean save(@RequestBody Users users) {
-        return userMapper.insert(users) != 0;
+    public Mono<Boolean> save(@RequestBody Users users) {
+        return Mono.just(userMapper.insert(users) != 0);
     }
 
     @CacheEvict(value = "users", key = "'user:all'")
