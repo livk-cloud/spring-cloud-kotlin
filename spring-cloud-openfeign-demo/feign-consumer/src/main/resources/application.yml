@@ -5,9 +5,10 @@ spring:
   application:
     name: feign-consumer
   cloud:
-    nacos:
+    consul:
       discovery:
-        server-addr: livk.com:8848
+        service-name: ${spring.application.name}
+      host: livk.com
 server:
   port: 8661
 

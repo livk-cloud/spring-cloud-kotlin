@@ -17,7 +17,7 @@ dependencies {
     api project(':spring-common')
     api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     api 'org.springframework.cloud:spring-cloud-starter-config'
-    api 'org.springframework.boot:spring-boot-starter-webflux'
+    api 'org.springframework.boot:spring-boot-starter-web'
 }
 
 test {

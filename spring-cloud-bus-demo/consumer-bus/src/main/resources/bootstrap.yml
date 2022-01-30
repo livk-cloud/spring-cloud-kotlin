@@ -10,9 +10,10 @@ spring:
   kafka:
     bootstrap-servers: livk.com:9092
   cloud:
-    nacos:
+    consul:
       discovery:
-        server-addr: livk.com:8848
+        service-name: ${spring.application.name}
+      host: livk.com
   profiles:
     active: dev
 

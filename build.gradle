@@ -13,9 +13,8 @@ sourceCompatibility = JavaVersion.VERSION_17
 
 buildscript {
     ext {
-        set('springBootVersion', '2.6.2')
-        set('springCloudVersion', "2021.0.0")
-        set('springCloudAlibabaVersion', '2021.1')
+        set('springBootVersion', '3.0.0-M1')
+        set('springCloudVersion', "2022.0.0-M1")
         set('pagehelperVersion', '1.4.1')
         set('mpVersion', "3.5.0")
         set('swaggerVersion', '3.0.0')
@@ -51,7 +50,6 @@ subprojects {
         imports {
             mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
         }
         dependencies {
             dependency "com.github.pagehelper:pagehelper-spring-boot-starter:${pagehelperVersion}"
