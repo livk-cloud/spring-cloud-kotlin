@@ -7,7 +7,6 @@ import org.springframework.boot.SpringBootVersion;
 import org.springframework.core.env.Environment;
 
 import java.io.PrintStream;
-import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Consumer;

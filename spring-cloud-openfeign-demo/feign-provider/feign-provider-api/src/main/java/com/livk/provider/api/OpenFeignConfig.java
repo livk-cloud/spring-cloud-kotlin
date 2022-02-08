@@ -29,6 +29,7 @@ public class OpenFeignConfig {
 
     @Bean
     Logger.Level feignLoggerLevel() {
+        System.setProperty("logging.level.com.livk.provider.api.feign","debug");
         return Logger.Level.FULL;
     }
 

@@ -3,9 +3,12 @@ package com.livk.consumer.biz.controller;
 import com.livk.provider.api.domain.Users;
 import com.livk.provider.api.feign.UserRemoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /**
  * <p>
@@ -23,12 +26,12 @@ public class UserController {
     private final UserRemoteService userRemoteService;
 
     @GetMapping
-    public Flux<Users> users() {
+    public List<Users> users() {
         return userRemoteService.users();
     }
 
     @PostMapping
-    public Mono<Boolean> save(@RequestBody Users users) {
+    public Boolean save(@RequestBody Users users) {
         return userRemoteService.save(users);
     }
 }

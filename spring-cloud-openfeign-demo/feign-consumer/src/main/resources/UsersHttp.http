@@ -1,0 +1,10 @@
+POST http://localhost:8661/user
+Content-Type: application/json
+
+{
+  "username": "fake_data",
+  "password": "fake_data"
+}
+
+#####
+GET http://localhost:8661/user

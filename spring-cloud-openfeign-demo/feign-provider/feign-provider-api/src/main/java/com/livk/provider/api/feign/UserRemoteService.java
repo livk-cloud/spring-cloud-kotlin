@@ -5,11 +5,14 @@ import com.livk.provider.api.feign.factory.UserRemoteServiceFallbackFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /**
  * <p>
@@ -23,11 +26,11 @@ import reactor.core.publisher.Mono;
         fallbackFactory = UserRemoteServiceFallbackFactory.class)
 public interface UserRemoteService {
 
-    @Cacheable(value = "users", key = "'user:all'", unless = "#result.empty")
+    @Cacheable(value = "users", key = "'user:all'" ,unless = "#result.empty")
     @GetMapping("/users")
-    Flux<Users> users();
+    List<Users> users();
 
     @CacheEvict(value = "users", key = "'user:all'")
     @PostMapping("/users")
-    Mono<Boolean> save(@RequestBody Users users);
+    Boolean save(@RequestBody Users users);
 }

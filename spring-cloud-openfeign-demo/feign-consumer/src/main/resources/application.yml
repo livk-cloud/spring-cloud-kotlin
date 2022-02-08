@@ -8,6 +8,8 @@ spring:
     consul:
       discovery:
         service-name: ${spring.application.name}
+        heartbeat:
+          enabled: true
       host: livk.com
 server:
   port: 8661

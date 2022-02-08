@@ -5,9 +5,13 @@ import com.livk.provider.biz.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /**
  * <p>
@@ -26,13 +30,13 @@ public class UsersController {
 
     @Cacheable(value = "users", key = "'user:all'")
     @GetMapping
-    public Flux<Users> users() {
-        return Flux.fromIterable(userMapper.selectList(null));
+    public List<Users> users() {
+        return userMapper.selectList(null);
     }
 
     @PostMapping
-    public Mono<Boolean> save(@RequestBody Users users) {
-        return Mono.just(userMapper.insert(users) != 0);
+    public Boolean save(@RequestBody Users users) {
+        return userMapper.insert(users) != 0;
     }
 
     @CacheEvict(value = "users", key = "'user:all'")
