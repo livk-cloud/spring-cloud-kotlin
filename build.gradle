@@ -16,7 +16,7 @@ buildscript {
         set('springBootVersion', '3.0.0-M1')
         set('springCloudVersion', "2022.0.0-M1")
         set('pagehelperVersion', '1.4.1')
-        set('mpVersion', "3.5.0")
+        set('mpVersion', "3.5.1")
         set('swaggerVersion', '3.0.0')
     }
 

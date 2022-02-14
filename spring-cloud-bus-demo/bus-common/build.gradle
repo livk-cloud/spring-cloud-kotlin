@@ -15,6 +15,7 @@ dependencies {
     api 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
 //    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
     api 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
+    api 'org.springframework.cloud:spring-cloud-starter-consul-config'
     api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     api 'org.springframework.boot:spring-boot-starter-web'
 }

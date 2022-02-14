@@ -7,15 +7,30 @@ spring:
 #    host: livk.com
 #    username: admin
 #    password: admin
-  kafka:
-    bootstrap-servers: livk.com:9092
+#  kafka:
+#    bootstrap-servers: livk.com:9092
   cloud:
     consul:
+      host: livk.com
       discovery:
         service-name: ${spring.application.name}
         heartbeat:
           enabled: true
-      host: livk.com
+        instance-id: ${spring.application.name}-01
+        port: ${server.port}
+        prefer-ip-address: true
+        register: true
+        heartbeat:
+          enabled: true
+      config:
+        enabled: true
+        prefixes: spring-cloud-demo
+        format: yaml
+        data-key: consumer-bus
+        watch:
+          enabled: true
+          delay: 1000
+        default-context: spring-cloud-bus-demo
   profiles:
     active: dev
 
