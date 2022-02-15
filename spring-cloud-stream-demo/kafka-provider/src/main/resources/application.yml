@@ -1,0 +1,18 @@
+server:
+  port: 7888
+spring:
+  profiles:
+    active: dev
+  application:
+    name: kafka-provider
+  kafka:
+    bootstrap-servers: livk.com:9092
+  cloud:
+    consul:
+      host: livk.com
+      discovery:
+        heartbeat:
+          enabled: true
+        service-name: ${spring.application.name}
+
+
