@@ -14,8 +14,6 @@ spring:
       host: livk.com
       discovery:
         service-name: ${spring.application.name}
-        heartbeat:
-          enabled: true
         instance-id: ${spring.application.name}-01
         port: ${server.port}
         prefer-ip-address: true
