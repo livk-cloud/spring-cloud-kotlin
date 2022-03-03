@@ -36,11 +36,6 @@ findProject(':spring-cloud-openfeign-demo:feign-provider:feign-provider-biz')?.n
 include 'spring-cloud-openfeign-demo:feign-consumer'
 findProject(':spring-cloud-openfeign-demo:feign-consumer')?.name = 'feign-consumer'
 include 'spring-cloud-square-demo'
-include 'spring-cloud-stream-demo'
-include 'spring-cloud-stream-demo:kafka-provider'
-findProject(':spring-cloud-stream-demo:kafka-provider')?.name = 'kafka-provider'
-include 'spring-cloud-stream-demo:kafka-common'
-findProject(':spring-cloud-stream-demo:kafka-common')?.name = 'kafka-common'
-include 'spring-cloud-stream-demo:kafka-consumer'
-findProject(':spring-cloud-stream-demo:kafka-consumer')?.name = 'kafka-consumer'
+include 'spring-cloud-config-demo:config-server-two'
+findProject(':spring-cloud-config-demo:config-server-two')?.name = 'config-server-two'
 
