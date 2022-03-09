@@ -28,5 +28,4 @@ public class KafkaConsumer {
     public Consumer<Flux<KafkaMessage<String>>> send() {
         return kafkaMessageFlux -> kafkaMessageFlux.subscribe(kafkaMessage->log.info("[{}]", kafkaMessage));
     }
-
 }

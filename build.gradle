@@ -13,8 +13,10 @@ sourceCompatibility = JavaVersion.VERSION_17
 
 buildscript {
     ext {
-        set('springBootVersion', '3.0.0-M1')
-        set('springCloudVersion', "2022.0.0-M1")
+//        set('springBootVersion', '3.0.0-M1')
+//        set('springCloudVersion', "2022.0.0-M1")
+        set('springBootVersion', '2.6.4')
+        set('springCloudVersion', "2021.0.1")
         set('pagehelperVersion', '1.4.1')
         set('mpVersion', "3.5.1")
         set('swaggerVersion', '3.0.0')

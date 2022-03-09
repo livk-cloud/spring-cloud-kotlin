@@ -4,7 +4,6 @@ import com.livk.stream.entity.KafkaMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
@@ -16,7 +15,7 @@ import java.util.UUID;
  * @author livk
  * @date 2022/2/15
  */
-@Component
+//@Component
 @RequiredArgsConstructor
 public class SendMessage {
 

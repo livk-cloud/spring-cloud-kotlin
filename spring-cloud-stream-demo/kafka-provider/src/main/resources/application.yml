@@ -14,5 +14,9 @@ spring:
         heartbeat:
           enabled: true
         service-name: ${spring.application.name}
-
+    stream:
+      bindings:
+        send-out-0:
+          destination: livk-topic
+          content-type: application/json
 

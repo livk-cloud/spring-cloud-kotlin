@@ -18,4 +18,4 @@ spring:
       bindings:
         send-in-0:
           destination: livk-topic
-          content-type: text/plain
+          content-type: application/json
