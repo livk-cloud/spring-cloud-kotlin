@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'java-library'
+}
+
+group = 'com.livk'
+version = '0.0.1-SNAPSHOT'
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
+dependencies {
+    api 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+}
+
+test {
+    useJUnitPlatform()
+}

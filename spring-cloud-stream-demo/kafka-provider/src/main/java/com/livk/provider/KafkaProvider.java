@@ -39,6 +39,6 @@ public class KafkaProvider {
 
     @Bean
     public Supplier<Flux<KafkaMessage<String>>> send() {
-        return () -> buffer.asFlux();
+        return buffer::asFlux;
     }
 }
