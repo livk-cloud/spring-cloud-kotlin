@@ -13,18 +13,21 @@ sourceCompatibility = JavaVersion.VERSION_17
 
 buildscript {
     ext {
-//        set('springBootVersion', '3.0.0-M1')
-//        set('springCloudVersion', "2022.0.0-M1")
-        set('springBootVersion', '2.6.4')
-        set('springCloudVersion', "2021.0.1")
+        set('springBootVersion', '3.0.0-SNAPSHOT')
+        set('springCloudVersion', "2022.0.0-SNAPSHOT")
+//        set('springBootVersion', '2.6.4')
+//        set('springCloudVersion', "2021.0.1")
         set('pagehelperVersion', '1.4.1')
         set('mpVersion', "3.5.1")
         set('swaggerVersion', '3.0.0')
     }
 
     repositories {
-        mavenCentral()
+        mavenLocal()
         maven { url 'https://repo.spring.io/libs-snapshot/' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://repo.spring.io/release'}
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -34,7 +37,11 @@ buildscript {
 allprojects {
 
     repositories {
-        mavenCentral()
+        mavenLocal()
+        maven { url 'https://repo.spring.io/libs-snapshot/' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://repo.spring.io/release'}
     }
 
 //    sourceSets.main.resources.srcDirs = ["src/main/java","src/main/resources"]
