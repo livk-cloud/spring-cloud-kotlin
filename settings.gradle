@@ -23,5 +23,4 @@ include 'spring-cloud-stream-demo:kafka-consumer'
 include 'spring-cloud-stream-demo:kafka-provider'
 include 'spring-cloud-resilience4j-demo'
 include 'spring-cloud-resilience4j-demo:resilience4j-common'
-findProject(':spring-cloud-resilience4j-demo:resilience4j-common')?.name = 'resilience4j-common'
 
