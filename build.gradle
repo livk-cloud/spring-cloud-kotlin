@@ -21,6 +21,7 @@ buildscript {
 
     repositories {
         mavenLocal()
+        maven { url 'https://repo.spring.io/libs-snapshot/' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://plugins.gradle.org/m2/' }
         maven { url 'https://repo.spring.io/release'}
@@ -34,6 +35,7 @@ allprojects {
 
     repositories {
         mavenLocal()
+        maven { url 'https://repo.spring.io/libs-snapshot/' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://plugins.gradle.org/m2/' }
         maven { url 'https://repo.spring.io/release'}
