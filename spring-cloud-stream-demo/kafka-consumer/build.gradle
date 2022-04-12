@@ -1,17 +1,5 @@
-plugins {
-    id 'java'
-    id 'java-library'
-    id 'org.springframework.boot'
-    id 'io.spring.dependency-management'
-}
-
-group = 'com.livk'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_17
-
-jar {
-    manifest.attributes provider: 'gradle'
-}
+apply plugin: 'java-library'
+apply plugin: 'org.springframework.boot'
 
 dependencies {
     api project(':spring-cloud-stream-demo:kafka-common')

@@ -1,18 +1,4 @@
-plugins {
-    id 'java'
-    id 'idea'
-    id 'java-library'
-}
-
-group = 'com.livk'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_17
-
-idea {
-    module {
-        inheritOutputDirs = true
-    }
-}
+apply plugin: 'java-library'
 
 dependencies {
     compileOnly 'org.springframework.boot:spring-boot-starter'
