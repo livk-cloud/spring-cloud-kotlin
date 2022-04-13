@@ -21,7 +21,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class ConsumerBus {
 
 	public static void main(String[] args) {
-		LivkSpring.runServlet(ConsumerBus.class, args);
+		LivkSpring.run(ConsumerBus.class, args);
 	}
 
 }

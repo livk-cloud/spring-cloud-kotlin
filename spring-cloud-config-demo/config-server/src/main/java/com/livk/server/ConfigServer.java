@@ -16,7 +16,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 public class ConfigServer {
 
 	public static void main(String[] args) {
-		LivkSpring.runReactive(ConfigServer.class, args);
+		LivkSpring.run(ConfigServer.class, args);
 	}
 
 }

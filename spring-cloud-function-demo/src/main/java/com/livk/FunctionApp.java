@@ -17,7 +17,7 @@ import java.util.function.Function;
 @SpringBootApplication
 public class FunctionApp {
     public static void main(String[] args) {
-        LivkSpring.runServlet(FunctionApp.class, args);
+        LivkSpring.run(FunctionApp.class, args);
     }
 
     @Bean

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: square-provider
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        heartbeat:
+          enabled: true
+      host: livk.com
+
+server:
+  port: 8671

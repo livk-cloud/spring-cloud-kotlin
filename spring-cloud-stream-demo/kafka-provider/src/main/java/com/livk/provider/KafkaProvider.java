@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 @SpringBootApplication
 public class KafkaProvider {
     public static void main(String[] args) {
-        LivkSpring.runServlet(KafkaProvider.class, args);
+        LivkSpring.run(KafkaProvider.class, args);
     }
 
     Sinks.Many<KafkaMessage<String>> buffer = Sinks.many().multicast().onBackpressureBuffer();

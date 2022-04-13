@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 @SpringBootApplication
 public class KafkaConsumer {
     public static void main(String[] args) {
-        LivkSpring.runServlet(KafkaConsumer.class, args);
+        LivkSpring.run(KafkaConsumer.class, args);
     }
 
     @Bean

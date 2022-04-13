@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConfigClient {
 
 	public static void main(String[] args) {
-		LivkSpring.runReactive(ConfigClient.class, args);
+		LivkSpring.run(ConfigClient.class, args);
 	}
 
 	@Value("${foo}")

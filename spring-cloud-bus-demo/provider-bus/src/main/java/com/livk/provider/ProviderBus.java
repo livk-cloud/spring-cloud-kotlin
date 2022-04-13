@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProviderBus {
 
     public static void main(String[] args) {
-        LivkSpring.runServlet(ProviderBus.class, args);
+        LivkSpring.run(ProviderBus.class, args);
     }
 
 }

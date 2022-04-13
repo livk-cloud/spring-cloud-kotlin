@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation project(':spring-cloud-square-demo:square-common')
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.cloud:spring-cloud-square-retrofit-webclient:0.4.1'
+}
+
+test {
+    useJUnitPlatform()
+}
