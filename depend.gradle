@@ -27,7 +27,8 @@ ext {
 
     mavenBom = [
             "org.springframework.boot:spring-boot-dependencies:${springBootVersion}",
-            "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}",
+            "org.springframework.cloud:spring-cloud-square-dependencies:${squareVersion}"
     ]
 
     dependency = [

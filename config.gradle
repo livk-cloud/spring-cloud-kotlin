@@ -4,4 +4,5 @@ ext {
     set('pagehelperVersion', '1.4.1')
     set('mpVersion', "3.5.1")
     set('swaggerVersion', '3.0.0')
+    set('squareVersion', '0.4.1')
 }
