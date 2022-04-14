@@ -28,7 +28,7 @@ public class LivkRedisRouteDefinitionRepository implements RouteDefinitionReposi
     private final ReactiveHashOperations<String, String, RouteDefinition> reactiveHashOperations;
 
     public LivkRedisRouteDefinitionRepository(LivkReactiveRedisTemplate livkReactiveRedisTemplate) {
-        reactiveHashOperations = livkReactiveRedisTemplate.opsForHash();
+        reactiveHashOperations = livkReactiveRedisTemplate.opsForHash(RedisSerialization.json(RouteDefinition.class));
     }
 
     /**
