@@ -35,5 +35,6 @@ ext {
             "com.baomidou:mybatis-plus-boot-starter:${mpVersion}",
             "com.baomidou:mybatis-plus:${mpVersion}",
             "io.springfox:springfox-boot-starter:${swaggerVersion}",
+            "org.burningwave:core:${burningwaveVersion}",
     ]
 }
