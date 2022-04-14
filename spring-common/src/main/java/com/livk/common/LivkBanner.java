@@ -43,10 +43,10 @@ public class LivkBanner implements Banner {
             out.println(line);
         }
         var format = Format.create(out, 70);
-        format.accept("Spring Boot Version: " + SpringBootVersion.getVersion());
-        format.accept("Current time: " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
-        format.accept("Current JDK Version: " + System.getProperty("java.version"));
-        format.accept("Operating System: " + System.getProperty("os.name"));
+        format.accept(" Spring Boot Version: " + SpringBootVersion.getVersion()+" ");
+        format.accept(" Current time: " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now())+" ");
+        format.accept(" Current JDK Version: " + System.getProperty("java.version")+" ");
+        format.accept(" Operating System: " + System.getProperty("os.name")+" ");
         out.flush();
     }
 
@@ -57,11 +57,11 @@ public class LivkBanner implements Banner {
     private record Format(int n, PrintStream out, char ch) implements Function<String, String>, Consumer<String> {
         @Override
         public String apply(String str) {
-            int length = str.length();
+            var length = str.length();
             if (length >= n) {
                 return str;
             }
-            int index = (n - length) >> 1;
+            var index = (n - length) >> 1;
             str = StringUtils.leftPad(str, length + index, ch);
             return StringUtils.rightPad(str, n, ch);
         }

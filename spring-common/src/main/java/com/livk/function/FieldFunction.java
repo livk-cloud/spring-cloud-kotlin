@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 import java.util.function.Function;
 
 /**
- * <p>此接口必须继承{@link java.io.Serializable}</p>
+ * <p>此接口必须继承{@link Serializable}</p>
  * <p>否则出现丢失writeReplace()方法</p>
  *
  * @author livk
