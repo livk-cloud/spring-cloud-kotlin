@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'java-library'
 apply from: "$rootDir/depend.gradle"
 
 def managementMavenBom = project.ext.mavenBom
@@ -12,8 +11,6 @@ def testCompileOnlyDependency = project.ext.testCompileOnly
 def testAnnotationProcessorDependency = project.ext.testAnnotationProcessor
 
 buildscript {
-    apply from: "$rootDir/config.gradle"
-
     repositories {
         mavenLocal()
         maven { url 'https://repo.spring.io/milestone' }
@@ -46,6 +43,7 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'java-library'
     apply plugin: 'io.spring.dependency-management'
 
     dependencyManagement {

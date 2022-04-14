@@ -1,5 +1,3 @@
-apply plugin: 'java-library'
-
 dependencies {
     compileOnly 'org.springframework.boot:spring-boot-starter'
     compileOnly 'com.github.pagehelper:pagehelper-spring-boot-starter'

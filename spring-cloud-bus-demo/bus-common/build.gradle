@@ -1,11 +1,8 @@
-apply plugin: 'java-library'
-
 dependencies {
     api project(':spring-common')
     api 'org.springframework.cloud:spring-cloud-starter-bus-stream'
 //    api 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
     api 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
-//    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
     api 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
     api 'org.springframework.cloud:spring-cloud-starter-consul-config'
     api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
