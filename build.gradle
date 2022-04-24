@@ -42,6 +42,7 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library'
+    apply plugin: 'livk.resources.plugin'
     apply plugin: 'io.spring.dependency-management'
 
     dependencyManagement {
