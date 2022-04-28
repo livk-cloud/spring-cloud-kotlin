@@ -23,15 +23,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserRemoteService userRemoteService;
+	private final UserRemoteService userRemoteService;
 
-    @GetMapping
-    public List<Users> users() {
-        return userRemoteService.users();
-    }
+	@GetMapping
+	public List<Users> users() {
+		return userRemoteService.users();
+	}
 
-    @PostMapping
-    public Boolean save(@RequestBody Users users) {
-        return userRemoteService.save(users);
-    }
+	@PostMapping
+	public Boolean save(@RequestBody Users users) {
+		return userRemoteService.save(users);
+	}
+
 }

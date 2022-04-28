@@ -13,7 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class RetrofitWebfluxConsumerApp {
-    public static void main(String[] args) {
-        LivkSpring.run(RetrofitWebfluxConsumerApp.class, args);
-    }
+
+	public static void main(String[] args) {
+		LivkSpring.run(RetrofitWebfluxConsumerApp.class, args);
+	}
+
 }

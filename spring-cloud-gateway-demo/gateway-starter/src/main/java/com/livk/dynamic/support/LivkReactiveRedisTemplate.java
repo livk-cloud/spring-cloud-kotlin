@@ -13,15 +13,19 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
  * @date 2021/12/28
  */
 public class LivkReactiveRedisTemplate extends ReactiveRedisTemplate<String, Object> {
-    public LivkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {
-        this(connectionFactory, RedisSerialization.json());
-    }
 
-    public LivkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory, RedisSerializationContext<String, Object> serializationContext) {
-        super(connectionFactory, serializationContext);
-    }
+	public LivkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {
+		this(connectionFactory, RedisSerialization.json());
+	}
 
-    public LivkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory, RedisSerializationContext<String, Object> serializationContext, boolean exposeConnection) {
-        super(connectionFactory, serializationContext, exposeConnection);
-    }
+	public LivkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory,
+			RedisSerializationContext<String, Object> serializationContext) {
+		super(connectionFactory, serializationContext);
+	}
+
+	public LivkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory,
+			RedisSerializationContext<String, Object> serializationContext, boolean exposeConnection) {
+		super(connectionFactory, serializationContext, exposeConnection);
+	}
+
 }

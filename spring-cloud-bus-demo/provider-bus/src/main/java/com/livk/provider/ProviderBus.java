@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDiscoveryClient
 public class ProviderBus {
 
-    public static void main(String[] args) {
-        LivkSpring.run(ProviderBus.class, args);
-    }
+	public static void main(String[] args) {
+		LivkSpring.run(ProviderBus.class, args);
+	}
 
 }
 
@@ -34,14 +34,14 @@ public class ProviderBus {
 @RequiredArgsConstructor
 class BusController {
 
-    private final ApplicationContext applicationContext;
+	private final ApplicationContext applicationContext;
 
-    private final BusProperties busProperties;
+	private final BusProperties busProperties;
 
-    @GetMapping("refresh")
-    public void refresh() {
-        applicationContext.publishEvent(new LivkBusEvent("livk", busProperties.getId(), () -> "consumer-bus:6077:**"));
-        log.info("event publish!");
-    }
+	@GetMapping("refresh")
+	public void refresh() {
+		applicationContext.publishEvent(new LivkBusEvent("livk", busProperties.getId(), () -> "consumer-bus:6077:**"));
+		log.info("event publish!");
+	}
 
 }

@@ -31,7 +31,8 @@ public class Jackson2RedisSerializationContext<T> implements RedisSerialization<
 	@NonNull
 	@Override
 	public <HV> RedisSerializationContext.SerializationPair<HV> getHashValueSerializationPair() {
-		return (RedisSerializationContext.SerializationPair<HV>) RedisSerializationContext.SerializationPair.fromSerializer(serializer);
+		return (RedisSerializationContext.SerializationPair<HV>) RedisSerializationContext.SerializationPair
+				.fromSerializer(serializer);
 	}
 
 }

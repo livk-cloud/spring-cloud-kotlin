@@ -27,18 +27,18 @@ import java.util.concurrent.TimeUnit;
 @AutoConfigureBefore(FeignAutoConfiguration.class)
 public class OpenFeignConfig {
 
-    @Bean
-    Logger.Level feignLoggerLevel() {
-        System.setProperty("logging.level.com.livk.provider.api.feign","debug");
-        return Logger.Level.FULL;
-    }
+	@Bean
+	Logger.Level feignLoggerLevel() {
+		System.setProperty("logging.level.com.livk.provider.api.feign", "debug");
+		return Logger.Level.FULL;
+	}
 
-    @Bean
-    public okhttp3.OkHttpClient okHttpClient(OkHttpClientFactory okHttpClientFactory,
-                                             FeignHttpClientProperties httpClientProperties) {
-        return okHttpClientFactory.createBuilder(httpClientProperties.isDisableSslValidation())
-                .connectTimeout(httpClientProperties.getConnectionTimeout(), TimeUnit.SECONDS)
-                .followRedirects(httpClientProperties.isFollowRedirects())
-                .build();
-    }
+	@Bean
+	public okhttp3.OkHttpClient okHttpClient(OkHttpClientFactory okHttpClientFactory,
+			FeignHttpClientProperties httpClientProperties) {
+		return okHttpClientFactory.createBuilder(httpClientProperties.isDisableSslValidation())
+				.connectTimeout(httpClientProperties.getConnectionTimeout(), TimeUnit.SECONDS)
+				.followRedirects(httpClientProperties.isFollowRedirects()).build();
+	}
+
 }

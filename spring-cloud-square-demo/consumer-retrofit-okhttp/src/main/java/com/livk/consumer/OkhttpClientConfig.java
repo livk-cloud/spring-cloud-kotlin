@@ -18,9 +18,10 @@ import org.springframework.context.annotation.Configuration;
 @EnableRetrofitClients
 public class OkhttpClientConfig {
 
-    @Bean
-    @LoadBalanced
-    public OkHttpClient.Builder okHttpClientBuilder() {
-        return new OkHttpClient.Builder();
-    }
+	@Bean
+	@LoadBalanced
+	public OkHttpClient.Builder okHttpClientBuilder() {
+		return new OkHttpClient.Builder();
+	}
+
 }

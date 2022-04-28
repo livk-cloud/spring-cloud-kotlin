@@ -23,14 +23,15 @@ import java.util.List;
  * @date 2021/12/6
  */
 @FeignClient(contextId = "userRemoteService", value = "feign-provider-biz",
-        fallbackFactory = UserRemoteServiceFallbackFactory.class)
+		fallbackFactory = UserRemoteServiceFallbackFactory.class)
 public interface UserRemoteService {
 
-    @Cacheable(value = "users", key = "'user:all'" ,unless = "#result.empty")
-    @GetMapping("/users")
-    List<Users> users();
+	@Cacheable(value = "users", key = "'user:all'", unless = "#result.empty")
+	@GetMapping("/users")
+	List<Users> users();
 
-    @CacheEvict(value = "users", key = "'user:all'")
-    @PostMapping("/users")
-    Boolean save(@RequestBody Users users);
+	@CacheEvict(value = "users", key = "'user:all'")
+	@PostMapping("/users")
+	Boolean save(@RequestBody Users users);
+
 }

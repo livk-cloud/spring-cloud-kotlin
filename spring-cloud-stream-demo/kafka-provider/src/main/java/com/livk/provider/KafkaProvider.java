@@ -25,19 +25,21 @@ import java.util.function.Supplier;
 @EnableScheduling
 @SpringBootApplication
 public class KafkaProvider {
-    public static void main(String[] args) {
-        LivkSpring.run(KafkaProvider.class, args);
-    }
 
-    Sinks.Many<KafkaMessage<String>> buffer = Sinks.many().multicast().onBackpressureBuffer();
+	public static void main(String[] args) {
+		LivkSpring.run(KafkaProvider.class, args);
+	}
 
-    @PostMapping("send")
-    public void send(@RequestBody KafkaMessage<String> message) {
-        buffer.tryEmitNext(message);
-    }
+	Sinks.Many<KafkaMessage<String>> buffer = Sinks.many().multicast().onBackpressureBuffer();
 
-    @Bean
-    public Supplier<Flux<KafkaMessage<String>>> send() {
-        return buffer::asFlux;
-    }
+	@PostMapping("send")
+	public void send(@RequestBody KafkaMessage<String> message) {
+		buffer.tryEmitNext(message);
+	}
+
+	@Bean
+	public Supplier<Flux<KafkaMessage<String>>> send() {
+		return buffer::asFlux;
+	}
+
 }

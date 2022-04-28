@@ -20,12 +20,14 @@ import java.util.function.Consumer;
 @Slf4j
 @SpringBootApplication
 public class KafkaConsumer {
-    public static void main(String[] args) {
-        LivkSpring.run(KafkaConsumer.class, args);
-    }
 
-    @Bean
-    public Consumer<Flux<KafkaMessage<String>>> send() {
-        return kafkaMessageFlux -> kafkaMessageFlux.subscribe(kafkaMessage->log.info("[{}]", kafkaMessage));
-    }
+	public static void main(String[] args) {
+		LivkSpring.run(KafkaConsumer.class, args);
+	}
+
+	@Bean
+	public Consumer<Flux<KafkaMessage<String>>> send() {
+		return kafkaMessageFlux -> kafkaMessageFlux.subscribe(kafkaMessage -> log.info("[{}]", kafkaMessage));
+	}
+
 }

@@ -12,9 +12,10 @@ import java.lang.annotation.*;
  * @author livk
  * @date 2022/1/7
  */
-@Target({ElementType.TYPE})
+@Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import(LivkEventListener.class)
 public @interface EnableRemoteEventListener {
+
 }

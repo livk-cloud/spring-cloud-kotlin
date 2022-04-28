@@ -23,42 +23,39 @@ import java.util.*;
 @RequiredArgsConstructor
 public class GatewaySwaggerProvider implements SwaggerResourcesProvider {
 
-    public static final String SWAGGER2URL = "/v2/api-docs";
-    /**
-     * Swagger3默认的url后缀
-     * V3采用新的OPENAPI规则，这样缺失了BaseUrl
-     */
-    public static final String SWAGGER3URL = "/v3/api-docs";
+	public static final String SWAGGER2URL = "/v2/api-docs";
 
-    private final RouteDefinitionRepository routeDefinitionRepository;
+	/**
+	 * Swagger3默认的url后缀 V3采用新的OPENAPI规则，这样缺失了BaseUrl
+	 */
+	public static final String SWAGGER3URL = "/v3/api-docs";
 
-    private final DiscoveryClient discoveryClient;
+	private final RouteDefinitionRepository routeDefinitionRepository;
 
-    @Override
-    public List<SwaggerResource> get() {
-        var routeDefinitions = new HashSet<RouteDefinition>();
-        routeDefinitionRepository.getRouteDefinitions()
-                .filter(routeDefinition -> discoveryClient.getServices().contains(routeDefinition.getId()))
-                .sort(Comparator.comparingInt(RouteDefinition::getOrder))
-                .subscribe(routeDefinitions::add);
-        return routeDefinitions.stream()
-                .flatMap(routeDefinition -> routeDefinition.getPredicates().stream()
-                        .filter(predicateDefinition -> "Path".equalsIgnoreCase(predicateDefinition.getName()))
-                        .filter(predicateDefinition -> !predicateDefinition.getArgs().isEmpty())
-                        .map(predicateDefinition -> {
-                            var args = predicateDefinition.getArgs();
-                            var pattern = Optional.ofNullable(args.get("pattern"))
-                                    .orElse(args.get(NameUtils.GENERATED_NAME_PREFIX + "0"));
-                            return swaggerResource(routeDefinition.getId(), pattern.replace("/**", SWAGGER2URL));
-                        })).toList();
-    }
+	private final DiscoveryClient discoveryClient;
 
-    private SwaggerResource swaggerResource(String name, String location) {
-        var swaggerResource = new SwaggerResource();
-        swaggerResource.setName(name);
-        swaggerResource.setUrl(location);
-        swaggerResource.setSwaggerVersion("2.0");
-        return swaggerResource;
-    }
+	@Override
+	public List<SwaggerResource> get() {
+		var routeDefinitions = new HashSet<RouteDefinition>();
+		routeDefinitionRepository.getRouteDefinitions()
+				.filter(routeDefinition -> discoveryClient.getServices().contains(routeDefinition.getId()))
+				.sort(Comparator.comparingInt(RouteDefinition::getOrder)).subscribe(routeDefinitions::add);
+		return routeDefinitions.stream().flatMap(routeDefinition -> routeDefinition.getPredicates().stream()
+				.filter(predicateDefinition -> "Path".equalsIgnoreCase(predicateDefinition.getName()))
+				.filter(predicateDefinition -> !predicateDefinition.getArgs().isEmpty()).map(predicateDefinition -> {
+					var args = predicateDefinition.getArgs();
+					var pattern = Optional.ofNullable(args.get("pattern"))
+							.orElse(args.get(NameUtils.GENERATED_NAME_PREFIX + "0"));
+					return swaggerResource(routeDefinition.getId(), pattern.replace("/**", SWAGGER2URL));
+				})).toList();
+	}
+
+	private SwaggerResource swaggerResource(String name, String location) {
+		var swaggerResource = new SwaggerResource();
+		swaggerResource.setName(name);
+		swaggerResource.setUrl(location);
+		swaggerResource.setSwaggerVersion("2.0");
+		return swaggerResource;
+	}
 
 }

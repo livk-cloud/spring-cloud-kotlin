@@ -13,7 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class RetrofitOkhttpConsumerApp {
-    public static void main(String[] args) {
-        LivkSpring.run(RetrofitOkhttpConsumerApp.class, args);
-    }
+
+	public static void main(String[] args) {
+		LivkSpring.run(RetrofitOkhttpConsumerApp.class, args);
+	}
+
 }

@@ -20,7 +20,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @SpringBootApplication
 public class ConsumerApp {
-    public static void main(String[] args) {
-        LivkSpring.run(ConsumerApp.class, args);
-    }
+
+	public static void main(String[] args) {
+		LivkSpring.run(ConsumerApp.class, args);
+	}
+
 }

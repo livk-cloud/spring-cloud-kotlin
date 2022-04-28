@@ -23,39 +23,38 @@ import java.util.Map;
 @Slf4j
 public class LivkRedisRouteDefinitionRepository implements RouteDefinitionRepository {
 
-    public static final String ROUTE_KEY = "RouteDefinition";
+	public static final String ROUTE_KEY = "RouteDefinition";
 
-    private final ReactiveHashOperations<String, String, RouteDefinition> reactiveHashOperations;
+	private final ReactiveHashOperations<String, String, RouteDefinition> reactiveHashOperations;
 
-    public LivkRedisRouteDefinitionRepository(LivkReactiveRedisTemplate livkReactiveRedisTemplate) {
-        reactiveHashOperations = livkReactiveRedisTemplate.opsForHash(RedisSerialization.json(RouteDefinition.class));
-    }
+	public LivkRedisRouteDefinitionRepository(LivkReactiveRedisTemplate livkReactiveRedisTemplate) {
+		reactiveHashOperations = livkReactiveRedisTemplate.opsForHash(RedisSerialization.json(RouteDefinition.class));
+	}
 
-    /**
-     * @return Flux<RouteDefinition>
-     */
-    @Override
-    public Flux<RouteDefinition> getRouteDefinitions() {
-        return reactiveHashOperations.entries(ROUTE_KEY).map(Map.Entry::getValue);
-    }
+	/**
+	 * @return Flux<RouteDefinition>
+	 */
+	@Override
+	public Flux<RouteDefinition> getRouteDefinitions() {
+		return reactiveHashOperations.entries(ROUTE_KEY).map(Map.Entry::getValue);
+	}
 
-    /**
-     * @param route route
-     * @return Mono.empty()
-     */
-    @Override
-    public Mono<Void> save(Mono<RouteDefinition> route) {
-        return route.flatMap(r -> this.reactiveHashOperations.put(ROUTE_KEY, r.getId(), r)
-                .flatMap(success -> Boolean.TRUE.equals(success) ? Mono.empty() : Mono.defer(
-                        () -> Mono.error(new RuntimeException(String.format("Could not add route to redis repository: %s", r))))));
-    }
+	/**
+	 * @param route route
+	 * @return Mono.empty()
+	 */
+	@Override
+	public Mono<Void> save(Mono<RouteDefinition> route) {
+		return route.flatMap(r -> this.reactiveHashOperations.put(ROUTE_KEY, r.getId(), r)
+				.flatMap(success -> Boolean.TRUE.equals(success) ? Mono.empty() : Mono.defer(() -> Mono.error(
+						new RuntimeException(String.format("Could not add route to redis repository: %s", r))))));
+	}
 
-    @Override
-    public Mono<Void> delete(Mono<String> routeId) {
-        return routeId.flatMap(id -> this.reactiveHashOperations.remove(ROUTE_KEY, id)
-                .flatMap(success -> success != 0 ? Mono.empty() : Mono.defer(
-                        () -> Mono.error(new NotFoundException(String.format("Could not remove route from redis repository with id: %s", id))))));
-    }
+	@Override
+	public Mono<Void> delete(Mono<String> routeId) {
+		return routeId.flatMap(id -> this.reactiveHashOperations.remove(ROUTE_KEY, id)
+				.flatMap(success -> success != 0 ? Mono.empty() : Mono.defer(() -> Mono.error(new NotFoundException(
+						String.format("Could not remove route from redis repository with id: %s", id))))));
+	}
 
 }
-

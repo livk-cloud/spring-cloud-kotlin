@@ -18,9 +18,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 @EnableRetrofitClients
 public class RetrofitConfig {
 
-    @Bean
-    @LoadBalanced
-    public WebClient.Builder builder() {
-        return WebClient.builder();
-    }
+	@Bean
+	@LoadBalanced
+	public WebClient.Builder builder() {
+		return WebClient.builder();
+	}
+
 }

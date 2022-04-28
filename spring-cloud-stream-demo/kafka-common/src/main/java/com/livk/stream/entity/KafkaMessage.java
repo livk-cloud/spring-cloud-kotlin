@@ -13,9 +13,10 @@ import lombok.Data;
 @Data
 public class KafkaMessage<T> {
 
-    private String id;
+	private String id;
 
-    private String msg;
+	private String msg;
 
-    private T data;
+	private T data;
+
 }

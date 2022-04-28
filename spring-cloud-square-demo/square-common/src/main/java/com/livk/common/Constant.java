@@ -9,5 +9,7 @@ package com.livk.common;
  * @date 2022/4/13
  */
 public interface Constant {
-    String PREFIX = "Livk";
+
+	String PREFIX = "Livk";
+
 }

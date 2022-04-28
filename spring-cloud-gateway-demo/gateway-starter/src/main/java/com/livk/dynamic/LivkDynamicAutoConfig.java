@@ -18,16 +18,18 @@ import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
  * @date 2021/12/28
  */
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore({GatewayAutoConfiguration.class, RedisAutoConfiguration.class})
+@AutoConfigureBefore({ GatewayAutoConfiguration.class, RedisAutoConfiguration.class })
 public class LivkDynamicAutoConfig {
 
-    @Bean
-    public LivkReactiveRedisTemplate livkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {
-        return new LivkReactiveRedisTemplate(connectionFactory);
-    }
+	@Bean
+	public LivkReactiveRedisTemplate livkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {
+		return new LivkReactiveRedisTemplate(connectionFactory);
+	}
 
-    @Bean
-    public LivkRedisRouteDefinitionRepository redisRouteDefinitionWriter(LivkReactiveRedisTemplate livkReactiveRedisTemplate) {
-        return new LivkRedisRouteDefinitionRepository(livkReactiveRedisTemplate);
-    }
+	@Bean
+	public LivkRedisRouteDefinitionRepository redisRouteDefinitionWriter(
+			LivkReactiveRedisTemplate livkReactiveRedisTemplate) {
+		return new LivkRedisRouteDefinitionRepository(livkReactiveRedisTemplate);
+	}
+
 }

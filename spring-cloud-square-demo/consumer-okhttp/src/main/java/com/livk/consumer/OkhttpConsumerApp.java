@@ -13,7 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class OkhttpConsumerApp {
-    public static void main(String[] args) {
-        LivkSpring.run(OkhttpConsumerApp.class, args);
-    }
+
+	public static void main(String[] args) {
+		LivkSpring.run(OkhttpConsumerApp.class, args);
+	}
+
 }

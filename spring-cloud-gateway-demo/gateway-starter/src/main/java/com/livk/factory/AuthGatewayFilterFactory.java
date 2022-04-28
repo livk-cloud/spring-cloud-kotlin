@@ -13,16 +13,17 @@ import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFac
  */
 public class AuthGatewayFilterFactory extends AbstractGatewayFilterFactory<AuthGatewayFilterFactory.Config> {
 
-    public AuthGatewayFilterFactory() {
-        super(Config.class);
-    }
+	public AuthGatewayFilterFactory() {
+		super(Config.class);
+	}
 
-    @Override
-    public GatewayFilter apply(Config config) {
-        return (exchange, chain) -> chain.filter(exchange);
-    }
+	@Override
+	public GatewayFilter apply(Config config) {
+		return (exchange, chain) -> chain.filter(exchange);
+	}
 
-    public static class Config {
+	public static class Config {
 
-    }
+	}
+
 }

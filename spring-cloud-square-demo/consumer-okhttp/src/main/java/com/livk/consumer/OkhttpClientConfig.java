@@ -16,9 +16,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OkhttpClientConfig {
 
-    @Bean
-    @LoadBalanced
-    public OkHttpClient.Builder okhttpClientBuilder() {
-        return new OkHttpClient.Builder();
-    }
+	@Bean
+	@LoadBalanced
+	public OkHttpClient.Builder okhttpClientBuilder() {
+		return new OkHttpClient.Builder();
+	}
+
 }
