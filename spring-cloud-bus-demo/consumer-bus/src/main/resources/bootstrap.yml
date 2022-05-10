@@ -3,12 +3,12 @@ server:
 spring:
   application:
     name: consumer-bus
-#  rabbitmq:
-#    host: livk.com
-#    username: admin
-#    password: admin
-#  kafka:
-#    bootstrap-servers: livk.com:9092
+  #  rabbitmq:
+  #    host: livk.com
+  #    username: admin
+  #    password: admin
+  kafka:
+    bootstrap-servers: livk.com:9092
   cloud:
     consul:
       host: livk.com
@@ -22,14 +22,12 @@ spring:
           enabled: true
       config:
         enabled: true
-        prefixes: spring-cloud-demo
+#        prefixes: spring-cloud-config
         format: yaml
-        data-key: consumer-bus
+        data-key: name
         watch:
           enabled: true
           delay: 1000
-        default-context: spring-cloud-bus-demo
+        default-context: ${spring.application.name}
   profiles:
     active: dev
-
-
