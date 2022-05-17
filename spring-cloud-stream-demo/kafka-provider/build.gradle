@@ -1,7 +1,5 @@
-apply plugin: 'org.springframework.boot'
-
 dependencies {
-    api project(':spring-cloud-stream-demo:kafka-common')
+    api project(":spring-cloud-stream-demo:kafka-common")
 }
 
 test {

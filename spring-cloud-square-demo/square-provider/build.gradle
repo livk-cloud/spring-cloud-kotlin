@@ -1,8 +1,6 @@
-apply plugin: 'org.springframework.boot'
-
 dependencies {
-    api project(':spring-cloud-square-demo:square-common')
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    api project(":spring-cloud-square-demo:square-common")
+    implementation "org.springframework.boot:spring-boot-starter-web"
 }
 
 test {

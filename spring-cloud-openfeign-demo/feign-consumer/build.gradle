@@ -1,8 +1,6 @@
-apply plugin: 'org.springframework.boot'
-
 dependencies {
-    api project(':spring-cloud-openfeign-demo:feign-provider:feign-provider-api')
-    api 'org.springframework.boot:spring-boot-starter-data-redis'
+    api project(":spring-cloud-openfeign-demo:feign-provider:feign-provider-api")
+    api "org.springframework.boot:spring-boot-starter-data-redis"
 }
 
 test {

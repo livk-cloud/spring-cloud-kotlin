@@ -1,0 +1,18 @@
+plugins {
+    id "java-platform"
+}
+
+javaPlatform {
+    allowDependencies()
+}
+
+dependencies {
+    constraints {
+        api "com.github.pagehelper:pagehelper-spring-boot-starter:$pagehelperVersion"
+        api "com.baomidou:mybatis-plus-boot-starter:$mpVersion"
+        api "com.baomidou:mybatis-plus:$mpVersion"
+        api "io.springfox:springfox-boot-starter:$swaggerVersion"
+        api "org.burningwave:core:$burningwaveVersion"
+        api "com.google.code.findbugs:annotations:$googleFindbugsVersion"
+    }
+}

@@ -1,19 +1,15 @@
 ext {
-    implementation = [
-
-    ]
-
     annotationProcessor = [
-            'org.projectlombok:lombok'
+            "org.projectlombok:lombok"
     ]
 
     testImplementation = [
-            'org.springframework.boot:spring-boot-starter-test',
-            'org.projectlombok:lombok'
+            "org.springframework.boot:spring-boot-starter-test",
+            "org.projectlombok:lombok"
     ]
 
     compileOnly = [
-            'org.projectlombok:lombok'
+            "org.projectlombok:lombok"
     ]
 
     testCompileOnly = [
@@ -21,20 +17,6 @@ ext {
     ]
 
     testAnnotationProcessor = [
-            'org.projectlombok:lombok'
-    ]
-
-    mavenBom = [
-            "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}",
-            "org.springframework.cloud:spring-cloud-square-dependencies:${squareVersion}"
-    ]
-
-    dependency = [
-            "com.github.pagehelper:pagehelper-spring-boot-starter:${pagehelperVersion}",
-            "com.baomidou:mybatis-plus-boot-starter:${mpVersion}",
-            "com.baomidou:mybatis-plus:${mpVersion}",
-            "io.springfox:springfox-boot-starter:${swaggerVersion}",
-            "org.burningwave:core:${burningwaveVersion}",
-            "com.google.code.findbugs:annotations:${googleFindbugsVersion}",
+            "org.projectlombok:lombok"
     ]
 }

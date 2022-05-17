@@ -1,10 +1,8 @@
-apply plugin: 'org.springframework.boot'
-
 dependencies {
-    api project(':spring-cloud-openfeign-demo:feign-provider:feign-provider-api')
-    api 'mysql:mysql-connector-java'
-    api 'com.baomidou:mybatis-plus-boot-starter'
-    api 'org.springframework.boot:spring-boot-starter-data-redis'
+    api project(":spring-cloud-openfeign-demo:feign-provider:feign-provider-api")
+    api "mysql:mysql-connector-java"
+    api "com.baomidou:mybatis-plus-boot-starter"
+    api "org.springframework.boot:spring-boot-starter-data-redis"
 }
 
 test {

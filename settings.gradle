@@ -1,9 +1,9 @@
-rootProject.name = 'Spring-Cloud-Demo'
+rootProject.name = "Spring-Cloud-Demo"
 
 def buildFiles = fileTree(rootDir) {
-    def excludes = gradle.startParameter.projectProperties.get('excludeProjects')?.split(',')
-    include '**/*.gradle'
-    exclude 'build', '**/gradle', 'settings.gradle', 'buildSrc', '/build.gradle', '.', 'out', 'bin'
+    def excludes = gradle.startParameter.projectProperties.get("excludeProjects")?.split(",")
+    include "**/*.gradle"
+    exclude "build", "**/gradle", "settings.gradle", "buildSrc", "/build.gradle", ".", "out", "bin"
     if (excludes) {
         exclude excludes
     }

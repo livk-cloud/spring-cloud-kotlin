@@ -1,51 +1,73 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
-
-apply plugin: 'java'
-
-buildscript {
-    repositories {
-        mavenLocal()
-        maven { url 'https://repo.spring.io/milestone' }
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url 'https://repo.spring.io/release'}
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("io.spring.javaformat:spring-javaformat-gradle-plugin:${springJavaFormatPluginVersion}")
-    }
+plugins {
+    id "java-library"
+    id "org.springframework.boot" version("${springBootVersion}") apply false
 }
 
-allprojects {
-
-    repositories {
-        mavenLocal()
-        maven { url 'https://repo.spring.io/milestone' }
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url 'https://repo.spring.io/release'}
+ext {
+    bom = project(":livk-cloud-dependencies")
+    //含有build.gradle的项目(排除BOM)
+    gradleModuleProjects = subprojects.findAll {
+        it.buildFile.exists()
+    } - bom
+    //普通项目
+    commonModuleProjects = gradleModuleProjects.findAll {
+        it.name.endsWith("-common") || it.name.endsWith("-starter")
+                || it.name.endsWith("-api")
     }
-
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint:none" << "-nowarn" << "-Xlint:unchecked"
-        options.encoding = "UTF-8"
-    }
+    //springboot项目
+    springModuleProjects = gradleModuleProjects - commonModuleProjects
 }
 
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'java-library'
-    apply plugin: 'io.spring.javaformat'
-    apply plugin: 'livk.resources.plugin'
-    apply from: "$rootDir/gradle/dependency.gradle"
+configure(springModuleProjects) {
+    apply plugin: "org.springframework.boot"
+}
 
-    dependencyManagement {
-        imports {
-            mavenBom SpringBootPlugin.BOM_COORDINATES
+configure(allprojects) {
+    repositories {
+        mavenLocal()
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/libs-snapshot/" }
+    }
+
+    task cleanBuildDir(type: Delete) {
+        allprojects.forEach {
+            if (!it.buildFile.exists()) {
+                delete "${projectDir}/build"
+                delete "${projectDir}/out"
+                delete "${projectDir}/bin"
+            }
         }
     }
 }
 
-test {
-    useJUnitPlatform()
+configure(gradleModuleProjects) {
+    apply plugin: "java-library"
+    apply plugin: "io.spring.javaformat"
+    apply plugin: "livk.resources.plugin"
+    apply from: "$rootDir/gradle/dependency.gradle"
+
+    configurations {
+        dependencyBom {
+            api.extendsFrom(dependencyBom)
+            implementation.extendsFrom(dependencyBom)
+            compileOnly.extendsFrom(dependencyBom)
+            annotationProcessor.extendsFrom(dependencyBom)
+            testImplementation.extendsFrom(dependencyBom)
+            testCompileOnly.extendsFrom(dependencyBom)
+            testAnnotationProcessor.extendsFrom(dependencyBom)
+        }
+    }
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    dependencies {
+        dependencyBom enforcedPlatform("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+        dependencyBom enforcedPlatform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+        dependencyBom enforcedPlatform("org.springframework.cloud:spring-cloud-square-dependencies:$squareVersion")
+        dependencyBom enforcedPlatform(project(":livk-cloud-dependencies"))
+    }
 }
