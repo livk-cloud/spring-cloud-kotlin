@@ -73,7 +73,3 @@ configure(gradleModuleProjects) {
         dependencyBom enforcedPlatform(project(":livk-cloud-dependencies"))
     }
 }
-
-configure(bom) {
-    apply from: "$rootDir/gradle/version.gradle"
-}
