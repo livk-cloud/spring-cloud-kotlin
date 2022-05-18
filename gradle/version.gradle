@@ -1,0 +1,7 @@
+ext {
+    pagehelperVersion = "1.4.2"
+    mpVersion = "3.5.1"
+    swaggerVersion = "3.0.0"
+    burningwaveVersion = "12.48.0"
+    googleFindbugsVersion = "3.0.1"
+}

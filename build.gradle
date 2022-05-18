@@ -38,9 +38,9 @@ configure(allprojects) {
         allprojects.forEach {
             if (!it.buildFile.exists()) {
                 delete "${projectDir}/build"
-                delete "${projectDir}/out"
-                delete "${projectDir}/bin"
             }
+            delete "${projectDir}/out"
+            delete "${projectDir}/bin"
         }
     }
 }
@@ -72,4 +72,8 @@ configure(gradleModuleProjects) {
         dependencyBom enforcedPlatform("org.springframework.cloud:spring-cloud-square-dependencies:$squareVersion")
         dependencyBom enforcedPlatform(project(":livk-cloud-dependencies"))
     }
+}
+
+configure(bom) {
+    apply from: "$rootDir/gradle/version.gradle"
 }
