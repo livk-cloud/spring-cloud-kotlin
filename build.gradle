@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id "java-library"
     id "org.springframework.boot" version("${springBootVersion}") apply false
@@ -65,7 +67,7 @@ configure(gradleModuleProjects) {
     targetCompatibility = JavaVersion.VERSION_17
 
     dependencies {
-        dependencyBom enforcedPlatform("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+        dependencyBom enforcedPlatform(SpringBootPlugin.BOM_COORDINATES)
         dependencyBom enforcedPlatform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
         dependencyBom enforcedPlatform("org.springframework.cloud:spring-cloud-square-dependencies:$squareVersion")
         dependencyBom enforcedPlatform(project(":livk-cloud-dependencies"))
