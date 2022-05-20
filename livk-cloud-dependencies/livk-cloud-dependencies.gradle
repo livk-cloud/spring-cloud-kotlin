@@ -10,7 +10,6 @@ ext {
     pagehelperVersion = "1.4.2"
     mpVersion = "3.5.1"
     swaggerVersion = "3.0.0"
-    burningwaveVersion = "12.48.0"
     googleFindbugsVersion = "3.0.1"
 }
 
@@ -20,7 +19,6 @@ dependencies {
         api "com.baomidou:mybatis-plus-boot-starter:$mpVersion"
         api "com.baomidou:mybatis-plus:$mpVersion"
         api "io.springfox:springfox-boot-starter:$swaggerVersion"
-        api "org.burningwave:core:$burningwaveVersion"
         api "com.google.code.findbugs:annotations:$googleFindbugsVersion"
     }
 }
