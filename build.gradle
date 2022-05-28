@@ -61,15 +61,21 @@ configure(gradleModuleProjects) {
             testCompileOnly.extendsFrom(dependencyBom)
             testAnnotationProcessor.extendsFrom(dependencyBom)
         }
+
+        all {
+            resolutionStrategy {
+                force "org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.2"
+            }
+        }
     }
 
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 
     dependencies {
-        dependencyBom enforcedPlatform(SpringBootPlugin.BOM_COORDINATES)
-        dependencyBom enforcedPlatform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
-        dependencyBom enforcedPlatform("org.springframework.cloud:spring-cloud-square-dependencies:$squareVersion")
-        dependencyBom enforcedPlatform(project(":livk-cloud-dependencies"))
+        dependencyBom platform(SpringBootPlugin.BOM_COORDINATES)
+        dependencyBom platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+        dependencyBom platform("org.springframework.cloud:spring-cloud-square-dependencies:$squareVersion")
+        dependencyBom platform(project(":livk-cloud-dependencies"))
     }
 }
