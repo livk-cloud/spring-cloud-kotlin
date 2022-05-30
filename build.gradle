@@ -7,16 +7,13 @@ plugins {
 
 ext {
     bom = project(":livk-cloud-dependencies")
-    //含有build.gradle的项目(排除BOM)
     gradleModuleProjects = subprojects.findAll {
         it.buildFile.exists()
     } - bom
-    //普通项目
     commonModuleProjects = gradleModuleProjects.findAll {
         it.name.endsWith("-common") || it.name.endsWith("-starter")
                 || it.name.endsWith("-api")
     }
-    //springboot项目
     springModuleProjects = gradleModuleProjects - commonModuleProjects
 }
 
@@ -27,11 +24,9 @@ configure(springModuleProjects) {
 configure(allprojects) {
     repositories {
         mavenLocal()
-        maven { url "https://repo.spring.io/milestone" }
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://repo.spring.io/release" }
-        maven { url "https://repo.spring.io/libs-snapshot/" }
     }
 
     task cleanBuildDir(type: Delete) {
@@ -60,12 +55,6 @@ configure(gradleModuleProjects) {
             testImplementation.extendsFrom(dependencyBom)
             testCompileOnly.extendsFrom(dependencyBom)
             testAnnotationProcessor.extendsFrom(dependencyBom)
-        }
-
-        all {
-            resolutionStrategy {
-                force "org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.2"
-            }
         }
     }
 

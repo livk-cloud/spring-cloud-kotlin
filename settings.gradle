@@ -1,15 +1,22 @@
-rootProject.name = "Spring-Cloud-Demo"
-
-def buildFiles = fileTree(rootDir) {
-    def excludes = gradle.startParameter.projectProperties.get("excludeProjects")?.split(",")
-    include "**/*.gradle"
-    exclude "build", "**/gradle", "settings.gradle", "buildSrc", "/build.gradle", ".", "out", "bin"
-    if (excludes) {
-        exclude excludes
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/release" }
+        maven { url "https://maven.aliyun.com/repository/public" }
     }
 }
 
-buildFiles.forEach { buildFile ->
+rootProject.name = "Spring-Cloud-Demo"
+
+fileTree(rootDir) {
+    def excludes = gradle.startParameter.projectProperties.get("excludeProjects")?.split(",")
+    include "**/*.gradle"
+    exclude "build", "**/gradle", "settings.gradle", "buildSrc", "/build.gradle", ".", "out"
+    if (excludes) {
+        exclude excludes
+    }
+}.forEach { buildFile ->
     def buildFilePath = buildFile.parentFile.absolutePath
     def projectPath = buildFilePath.replace(rootDir.absolutePath, "").replace(File.separator, ":")
     include projectPath
