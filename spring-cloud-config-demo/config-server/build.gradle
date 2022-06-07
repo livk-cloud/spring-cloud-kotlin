@@ -1,10 +1,10 @@
 dependencies {
-    api project(":spring-common")
-    api "org.springframework.cloud:spring-cloud-starter-bootstrap"
-    api "org.springframework.cloud:spring-cloud-config-server"
-    api "org.springframework.boot:spring-boot-starter-web"
-    api "org.springframework.boot:spring-boot-starter-jdbc"
-    api "mysql:mysql-connector-java"
+    implementation project(":spring-common")
+    implementation "org.springframework.cloud:spring-cloud-starter-bootstrap"
+    implementation "org.springframework.cloud:spring-cloud-config-server"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "mysql:mysql-connector-java"
 }
 
 test {

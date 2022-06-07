@@ -1,5 +1,5 @@
 dependencies {
-    api project(":spring-cloud-stream-demo:kafka-common")
+    implementation project(":spring-cloud-stream-demo:kafka-common")
 }
 
 test {

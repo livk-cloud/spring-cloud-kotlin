@@ -1,8 +1,8 @@
 dependencies {
-    api project(":spring-cloud-openfeign-demo:feign-provider:feign-provider-api")
-    api "mysql:mysql-connector-java"
-    api "com.baomidou:mybatis-plus-boot-starter"
-    api "org.springframework.boot:spring-boot-starter-data-redis"
+    implementation project(":spring-cloud-openfeign-demo:feign-provider:feign-provider-api")
+    implementation "mysql:mysql-connector-java"
+    implementation "com.baomidou:mybatis-plus-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-data-redis"
 }
 
 test {

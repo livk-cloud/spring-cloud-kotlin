@@ -1,5 +1,5 @@
 dependencies {
-    api project(":spring-cloud-square-demo:square-common")
+    implementation project(":spring-cloud-square-demo:square-common")
     implementation "org.springframework.boot:spring-boot-starter-web"
 }
 
