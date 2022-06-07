@@ -1,8 +1,8 @@
 dependencies {
-    api project(":spring-common")
-    api "org.springframework.cloud:spring-cloud-starter-bootstrap"
-    api "org.springframework.cloud:spring-cloud-starter-config"
-    api "org.springframework.boot:spring-boot-starter-web"
+    implementation project(":spring-common")
+    implementation "org.springframework.cloud:spring-cloud-starter-bootstrap"
+    implementation "org.springframework.cloud:spring-cloud-starter-config"
+    implementation "org.springframework.boot:spring-boot-starter-web"
 }
 
 test {

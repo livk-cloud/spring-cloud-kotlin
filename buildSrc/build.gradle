@@ -1,4 +1,4 @@
-apply plugin: "groovy"
+apply plugin: "groovy-gradle-plugin"
 
 repositories {
     maven { url "https://maven.aliyun.com/repository/public" }
@@ -7,4 +7,29 @@ repositories {
 
 dependencies {
     implementation "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.31"
+}
+
+gradlePlugin {
+    plugins {
+        compileArgsPlugin {
+            id = "com.livk.compile.args"
+            implementationClass = "com.livk.plugin.CompileArgsPlugin"
+            description = "Add compile parameters"
+        }
+        dependencyBomPlugin {
+            id = "com.livk.dependency"
+            implementationClass = "com.livk.plugin.DependencyBomPlugin"
+            description = "build dependency BOM"
+        }
+        formatPlugin {
+            id = "com.livk.format"
+            implementationClass = "com.livk.plugin.FormatPlugin"
+            description = "code format"
+        }
+        resourcesPlugin {
+            id = "com.livk.resources"
+            implementationClass = "com.livk.plugin.ResourcesPlugin"
+            description = "Add resource handling"
+        }
+    }
 }

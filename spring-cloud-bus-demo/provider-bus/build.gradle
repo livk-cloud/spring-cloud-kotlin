@@ -1,5 +1,5 @@
 dependencies {
-    api project(":spring-cloud-bus-demo:bus-common")
+    implementation project(":spring-cloud-bus-demo:bus-common")
 }
 
 test {
