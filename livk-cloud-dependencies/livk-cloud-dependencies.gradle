@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id "java-platform"
 }
@@ -11,9 +13,14 @@ ext {
     mpVersion = "3.5.1"
     swaggerVersion = "3.0.0"
     googleFindbugsVersion = "3.0.1"
+    springCloudVersion = "2021.0.3"
+    squareVersion = "0.4.1"
 }
 
 dependencies {
+    api platform(SpringBootPlugin.BOM_COORDINATES)
+    api platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+    api platform("org.springframework.cloud:spring-cloud-square-dependencies:$squareVersion")
     constraints {
         api "com.github.pagehelper:pagehelper-spring-boot-starter:$pagehelperVersion"
         api "com.baomidou:mybatis-plus-boot-starter:$mpVersion"
