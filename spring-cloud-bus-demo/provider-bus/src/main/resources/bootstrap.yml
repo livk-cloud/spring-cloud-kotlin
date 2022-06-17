@@ -3,12 +3,12 @@ server:
 spring:
   application:
     name: provider-bus
-#  rabbitmq:
-#    host: livk.com
-#    username: admin
-#    password: admin
-#  kafka:
-#    bootstrap-servers: livk.com:9092
+  #  rabbitmq:
+  #    host: livk.com
+  #    username: admin
+  #    password: admin
+  #  kafka:
+  #    bootstrap-servers: livk.com:9092
   cloud:
     consul:
       host: livk.com

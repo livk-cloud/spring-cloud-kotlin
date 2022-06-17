@@ -19,11 +19,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class RemoteController {
 
-	private final RemoteService remoteService;
+    private final RemoteService remoteService;
 
-	@GetMapping("/remote/instance")
-	public Mono<String> remoteInstance() throws IOException {
-		return remoteService.instance();
-	}
+    @GetMapping("/remote/instance")
+    public Mono<String> remoteInstance() throws IOException {
+        return remoteService.instance();
+    }
 
 }

@@ -13,7 +13,7 @@ import java.lang.annotation.*;
  * @author livk
  * @date 2021/12/28
  */
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited

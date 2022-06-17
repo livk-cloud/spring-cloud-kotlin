@@ -21,13 +21,13 @@ import java.util.function.Consumer;
 @SpringBootApplication
 public class KafkaConsumer {
 
-	public static void main(String[] args) {
-		LivkSpring.run(KafkaConsumer.class, args);
-	}
+    public static void main(String[] args) {
+        LivkSpring.run(KafkaConsumer.class, args);
+    }
 
-	@Bean
-	public Consumer<Flux<KafkaMessage<String>>> send() {
-		return kafkaMessageFlux -> kafkaMessageFlux.subscribe(kafkaMessage -> log.info("[{}]", kafkaMessage));
-	}
+    @Bean
+    public Consumer<Flux<KafkaMessage<String>>> send() {
+        return kafkaMessageFlux -> kafkaMessageFlux.subscribe(kafkaMessage -> log.info("[{}]", kafkaMessage));
+    }
 
 }

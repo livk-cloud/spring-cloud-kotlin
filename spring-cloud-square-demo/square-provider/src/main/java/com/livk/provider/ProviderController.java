@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ProviderController {
 
-	private final DiscoveryClient discoveryClient;
+    private final DiscoveryClient discoveryClient;
 
-	@GetMapping("instance")
-	public HttpEntity<String> instance() {
-		return ResponseEntity.ok(discoveryClient
-				.getInstances(SpringContextHolder.getApplicationContext().getEnvironment()
-						.getProperty("spring.application.name"))
-				.stream().findFirst().map(ServiceInstance::getInstanceId).orElse("is null"));
-	}
+    @GetMapping("instance")
+    public HttpEntity<String> instance() {
+        return ResponseEntity.ok(discoveryClient
+                .getInstances(SpringContextHolder.getApplicationContext().getEnvironment()
+                        .getProperty("spring.application.name"))
+                .stream().findFirst().map(ServiceInstance::getInstanceId).orElse("is null"));
+    }
 
 }

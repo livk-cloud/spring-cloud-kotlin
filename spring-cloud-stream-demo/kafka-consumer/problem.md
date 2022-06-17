@@ -6,6 +6,7 @@ spring:
         send-in-0:
           content-type: application/json
 ```
+
 ```java
 public class KafkaConsumer {
     @Bean
@@ -14,4 +15,5 @@ public class KafkaConsumer {
     }
 }
 ```
+
 > 当consumer泛型为其他类型,使用json处理

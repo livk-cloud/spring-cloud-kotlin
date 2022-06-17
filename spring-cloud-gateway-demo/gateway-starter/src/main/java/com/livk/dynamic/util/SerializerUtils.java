@@ -20,16 +20,16 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @UtilityClass
 public class SerializerUtils {
 
-	public <T> RedisSerializer<T> getJacksonSerializer(ObjectMapper mapper, Class<T> targetClass) {
-		var serializer = new Jackson2JsonRedisSerializer<>(targetClass);
-		mapper.registerModule(new JavaTimeModule());
-		mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-		serializer.setObjectMapper(mapper);
-		return serializer;
-	}
+    public <T> RedisSerializer<T> getJacksonSerializer(ObjectMapper mapper, Class<T> targetClass) {
+        var serializer = new Jackson2JsonRedisSerializer<>(targetClass);
+        mapper.registerModule(new JavaTimeModule());
+        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        serializer.setObjectMapper(mapper);
+        return serializer;
+    }
 
-	public <T> RedisSerializer<T> getJacksonSerializer(Class<T> targetClass) {
-		return getJacksonSerializer(JsonMapper.builder().build(), targetClass);
-	}
+    public <T> RedisSerializer<T> getJacksonSerializer(Class<T> targetClass) {
+        return getJacksonSerializer(JsonMapper.builder().build(), targetClass);
+    }
 
 }

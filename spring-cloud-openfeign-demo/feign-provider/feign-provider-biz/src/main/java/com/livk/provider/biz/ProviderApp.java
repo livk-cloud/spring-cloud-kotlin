@@ -18,8 +18,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 public class ProviderApp {
 
-	public static void main(String[] args) {
-		LivkSpring.run(ProviderApp.class, args);
-	}
+    public static void main(String[] args) {
+        LivkSpring.run(ProviderApp.class, args);
+    }
 
 }

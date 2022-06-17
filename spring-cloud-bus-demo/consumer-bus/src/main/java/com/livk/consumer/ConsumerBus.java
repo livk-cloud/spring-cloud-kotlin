@@ -20,8 +20,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 public class ConsumerBus {
 
-	public static void main(String[] args) {
-		LivkSpring.run(ConsumerBus.class, args);
-	}
+    public static void main(String[] args) {
+        LivkSpring.run(ConsumerBus.class, args);
+    }
 
 }

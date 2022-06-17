@@ -13,19 +13,19 @@ import org.springframework.cloud.bus.event.RemoteApplicationEvent;
  */
 public class LivkBusEvent extends RemoteApplicationEvent {
 
-	public LivkBusEvent() {
-		super();
-	}
+    public LivkBusEvent() {
+        super();
+    }
 
-	public LivkBusEvent(Object source, String originService, Destination destination) {
+    public LivkBusEvent(Object source, String originService, Destination destination) {
 
-		super(source, originService, destination);
-	}
+        super(source, originService, destination);
+    }
 
-	@Deprecated
-	public LivkBusEvent(Object source, String originService, String destinationService) {
+    @Deprecated
+    public LivkBusEvent(Object source, String originService, String destinationService) {
 
-		super(source, originService, destinationService);
-	}
+        super(source, originService, destinationService);
+    }
 
 }

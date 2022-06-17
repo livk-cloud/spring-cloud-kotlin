@@ -21,19 +21,19 @@ import java.util.List;
 @Component
 public class UserRemoteServiceFallbackFactory implements FallbackFactory<UserRemoteService> {
 
-	@Override
-	public UserRemoteService create(Throwable cause) {
-		return new UserRemoteService() {
-			@Override
-			public List<Users> users() {
-				return Collections.emptyList();
-			}
+    @Override
+    public UserRemoteService create(Throwable cause) {
+        return new UserRemoteService() {
+            @Override
+            public List<Users> users() {
+                return Collections.emptyList();
+            }
 
-			@Override
-			public Boolean save(Users users) {
-				return false;
-			}
-		};
-	}
+            @Override
+            public Boolean save(Users users) {
+                return false;
+            }
+        };
+    }
 
 }

@@ -16,9 +16,9 @@ import org.springframework.lang.Nullable;
 @Slf4j
 public class LivkEventListener implements ApplicationListener<LivkBusEvent> {
 
-	@Override
-	public void onApplicationEvent(@Nullable LivkBusEvent event) {
-		log.info("listener:{}", event);
-	}
+    @Override
+    public void onApplicationEvent(@Nullable LivkBusEvent event) {
+        log.info("listener:{}", event);
+    }
 
 }
