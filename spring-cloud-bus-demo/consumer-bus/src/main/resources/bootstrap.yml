@@ -22,7 +22,7 @@ spring:
           enabled: true
       config:
         enabled: true
-#        prefixes: spring-cloud-config
+        #        prefixes: spring-cloud-config
         format: yaml
         data-key: name
         watch:

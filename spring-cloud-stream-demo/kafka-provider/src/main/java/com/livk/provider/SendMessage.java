@@ -19,17 +19,17 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class SendMessage {
 
-	public static final String KAFKA_TOPIC = "livk-topic";
+    public static final String KAFKA_TOPIC = "livk-topic";
 
-	private final StreamBridge streamBridge;
+    private final StreamBridge streamBridge;
 
-	@Scheduled(cron = "0/5 * * * * ?")
-	public void send() {
-		KafkaMessage<String> message = new KafkaMessage<>();
-		message.setId(UUID.randomUUID().toString());
-		message.setMsg(UUID.randomUUID() + "hello");
-		message.setData(UUID.randomUUID() + "|||" + UUID.randomUUID());
-		streamBridge.send(KAFKA_TOPIC, message);
-	}
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void send() {
+        KafkaMessage<String> message = new KafkaMessage<>();
+        message.setId(UUID.randomUUID().toString());
+        message.setMsg(UUID.randomUUID() + "hello");
+        message.setData(UUID.randomUUID() + "|||" + UUID.randomUUID());
+        streamBridge.send(KAFKA_TOPIC, message);
+    }
 
 }

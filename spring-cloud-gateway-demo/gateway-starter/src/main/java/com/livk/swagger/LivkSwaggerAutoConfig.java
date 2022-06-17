@@ -19,16 +19,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 public class LivkSwaggerAutoConfig {
 
-	@Bean
-	public WebFluxSwaggerConfig webFluxSwaggerConfig() {
-		return new WebFluxSwaggerConfig();
-	}
+    @Bean
+    public WebFluxSwaggerConfig webFluxSwaggerConfig() {
+        return new WebFluxSwaggerConfig();
+    }
 
-	@Bean
-	@ConditionalOnBean({ RouteDefinitionRepository.class, DiscoveryClient.class })
-	public GatewaySwaggerProvider gatewaySwaggerProvider(RouteDefinitionRepository routeDefinitionRepository,
-			DiscoveryClient discoveryClient) {
-		return new GatewaySwaggerProvider(routeDefinitionRepository, discoveryClient);
-	}
+    @Bean
+    @ConditionalOnBean({RouteDefinitionRepository.class, DiscoveryClient.class})
+    public GatewaySwaggerProvider gatewaySwaggerProvider(RouteDefinitionRepository routeDefinitionRepository,
+                                                         DiscoveryClient discoveryClient) {
+        return new GatewaySwaggerProvider(routeDefinitionRepository, discoveryClient);
+    }
 
 }

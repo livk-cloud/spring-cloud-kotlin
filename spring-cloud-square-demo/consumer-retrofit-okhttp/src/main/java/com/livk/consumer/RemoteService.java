@@ -15,7 +15,7 @@ import retrofit2.http.GET;
 @RetrofitClient("square-provider")
 public interface RemoteService {
 
-	@GET("instance")
-	Call<String> instance();
+    @GET("instance")
+    Call<String> instance();
 
 }

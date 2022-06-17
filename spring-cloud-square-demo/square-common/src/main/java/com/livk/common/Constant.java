@@ -10,6 +10,6 @@ package com.livk.common;
  */
 public interface Constant {
 
-	String PREFIX = "Livk";
+    String PREFIX = "Livk";
 
 }

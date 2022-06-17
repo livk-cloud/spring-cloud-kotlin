@@ -19,11 +19,11 @@ import java.io.Serializable;
 @TableName("users")
 public class Users implements Serializable {
 
-	@TableId(type = IdType.AUTO)
-	private Long id;
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
-	private String username;
+    private String username;
 
-	private String password;
+    private String password;
 
 }

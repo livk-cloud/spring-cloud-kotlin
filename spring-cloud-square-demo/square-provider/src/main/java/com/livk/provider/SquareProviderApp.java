@@ -14,8 +14,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SquareProviderApp {
 
-	public static void main(String[] args) {
-		LivkSpring.run(SquareProviderApp.class, args);
-	}
+    public static void main(String[] args) {
+        LivkSpring.run(SquareProviderApp.class, args);
+    }
 
 }

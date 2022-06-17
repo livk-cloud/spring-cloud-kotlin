@@ -23,15 +23,15 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class RemoteController {
 
-	private final OkHttpClient.Builder builder;
+    private final OkHttpClient.Builder builder;
 
-	// 本质就是使用okhttp调用，和restTemplate没什么区别
-	@GetMapping("/remote/instance")
-	public HttpEntity<String> remoteInstance() throws IOException {
-		Request request = new Request.Builder().url("http://square-provider/instance").build();
-		try (Response response = builder.build().newCall(request).execute()) {
-			return ResponseEntity.ok(response.body().string());
-		}
-	}
+    // 本质就是使用okhttp调用，和restTemplate没什么区别
+    @GetMapping("/remote/instance")
+    public HttpEntity<String> remoteInstance() throws IOException {
+        Request request = new Request.Builder().url("http://square-provider/instance").build();
+        try (Response response = builder.build().newCall(request).execute()) {
+            return ResponseEntity.ok(response.body().string());
+        }
+    }
 
 }
