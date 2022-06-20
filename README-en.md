@@ -8,4 +8,4 @@ Gradle:7.4.2--JDk:17<br>
 SpringBoot:2.7.0<br>
 SpringCloud:2021.0.3<br>
 
-[SpringBoot-Demo](https://github.com/livk-cloud/Spring-Boot-Demo)
+More description and usage can be moved [SpringBoot-Demo](https://github.com/livk-cloud/Spring-Boot-Demo)
