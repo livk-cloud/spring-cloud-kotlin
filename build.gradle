@@ -64,7 +64,6 @@ configure(allprojects) {
 }
 
 configure(gradleModuleProjects) {
-    apply plugin: "java"
     apply plugin: "com.livk.compile.args"
     apply plugin: "com.livk.dependency"
 
