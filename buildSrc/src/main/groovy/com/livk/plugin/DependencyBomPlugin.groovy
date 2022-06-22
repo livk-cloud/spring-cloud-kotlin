@@ -18,6 +18,7 @@ abstract class DependencyBomPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
+        project.pluginManager.apply(JavaPlugin.class)
         def dependencyBom = project.configurations.create(DEPENDENCY_BOM)
         dependencyBom.canBeResolved = false
         dependencyBom.canBeConsumed = false

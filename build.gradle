@@ -2,8 +2,8 @@ import java.time.Instant
 import java.util.concurrent.TimeUnit
 
 plugins {
-    id "java"
-    id "org.springframework.boot" version("${springBootVersion}") apply false
+    id "com.livk.dependency"
+    id "org.springframework.boot" version("$springBootVersion") apply false
 }
 
 ext {
@@ -20,7 +20,6 @@ ext {
 
 configure(commonModuleProjects) {
     apply plugin: "maven-publish"
-    apply plugin: "java-library"
     apply plugin: "com.livk.resources"
 
     publishing {
