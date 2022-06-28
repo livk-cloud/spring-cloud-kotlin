@@ -8,24 +8,15 @@ javaPlatform {
     allowDependencies()
 }
 
-ext {
-    pagehelperVersion = "1.4.2"
-    mpVersion = "3.5.1"
-    swaggerVersion = "3.0.0"
-    googleFindbugsVersion = "3.0.1"
-    springCloudVersion = "2021.0.3"
-    squareVersion = "0.4.1"
-}
-
 dependencies {
     api platform(SpringBootPlugin.BOM_COORDINATES)
-    api platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
-    api platform("org.springframework.cloud:spring-cloud-square-dependencies:$squareVersion")
+    api platform(libs.spring.cloud.dependencies)
+    api platform(libs.spring.cloud.square.dependencies)
     constraints {
-        api "com.github.pagehelper:pagehelper-spring-boot-starter:$pagehelperVersion"
-        api "com.baomidou:mybatis-plus-boot-starter:$mpVersion"
-        api "com.baomidou:mybatis-plus:$mpVersion"
-        api "io.springfox:springfox-boot-starter:$swaggerVersion"
-        api "com.google.code.findbugs:annotations:$googleFindbugsVersion"
+        api libs.pagehelper.starter
+        api libs.mybatis.plus.starter
+        api libs.mybatis.plus
+        api libs.swagger.starter
+        api libs.google.findbugs
     }
 }
