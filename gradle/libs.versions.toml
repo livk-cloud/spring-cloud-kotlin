@@ -1,0 +1,20 @@
+[versions]
+springBoot = "2.7.1"
+springCloud = "2021.0.3"
+springCloudSquare = "0.4.1"
+pagehelper = "1.4.2"
+mybatisPlus = "3.5.1"
+swagger = "3.0.0"
+googleFindbugs = "3.0.1"
+
+[libraries]
+spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
+spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
+pagehelper-starter = { group = "com.github.pagehelper", name = "pagehelper-spring-boot-starter", version.ref = "pagehelper" }
+mybatis-plus-starter = { group = "com.baomidou", name = "mybatis-plus-boot-starter", version.ref = "mybatisPlus" }
+mybatis-plus = { group = "com.baomidou", name = "mybatis-plus", version.ref = "mybatisPlus" }
+swagger-starter = { group = "io.springfox", name = "springfox-boot-starter", version.ref = "swagger" }
+google-findbugs = { group = "com.google.code.findbugs", name = "annotations", version.ref = "googleFindbugs" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
