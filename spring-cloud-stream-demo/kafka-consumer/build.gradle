@@ -1,7 +1,0 @@
-dependencies {
-    implementation project(":spring-cloud-stream-demo:kafka-common")
-}
-
-test {
-    useJUnitPlatform()
-}
