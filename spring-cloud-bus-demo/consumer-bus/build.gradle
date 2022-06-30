@@ -1,7 +1,0 @@
-dependencies {
-    implementation project(":spring-cloud-bus-demo:bus-common")
-}
-
-test {
-    useJUnitPlatform()
-}
