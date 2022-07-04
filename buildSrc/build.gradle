@@ -3,28 +3,37 @@ apply plugin: "groovy-gradle-plugin"
 repositories {
     maven { url "https://maven.aliyun.com/repository/public" }
     maven { url "https://plugins.gradle.org/m2/" }
+    maven { url "https://repo.spring.io/release" }
 }
 
 dependencies {
-    implementation "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.31"
+    implementation "org.springframework.boot:spring-boot-gradle-plugin:2.7.1"
 }
 
 gradlePlugin {
     plugins {
         compileArgsPlugin {
-            id = "com.livk.compile.args"
-            implementationClass = "com.livk.plugin.CompileArgsPlugin"
+            id = "com.livk.compile-args"
+            implementationClass = "com.livk.compile.CompileArgsPlugin"
             description = "Add compile parameters"
         }
         dependencyBomPlugin {
             id = "com.livk.dependency"
-            implementationClass = "com.livk.plugin.DependencyBomPlugin"
+            implementationClass = "com.livk.DependencyBomPlugin"
             description = "build dependency BOM"
         }
         resourcesPlugin {
             id = "com.livk.resources"
-            implementationClass = "com.livk.plugin.ResourcesPlugin"
+            implementationClass = "com.livk.compile.ResourcesPlugin"
             description = "Add resource handling"
+        }
+        deployedPlugin {
+            id = "com.livk.maven.deployed"
+            implementationClass = "com.livk.maven.DeployedPlugin"
+        }
+        bootPlugin {
+            id = "com.livk.build.boot"
+            implementationClass = "com.livk.jar.BootPlugin"
         }
     }
 }
