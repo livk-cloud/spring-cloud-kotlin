@@ -1,9 +1,6 @@
-import java.time.Instant
-import java.util.concurrent.TimeUnit
-
 plugins {
     id "com.livk.dependency"
-    alias(libs.plugins.spring.boot) apply false
+    id "org.springframework.boot" apply false
 }
 
 ext {
@@ -19,33 +16,12 @@ ext {
 }
 
 configure(commonModuleProjects) {
-    apply plugin: "maven-publish"
+    apply plugin: "com.livk.maven.deployed"
     apply plugin: "com.livk.resources"
-
-    publishing {
-        repositories {
-            mavenLocal()
-        }
-        publications {
-            library(MavenPublication) {
-                artifact jar
-            }
-        }
-    }
 }
 
 configure(springModuleProjects) {
-    apply plugin: "org.springframework.boot"
-
-    springBoot {
-        buildInfo {
-            properties {
-                group = "$project.group"
-                version = "$project.version"
-                time = Instant.now().plusMillis(TimeUnit.HOURS.toMillis(8))
-            }
-        }
-    }
+    apply plugin: "com.livk.build.boot"
 }
 
 configure(allprojects) {
@@ -64,11 +40,8 @@ configure(allprojects) {
 }
 
 configure(gradleModuleProjects) {
-    apply plugin: "com.livk.compile.args"
+    apply plugin: "com.livk.compile-args"
     apply plugin: "com.livk.dependency"
-
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
 
     dependencies {
         dependencyBom platform(project(":livk-cloud-dependencies"))

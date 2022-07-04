@@ -2,6 +2,7 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
     id "java-platform"
+    id "com.livk.maven.deployed"
 }
 
 javaPlatform {
@@ -13,10 +14,12 @@ dependencies {
     api platform(libs.spring.cloud.dependencies)
     api platform(libs.spring.cloud.square.dependencies)
     constraints {
-        api libs.pagehelper.starter
-        api libs.mybatis.plus.starter
-        api libs.mybatis.plus
-        api libs.swagger.starter
-        api libs.google.findbugs
+        def versionCatalog = rootProject.extensions
+                .getByType(VersionCatalogsExtension.class)
+                .named("libs")
+        versionCatalog.getLibraryAliases()
+                .findAll { !it.endsWith("dependencies") && !it.endsWith("bom") }
+                .collect { versionCatalog.findLibrary(it).get().get() }
+                .forEach { api it }
     }
 }
