@@ -4,7 +4,3 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-square-okhttp")
     implementation("org.springframework.cloud:spring-cloud-square-retrofit")
 }
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
-}

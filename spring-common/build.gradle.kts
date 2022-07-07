@@ -7,7 +7,3 @@ dependencies {
     api("org.apache.commons:commons-lang3")
     api("com.google.code.findbugs:annotations")
 }
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
-}

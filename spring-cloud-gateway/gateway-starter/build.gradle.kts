@@ -7,7 +7,3 @@ dependencies {
     api("com.fasterxml.jackson.core:jackson-databind")
     api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
-}

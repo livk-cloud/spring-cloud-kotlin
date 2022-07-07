@@ -36,11 +36,15 @@ configure(gradleModuleProjects) {
     apply(plugin = "com.livk.dependency")
 
     tasks {
-        getByName<Delete>("clean") {
+        getByName<Delete>(BasePlugin.CLEAN_TASK_NAME) {
             delete("$projectDir/build")
             delete("$projectDir/out")
             delete("$projectDir/bin")
         }
+    }
+
+    tasks.getByName<Test>(JavaPlugin.TEST_TASK_NAME) {
+        useJUnitPlatform()
     }
 
     dependencies {
