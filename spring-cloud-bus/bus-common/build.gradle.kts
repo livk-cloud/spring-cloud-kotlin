@@ -8,7 +8,3 @@ dependencies {
     api("org.springframework.cloud:spring-cloud-starter-bootstrap")
     api("org.springframework.boot:spring-boot-starter-web")
 }
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
-}

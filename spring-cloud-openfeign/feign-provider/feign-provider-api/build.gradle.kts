@@ -7,7 +7,3 @@ dependencies {
     api("com.baomidou:mybatis-plus")
     api("io.github.openfeign:feign-okhttp")
 }
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
-}
