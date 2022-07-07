@@ -27,3 +27,5 @@ fileTree(rootDir) {
         project.buildFileName = it.name
     }
 }
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
