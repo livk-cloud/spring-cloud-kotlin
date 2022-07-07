@@ -1,37 +1,39 @@
-apply plugin: "groovy-gradle-plugin"
+plugins {
+    id("groovy-gradle-plugin")
+}
 
 repositories {
-    maven { url "https://maven.aliyun.com/repository/public" }
-    maven { url "https://plugins.gradle.org/m2/" }
-    maven { url "https://repo.spring.io/release" }
+    maven { setUrl("https://maven.aliyun.com/repository/public") }
+    maven { setUrl("https://plugins.gradle.org/m2/") }
+    maven { setUrl("https://repo.spring.io/release") }
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-gradle-plugin:2.7.1"
+    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.7.1")
 }
 
 gradlePlugin {
     plugins {
-        compileArgsPlugin {
+        create("compileArgsPlugin") {
             id = "com.livk.compile-args"
             implementationClass = "com.livk.compile.CompileArgsPlugin"
             description = "Add compile parameters"
         }
-        dependencyBomPlugin {
+        create("dependencyBomPlugin") {
             id = "com.livk.dependency"
             implementationClass = "com.livk.DependencyBomPlugin"
             description = "build dependency BOM"
         }
-        resourcesPlugin {
+        create("resourcesPlugin") {
             id = "com.livk.resources"
             implementationClass = "com.livk.compile.ResourcesPlugin"
             description = "Add resource handling"
         }
-        deployedPlugin {
+        create("deployedPlugin") {
             id = "com.livk.maven.deployed"
             implementationClass = "com.livk.maven.DeployedPlugin"
         }
-        bootPlugin {
+        create("bootPlugin") {
             id = "com.livk.build.boot"
             implementationClass = "com.livk.jar.BootPlugin"
         }
