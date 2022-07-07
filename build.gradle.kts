@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") apply (false)
 }
 
+val bootVersion: String = libs.versions.springBoot.get()
 val bom = project(":livk-cloud-dependencies")
 val gradleModuleProjects = subprojects.filter {
     it.buildFile.exists()
@@ -29,23 +30,28 @@ configure(allprojects) {
         maven { setUrl("https://plugins.gradle.org/m2/") }
         maven { setUrl("https://repo.spring.io/release") }
     }
+
+    tasks.withType<Delete> {
+        delete("$projectDir/build")
+        delete("$projectDir/out")
+        delete("$projectDir/bin")
+    }
+
+    configurations {
+        all {
+            resolutionStrategy {
+                dependencySubstitution {
+                    substitute(module("org.springframework.boot:spring-boot-starter-tomcat"))
+                        .using(module("org.springframework.boot:spring-boot-starter-undertow:$bootVersion"))
+                }
+            }
+        }
+    }
 }
 
 configure(gradleModuleProjects) {
     apply(plugin = "com.livk.compile-args")
     apply(plugin = "com.livk.dependency")
-
-    tasks {
-        getByName<Delete>(BasePlugin.CLEAN_TASK_NAME) {
-            delete("$projectDir/build")
-            delete("$projectDir/out")
-            delete("$projectDir/bin")
-        }
-    }
-
-    tasks.getByName<Test>(JavaPlugin.TEST_TASK_NAME) {
-        useJUnitPlatform()
-    }
 
     dependencies {
         dependencyBom(platform(project(":livk-cloud-dependencies")))
@@ -57,5 +63,9 @@ configure(gradleModuleProjects) {
         testImplementation("org.projectlombok:lombok")
 
         testAnnotationProcessor("org.projectlombok:lombok")
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
     }
 }
