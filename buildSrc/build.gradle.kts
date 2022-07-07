@@ -8,8 +8,10 @@ repositories {
     maven { setUrl("https://repo.spring.io/release") }
 }
 
+val bootVersion: String = libs.versions.springBoot.get()
+
 dependencies {
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.7.1")
+    implementation("org.springframework.boot:spring-boot-gradle-plugin:$bootVersion")
 }
 
 gradlePlugin {
