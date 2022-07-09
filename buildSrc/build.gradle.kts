@@ -1,5 +1,7 @@
 plugins {
     id("groovy-gradle-plugin")
+    id("java-gradle-plugin")
+    kotlin("jvm") version "1.6.21"
 }
 
 repositories {
@@ -37,7 +39,7 @@ gradlePlugin {
         }
         create("bootPlugin") {
             id = "com.livk.build.boot"
-            implementationClass = "com.livk.jar.BootPlugin"
+            implementationClass = "com.livk.info.BootPlugin"
         }
     }
 }
