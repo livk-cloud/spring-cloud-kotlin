@@ -6,24 +6,24 @@ import org.gradle.api.plugins.JavaPlugin
 
 /**
  * <p>
- * 创建dependency效果的BOM引入器
+ * DependencyBomPlugin
  * </p>
  *
  * @author livk
- * @date 2022/6/1
+ * @date 2022/7/8
  */
-abstract class DependencyBomPlugin implements Plugin<Project> {
+abstract class DependencyBomPlugin : Plugin<Project> {
+    companion object {
+        const val DEPENDENCY_BOM = "dependencyBom"
+    }
 
-    public static final String DEPENDENCY_BOM = "dependencyBom"
-
-    @Override
-    void apply(Project project) {
-        project.pluginManager.apply(JavaPlugin.class)
-        def dependencyBom = project.configurations.create(DEPENDENCY_BOM)
-        dependencyBom.visible = false
-        dependencyBom.canBeResolved = false
-        dependencyBom.canBeConsumed = false
-        project.plugins.withType(JavaPlugin.class) {
+    override fun apply(project: Project) {
+        project.pluginManager.apply(JavaPlugin::class.java)
+        val dependencyBom = project.configurations.create(DEPENDENCY_BOM)
+        dependencyBom.isVisible = false
+        dependencyBom.isCanBeResolved = false
+        dependencyBom.isCanBeConsumed = false
+        project.plugins.withType(JavaPlugin::class.java) {
             project.configurations.getByName(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME).extendsFrom(dependencyBom)
             project.configurations.getByName(JavaPlugin.API_ELEMENTS_CONFIGURATION_NAME).extendsFrom(dependencyBom)
             project.configurations.getByName(JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME).extendsFrom(dependencyBom)
