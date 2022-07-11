@@ -41,5 +41,9 @@ gradlePlugin {
             id = "com.livk.build.boot"
             implementationClass = "com.livk.info.BootPlugin"
         }
+        create("deleteExpand") {
+            id = "com.livk.clean.expand"
+            implementationClass = "com.livk.tasks.DeleteExpand"
+        }
     }
 }

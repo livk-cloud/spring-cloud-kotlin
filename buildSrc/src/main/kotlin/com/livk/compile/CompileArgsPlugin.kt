@@ -6,6 +6,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.api.tasks.testing.Test
 
 /**
  * <p>
@@ -45,6 +46,10 @@ abstract class CompileArgsPlugin : Plugin<Project> {
         javaCompile.options.encoding = UTF_8
         javaCompile.sourceCompatibility = JavaVersion.VERSION_17.toString()
         javaCompile.targetCompatibility = JavaVersion.VERSION_17.toString()
+
+        project.tasks.withType(Test::class.java){
+            it.useJUnitPlatform()
+        }
 
         project.afterEvaluate {
             val dependencyName = HashSet<String>()

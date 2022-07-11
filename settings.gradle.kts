@@ -13,7 +13,7 @@ fileTree(rootDir) {
     val excludes = gradle.startParameter.projectProperties["excludeProjects"]?.split(",")
     include("**/*.gradle.kts")
     exclude("build", "**/gradle", "settings.gradle.kts", "buildSrc", "/build.gradle.kts", ".", "out")
-    if (excludes != null && excludes.isNotEmpty()) {
+    if (!excludes.isNullOrEmpty()) {
         exclude(excludes)
     }
 }.forEach {
