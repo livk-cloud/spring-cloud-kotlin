@@ -15,7 +15,7 @@ dependencies {
     api(platform(libs.spring.cloud.square.dependencies))
     constraints {
         val versionCatalog = rootProject.extensions
-            .getByType(VersionCatalogsExtension::class)
+            .getByType(VersionCatalogsExtension::class.java)
             .named("libs")
         versionCatalog.libraryAliases
             .filter { !it.endsWith("dependencies") && !it.endsWith("bom") }

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("groovy-gradle-plugin")
     id("java-gradle-plugin")
@@ -14,6 +16,13 @@ val bootVersion: String = libs.versions.springBoot.get()
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-gradle-plugin:$bootVersion")
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "17"
+    }
 }
 
 gradlePlugin {
@@ -44,6 +53,10 @@ gradlePlugin {
         create("deleteExpand") {
             id = "com.livk.clean.expand"
             implementationClass = "com.livk.tasks.DeleteExpand"
+        }
+        create("allConfiguration") {
+            id = "com.livk.all.configuration"
+            implementationClass = "com.livk.config.AllConfiguration"
         }
     }
 }
