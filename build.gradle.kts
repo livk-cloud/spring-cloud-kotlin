@@ -25,16 +25,11 @@ configure(springModuleProjects) {
 }
 
 configure(allprojects) {
+    apply(plugin = "com.livk.clean.expand")
     repositories {
         maven { setUrl("https://maven.aliyun.com/repository/public") }
         maven { setUrl("https://plugins.gradle.org/m2/") }
         maven { setUrl("https://repo.spring.io/release") }
-    }
-
-    tasks.withType<Delete> {
-        delete("$projectDir/build")
-        delete("$projectDir/out")
-        delete("$projectDir/bin")
     }
 
     configurations {
@@ -63,9 +58,5 @@ configure(gradleModuleProjects) {
         testImplementation("org.projectlombok:lombok")
 
         testAnnotationProcessor("org.projectlombok:lombok")
-    }
-
-    tasks.withType<Test> {
-        useJUnitPlatform()
     }
 }
