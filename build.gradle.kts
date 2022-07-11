@@ -26,21 +26,11 @@ configure(springModuleProjects) {
 
 configure(allprojects) {
     apply(plugin = "com.livk.clean.expand")
+    apply(plugin = "com.livk.all.configuration")
     repositories {
         maven { setUrl("https://maven.aliyun.com/repository/public") }
         maven { setUrl("https://plugins.gradle.org/m2/") }
         maven { setUrl("https://repo.spring.io/release") }
-    }
-
-    configurations {
-        all {
-            resolutionStrategy {
-                dependencySubstitution {
-                    substitute(module("org.springframework.boot:spring-boot-starter-tomcat"))
-                        .using(module("org.springframework.boot:spring-boot-starter-undertow:$bootVersion"))
-                }
-            }
-        }
     }
 }
 
