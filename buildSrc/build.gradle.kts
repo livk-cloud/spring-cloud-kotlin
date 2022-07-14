@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("groovy-gradle-plugin")
     id("java-gradle-plugin")
     kotlin("jvm") version "1.6.21"
 }
