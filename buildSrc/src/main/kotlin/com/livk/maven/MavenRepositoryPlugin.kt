@@ -17,13 +17,16 @@ abstract class MavenRepositoryPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.pluginManager.apply(MavenPublishPlugin::class.java)
         val publishing = project.extensions.getByType(PublishingExtension::class.java)
+        publishing.repositories.mavenLocal()
         publishing.repositories.maven { maven ->
-            val releasesRepoUrl = "https:xxxx"
-            val snapshotsRepoUrl = "https://xxx"
+            val releasesRepoUrl = "http://localhost:8081/repository/maven-releases/"
+            val snapshotsRepoUrl = "http://localhost:8081/repository/maven-snapshots/"
+            //使用不安全的http请求、也就是缺失SSL
+            maven.isAllowInsecureProtocol = true
             maven.setUrl(if (project.version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
             maven.credentials {
-                it.username = "xxxxxx"
-                it.password = "xxxxxx"
+                it.username = "admin"
+                it.password = "admin"
             }
         }
     }
