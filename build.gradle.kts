@@ -3,7 +3,6 @@ plugins {
     id("org.springframework.boot") apply (false)
 }
 
-val bootVersion: String = libs.versions.springBoot.get()
 val bom = setOf(project(":livk-cloud-dependencies"), project(":livk-cloud-bom"))
 val gradleModuleProjects = subprojects.filter {
     it.buildFile.exists()
