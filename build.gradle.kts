@@ -4,7 +4,7 @@ plugins {
 }
 
 val bootVersion: String = libs.versions.springBoot.get()
-val bom = project(":livk-cloud-dependencies")
+val bom = setOf(project(":livk-cloud-dependencies"), project(":livk-cloud-bom"))
 val gradleModuleProjects = subprojects.filter {
     it.buildFile.exists()
 }.toSet() - bom
@@ -14,6 +14,13 @@ val commonModuleProjects = gradleModuleProjects.filter {
             || it.name.endsWith("-api")
 }.toSet()
 val springModuleProjects = gradleModuleProjects - commonModuleProjects
+
+configure(bom) {
+    apply(plugin = "java-platform")
+    apply(plugin = "com.livk.maven.deployed")
+
+    project.extensions.getByType(JavaPlatformExtension::class.java).allowDependencies()
+}
 
 configure(commonModuleProjects) {
     apply(plugin = "com.livk.maven.deployed")
