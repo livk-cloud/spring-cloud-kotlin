@@ -12,7 +12,6 @@ spring:
     config:
       server:
         jdbc:
-          enabled: true
           sql: SELECT livk_key, livk_value from config_properties where APPLICATION=? and PROFILE=? and LABEL=?
 
 server:
