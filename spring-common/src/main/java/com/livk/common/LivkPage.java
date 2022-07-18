@@ -22,9 +22,13 @@ public class LivkPage<T> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
     private final long total;
+
     private final List<T> list;
+
     private int pageNum;
+
     private int pageSize;
 
     private LivkPage(List<T> list) {

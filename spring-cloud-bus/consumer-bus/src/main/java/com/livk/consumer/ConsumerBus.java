@@ -1,7 +1,7 @@
 package com.livk.consumer;
 
 import com.livk.bus.listener.EnableRemoteEventListener;
-import com.livk.common.LivkSpring;
+import com.livk.spring.LivkSpring;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

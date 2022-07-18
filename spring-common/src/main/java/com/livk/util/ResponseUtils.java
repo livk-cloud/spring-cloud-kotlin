@@ -1,5 +1,6 @@
 package com.livk.util;
 
+
 import lombok.experimental.UtilityClass;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -7,7 +8,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * <p>
@@ -45,7 +45,7 @@ public class ResponseUtils {
      */
     public void out(HttpServletResponse response, String message) {
         response.setContentType("application/json;charset=utf-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (var out = response.getWriter()) {
             out.print(message);
             out.flush();
         } catch (IOException exception) {

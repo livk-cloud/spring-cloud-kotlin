@@ -5,7 +5,7 @@ import com.livk.auth.common.constant.SecurityConstants;
 import com.livk.auth.common.core.exception.BadCaptchaException;
 import com.livk.auth.common.service.Oauth2UserDetailsService;
 import com.livk.auth.common.util.MessageSourceUtils;
-import com.livk.common.SpringContextHolder;
+import com.livk.support.SpringContextHolder;
 import com.livk.util.RequestUtils;
 import lombok.Getter;
 import lombok.Setter;
