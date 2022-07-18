@@ -1,7 +1,7 @@
 package com.livk.auth.common.core;
 
 
-import com.livk.auth.common.core.constant.SecurityConstants;
+import com.livk.auth.common.constant.SecurityConstants;
 import com.livk.auth.common.core.exception.BadCaptchaException;
 import com.livk.auth.common.service.Oauth2UserDetailsService;
 import com.livk.common.SpringContextHolder;

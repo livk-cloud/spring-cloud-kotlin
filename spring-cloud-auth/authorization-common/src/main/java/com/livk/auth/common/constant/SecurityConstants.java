@@ -1,4 +1,4 @@
-package com.livk.auth.common.core.constant;
+package com.livk.auth.common.constant;
 
 /**
  * @author livk

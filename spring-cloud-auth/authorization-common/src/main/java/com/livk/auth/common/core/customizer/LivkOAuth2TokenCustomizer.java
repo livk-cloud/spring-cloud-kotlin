@@ -1,7 +1,7 @@
 package com.livk.auth.common.core.customizer;
 
 
-import com.livk.auth.common.core.constant.SecurityConstants;
+import com.livk.auth.common.constant.SecurityConstants;
 import com.livk.auth.common.core.principal.Oauth2User;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;

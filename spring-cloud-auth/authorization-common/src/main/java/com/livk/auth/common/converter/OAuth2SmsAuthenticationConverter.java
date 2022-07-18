@@ -1,7 +1,7 @@
 package com.livk.auth.common.converter;
 
 
-import com.livk.auth.common.core.constant.SecurityConstants;
+import com.livk.auth.common.constant.SecurityConstants;
 import com.livk.auth.common.token.OAuth2SmsAuthenticationToken;
 import com.livk.auth.common.util.OAuth2EndpointUtils;
 import org.springframework.security.core.Authentication;

@@ -1,7 +1,7 @@
 package com.livk.auth.common.provider;
 
 
-import com.livk.auth.common.core.constant.SecurityConstants;
+import com.livk.auth.common.constant.SecurityConstants;
 import com.livk.auth.common.token.OAuth2SmsAuthenticationToken;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
