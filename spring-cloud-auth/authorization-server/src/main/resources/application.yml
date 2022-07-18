@@ -1,0 +1,9 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://livk.com:3306/livk_oauth
+    username: root
+    password: 123456
