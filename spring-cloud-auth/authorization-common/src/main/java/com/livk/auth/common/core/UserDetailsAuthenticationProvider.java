@@ -4,6 +4,7 @@ package com.livk.auth.common.core;
 import com.livk.auth.common.constant.SecurityConstants;
 import com.livk.auth.common.core.exception.BadCaptchaException;
 import com.livk.auth.common.service.Oauth2UserDetailsService;
+import com.livk.auth.common.util.MessageSourceUtils;
 import com.livk.common.SpringContextHolder;
 import com.livk.util.RequestUtils;
 import lombok.Getter;
@@ -66,7 +67,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     private UserDetailsPasswordService userDetailsPasswordService;
 
     public UserDetailsAuthenticationProvider() {
-        setMessageSource(SpringContextHolder.getBean("securityMessageSource"));
+        setMessageSource(MessageSourceUtils.get());
         setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
     }
 

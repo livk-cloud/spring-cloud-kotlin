@@ -3,9 +3,9 @@ package com.livk.auth.common.provider;
 
 import com.livk.auth.common.core.exception.BadCaptchaException;
 import com.livk.auth.common.token.OAuth2BaseAuthenticationToken;
+import com.livk.auth.common.util.MessageSourceUtils;
 import com.livk.auth.common.util.OAuth2AuthenticationProviderUtils;
 import com.livk.auth.common.util.OAuth2ErrorCodesExpand;
-import com.livk.common.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.authentication.*;
@@ -69,7 +69,7 @@ public abstract class OAuth2BaseAuthenticationProvider<T extends OAuth2BaseAuthe
         this.tokenGenerator = tokenGenerator;
 
         // 国际化配置
-        this.messages = new MessageSourceAccessor(SpringContextHolder.getBean("securityMessageSource"), Locale.CHINA);
+        this.messages = new MessageSourceAccessor(MessageSourceUtils.get(), Locale.CHINA);
     }
 
     @Deprecated
