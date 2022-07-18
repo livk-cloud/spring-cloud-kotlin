@@ -1,11 +1,12 @@
 package com.livk.auth.common.handler;
 
 
-import com.livk.auth.common.core.constant.SecurityConstants;
+import com.livk.auth.common.constant.SecurityConstants;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.core.AuthenticationException;
@@ -61,7 +62,7 @@ public class AuthenticationFailureEventHandler implements AuthenticationFailureH
 
         httpResponse.setStatusCode(HttpStatus.BAD_REQUEST);
 
-        this.errorHttpResponseConverter.write(WrapMapper.fail(error.getDescription()), MediaType.APPLICATION_JSON, httpResponse);
+        this.errorHttpResponseConverter.write(ResponseEntity.status(403).body(error.getDescription()), MediaType.APPLICATION_JSON, httpResponse);
     }
 
 }

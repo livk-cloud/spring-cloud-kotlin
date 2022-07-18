@@ -1,16 +1,16 @@
 package com.livk.auth.common.util;
 
-import cn.hutool.core.util.StrUtil;
-import com.somnus.microservice.commons.security.core.constant.SecurityConstants;
-import com.somnus.microservice.commons.security.core.principal.Oauth2User;
+
+import com.livk.auth.common.constant.SecurityConstants;
+import com.livk.auth.common.core.principal.Oauth2User;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author livk
@@ -53,16 +53,12 @@ public class SecurityUtils {
      * @return 角色集合
      */
     public List<Long> getRoles() {
-        Authentication authentication = getAuthentication();
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-
-        List<Long> roleIds = new ArrayList<>();
-        authorities.stream().filter(granted -> StrUtil.startWith(granted.getAuthority(), SecurityConstants.ROLE))
-                .forEach(granted -> {
-                    String id = StrUtil.removePrefix(granted.getAuthority(), SecurityConstants.ROLE);
-                    roleIds.add(Long.parseLong(id));
-                });
-        return roleIds;
+        return getAuthentication().getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .filter(authority -> StringUtils.hasText(authority) && authority.startsWith(SecurityConstants.ROLE))
+                .map(authority -> Long.parseLong(authority.replaceFirst(SecurityConstants.ROLE, "")))
+                .collect(Collectors.toList());
     }
 
 }
