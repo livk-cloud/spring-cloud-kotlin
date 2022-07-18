@@ -1,6 +1,7 @@
 package com.livk.client;
 
-import com.livk.common.LivkSpring;
+
+import com.livk.spring.LivkSpring;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;

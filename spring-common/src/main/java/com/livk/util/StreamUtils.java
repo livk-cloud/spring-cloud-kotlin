@@ -17,12 +17,12 @@ import java.util.stream.Stream;
 public class StreamUtils {
 
     @SuppressWarnings("unchecked")
-    public <T> T[] concat(T[] start, T[] end) {
+    public <T> T[] concat(T[] start, T... end) {
         return (T[]) Stream.concat(Stream.of(start), Stream.of(end)).toArray();
     }
 
     public <T> Stream<T> concat(Collection<T> start, Collection<T> end) {
-        return Stream.concat(Stream.of(start), Stream.of(end)).flatMap(Collection::stream);
+        return Stream.concat(start.stream(), end.stream());
     }
 
 }

@@ -1,7 +1,7 @@
 package com.livk.provider;
 
 import com.livk.bus.event.LivkBusEvent;
-import com.livk.common.LivkSpring;
+import com.livk.spring.LivkSpring;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

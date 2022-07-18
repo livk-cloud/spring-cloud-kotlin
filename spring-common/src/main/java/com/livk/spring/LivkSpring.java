@@ -1,4 +1,4 @@
-package com.livk.common;
+package com.livk.spring;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -20,8 +20,7 @@ public class LivkSpring {
         if (!targetClass.isAnnotationPresent(SpringBootApplication.class)) {
             throw new AnnotationConfigurationException("must use @SpringBootApplication in start class");
         }
-        SpringApplicationBuilder builder = new SpringApplicationBuilder(targetClass)
-                .banner(LivkBanner.create())
+        SpringApplicationBuilder builder = new SpringApplicationBuilder(targetClass).banner(LivkBanner.create())
                 .bannerMode(Banner.Mode.CONSOLE);
         application = builder.application();
         return builder.run(args);
@@ -30,4 +29,5 @@ public class LivkSpring {
     public static SpringApplication application() {
         return application;
     }
+
 }

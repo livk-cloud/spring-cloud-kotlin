@@ -3,7 +3,7 @@ package com.livk.auth.common.core.resource;
 
 import com.livk.auth.common.core.principal.Oauth2User;
 import com.livk.auth.common.service.Oauth2UserDetailsService;
-import com.livk.common.SpringContextHolder;
+import com.livk.support.SpringContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;

@@ -47,7 +47,7 @@ abstract class CompileArgsPlugin : Plugin<Project> {
         javaCompile.sourceCompatibility = JavaVersion.VERSION_17.toString()
         javaCompile.targetCompatibility = JavaVersion.VERSION_17.toString()
 
-        project.tasks.withType(Test::class.java){
+        project.tasks.withType(Test::class.java) {
             it.useJUnitPlatform()
         }
 

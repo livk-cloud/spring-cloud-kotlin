@@ -1,6 +1,7 @@
 package com.livk.consumer;
 
-import com.livk.common.LivkSpring;
+
+import com.livk.spring.LivkSpring;
 import com.livk.stream.entity.KafkaMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,7 @@
 package com.livk.provider;
 
-import com.livk.common.LivkSpring;
+
+import com.livk.spring.LivkSpring;
 import com.livk.stream.entity.KafkaMessage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
