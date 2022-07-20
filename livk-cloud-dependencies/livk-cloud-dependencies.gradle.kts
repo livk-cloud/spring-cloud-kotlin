@@ -1,16 +1,20 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
+val versionCatalog = rootProject.extensions
+    .getByType(VersionCatalogsExtension::class.java)
+    .named("libs")
+val bom = versionCatalog.libraryAliases
+    .filter { it.endsWith("dependencies") || it.endsWith("bom") }
+val dependency = versionCatalog.libraryAliases - bom.toSet()
+
 dependencies {
     api(platform(SpringBootPlugin.BOM_COORDINATES))
-    api(platform(libs.spring.cloud.dependencies))
-    api(platform(libs.spring.cloud.square.dependencies))
+    get(bom).forEach { api(platform(it)) }
     constraints {
-        val versionCatalog = rootProject.extensions
-            .getByType(VersionCatalogsExtension::class.java)
-            .named("libs")
-        versionCatalog.libraryAliases
-            .filter { !it.endsWith("dependencies") && !it.endsWith("bom") }
-            .map { versionCatalog.findLibrary(it).get().get() }
-            .forEach { api(it) }
+        get(dependency).forEach { api(it) }
     }
+}
+
+fun get(dependencyNames: List<String>): List<MinimalExternalModuleDependency> {
+    return dependencyNames.map { versionCatalog.findLibrary(it).get().get() }
 }
