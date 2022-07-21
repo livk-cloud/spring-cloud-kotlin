@@ -1,0 +1,24 @@
+server:
+  port: 7888
+spring:
+  profiles:
+    active: dev
+  application:
+    name: rabbit-provider
+  rabbitmq:
+    host: livk.com
+    username: admin
+    password: admin
+  cloud:
+    consul:
+      host: livk.com
+      discovery:
+        heartbeat:
+          enabled: true
+        service-name: ${spring.application.name}
+    stream:
+      bindings:
+        send-out-0:
+          destination: livk-topic
+          content-type: application/json
+
