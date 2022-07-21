@@ -11,7 +11,7 @@ import lombok.Data;
  * @date 2022/2/15
  */
 @Data
-public class KafkaMessage<T> {
+public class StreamMessage<T> {
 
     private String id;
 

@@ -1,3 +1,4 @@
 dependencies {
-    implementation(project(":spring-cloud-stream:kafka-common"))
+    implementation(project(":spring-cloud-stream:stream-common"))
+    implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka")
 }
