@@ -1,6 +1,6 @@
 package com.livk.provider;
 
-import com.livk.stream.entity.KafkaMessage;
+import com.livk.stream.entity.StreamMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,7 +25,7 @@ public class SendMessage {
 
     @Scheduled(cron = "0/5 * * * * ?")
     public void send() {
-        KafkaMessage<String> message = new KafkaMessage<>();
+        StreamMessage<String> message = new StreamMessage<>();
         message.setId(UUID.randomUUID().toString());
         message.setMsg(UUID.randomUUID() + "hello");
         message.setData(UUID.randomUUID() + "|||" + UUID.randomUUID());
