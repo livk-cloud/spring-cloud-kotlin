@@ -1,4 +1,4 @@
-package com.livk.consumer.biz;
+package com.livk.provider.api.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
