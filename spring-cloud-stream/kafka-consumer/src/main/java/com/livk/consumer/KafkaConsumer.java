@@ -2,7 +2,7 @@ package com.livk.consumer;
 
 
 import com.livk.spring.LivkSpring;
-import com.livk.stream.entity.KafkaMessage;
+import com.livk.stream.entity.StreamMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +27,7 @@ public class KafkaConsumer {
     }
 
     @Bean
-    public Consumer<Flux<KafkaMessage<String>>> send() {
+    public Consumer<Flux<StreamMessage<String>>> send() {
         return kafkaMessageFlux -> kafkaMessageFlux.subscribe(kafkaMessage -> log.info("[{}]", kafkaMessage));
     }
 

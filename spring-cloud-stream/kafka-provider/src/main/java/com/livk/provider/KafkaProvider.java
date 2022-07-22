@@ -2,7 +2,7 @@ package com.livk.provider;
 
 
 import com.livk.spring.LivkSpring;
-import com.livk.stream.entity.KafkaMessage;
+import com.livk.stream.entity.StreamMessage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -27,19 +27,19 @@ import java.util.function.Supplier;
 @SpringBootApplication
 public class KafkaProvider {
 
-    Sinks.Many<KafkaMessage<String>> buffer = Sinks.many().multicast().onBackpressureBuffer();
+    Sinks.Many<StreamMessage<String>> buffer = Sinks.many().multicast().onBackpressureBuffer();
 
     public static void main(String[] args) {
         LivkSpring.run(KafkaProvider.class, args);
     }
 
     @PostMapping("send")
-    public void send(@RequestBody KafkaMessage<String> message) {
+    public void send(@RequestBody StreamMessage<String> message) {
         buffer.tryEmitNext(message);
     }
 
     @Bean
-    public Supplier<Flux<KafkaMessage<String>>> send() {
+    public Supplier<Flux<StreamMessage<String>>> send() {
         return buffer::asFlux;
     }
 
