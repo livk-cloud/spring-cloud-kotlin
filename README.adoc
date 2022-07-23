@@ -4,8 +4,9 @@ link:README-en.adoc[English] +
 这是一个关于SpringCloud的各种示例 +
 里面的代码或多或少应该可以帮助到你 +
 如果觉得不错，可以star一下 +
-Gradle:7.4.2--JDk:17 +
-SpringBoot:2.7.0 +
+JDk:17 +
+Gradle:7.5 +
+SpringBoot:2.7.2 +
 SpringCloud:2021.0.3 +
 
 更多的描述和使用可以移步 https://github.com/livk-cloud/spring-boot-example[spring-boot-example]
