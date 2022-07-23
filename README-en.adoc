@@ -4,8 +4,9 @@ link:README.adoc[简体中文] +
 Here is a various example on SpringCloud +
 The code inside should more or less help you +
 If you feel good, you can star it +
-Gradle:7.4.2--JDk:17 +
-SpringBoot:2.7.0 +
+JDk:17 +
+Gradle:7.5 +
+SpringBoot:2.7.2 +
 SpringCloud:2021.0.3 +
 
 More description and usage can be moved https://github.com/livk-cloud/spring-boot-example[spring-boot-example]
