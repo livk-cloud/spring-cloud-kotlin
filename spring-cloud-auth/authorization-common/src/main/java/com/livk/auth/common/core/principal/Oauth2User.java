@@ -1,5 +1,6 @@
 package com.livk.auth.common.core.principal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @author livk
  */
 @Getter
+@JsonIgnoreProperties("password")
 public class Oauth2User extends User implements OAuth2AuthenticatedPrincipal {
 
     @Serial
