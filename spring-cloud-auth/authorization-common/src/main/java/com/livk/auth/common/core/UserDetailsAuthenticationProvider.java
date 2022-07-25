@@ -22,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
@@ -68,7 +69,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
 
     public UserDetailsAuthenticationProvider() {
         setMessageSource(MessageSourceUtils.get());
-        setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
+        setPasswordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
     @Override

@@ -28,7 +28,7 @@ public class OAuth2JwtTokenCustomizer implements OAuth2TokenCustomizer<JwtEncodi
         claims.claim(OAuth2ParameterNames.CLIENT_ID, context.getAuthorizationGrant().getName());
 
         // 客户端模式不返回具体用户信息
-        if (AuthorizationGrantType.CLIENT_CREDENTIALS.getValue().equals(context.getAuthorizationGrantType().getValue())) {
+        if (AuthorizationGrantType.CLIENT_CREDENTIALS.equals(context.getAuthorizationGrantType())) {
             return;
         }
 
