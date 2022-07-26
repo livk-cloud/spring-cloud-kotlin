@@ -82,7 +82,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
             throw new BadCredentialsException(this.messages
                     .getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         }
-
+        //校验验证码
         if (Objects.equals(SecurityConstants.SMS, grantType)) {
             String code = authentication.getCredentials().toString();
             if (!Objects.equals(code, "123456")) {
@@ -91,7 +91,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
                         .getMessage("AbstractUserDetailsAuthenticationProvider.badCaptcha", "Bad captcha"));
             }
         }
-
+        //校验密码
         if (Objects.equals(AuthorizationGrantType.PASSWORD.getValue(), grantType)) {
             String presentedPassword = authentication.getCredentials().toString();
             String encodedPassword = extractEncodedPassword(userDetails.getPassword());
