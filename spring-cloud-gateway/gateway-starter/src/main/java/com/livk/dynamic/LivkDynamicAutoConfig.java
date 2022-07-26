@@ -2,11 +2,10 @@ package com.livk.dynamic;
 
 import com.livk.dynamic.support.LivkReactiveRedisTemplate;
 import com.livk.dynamic.support.LivkRedisRouteDefinitionRepository;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.cloud.gateway.config.GatewayAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 
 /**
@@ -17,8 +16,7 @@ import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
  * @author livk
  * @date 2021/12/28
  */
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore({GatewayAutoConfiguration.class, RedisAutoConfiguration.class})
+@AutoConfiguration(before = {GatewayAutoConfiguration.class, RedisAutoConfiguration.class})
 public class LivkDynamicAutoConfig {
 
     @Bean
