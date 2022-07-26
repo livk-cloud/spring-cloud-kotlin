@@ -8,6 +8,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
+import org.springframework.lang.NonNull;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -27,10 +28,11 @@ public abstract class ResultHandlerWebFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         var originalResponse = exchange.getResponse();
-        if (chooseHandler(originalResponse)) {
+        if (support(originalResponse)) {
             var decoratedResponse = new ServerHttpResponseDecorator(originalResponse) {
+                @NonNull
                 @Override
-                public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
+                public Mono<Void> writeWith(@NonNull Publisher<? extends DataBuffer> body) {
                     if (body instanceof Flux) {
                         @SuppressWarnings("unchecked")
                         var fluxBody = (Flux<? extends DataBuffer>) body;
@@ -51,7 +53,7 @@ public abstract class ResultHandlerWebFilter implements GlobalFilter, Ordered {
         return chain.filter(exchange);
     }
 
-    protected abstract boolean chooseHandler(ServerHttpResponse response);
+    protected abstract boolean support(ServerHttpResponse response);
 
     protected abstract String resultHandler(String result);
 

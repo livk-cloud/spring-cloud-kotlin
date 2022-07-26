@@ -2,14 +2,13 @@ package com.livk.provider.api;
 
 import feign.Feign;
 import feign.Logger;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.commons.httpclient.OkHttpClientFactory;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.cloud.openfeign.support.FeignHttpClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,9 +21,8 @@ import java.util.concurrent.TimeUnit;
  * @date 2021/12/7
  */
 @ComponentScan(basePackageClasses = OpenFeignConfig.class)
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(before = FeignAutoConfiguration.class)
 @ConditionalOnClass(Feign.class)
-@AutoConfigureBefore(FeignAutoConfiguration.class)
 public class OpenFeignConfig {
 
     @Bean

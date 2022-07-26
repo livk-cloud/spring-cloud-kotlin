@@ -2,11 +2,11 @@ package com.livk.resillence4j.config;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 import org.springframework.cloud.client.circuitbreaker.Customizer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.time.Duration;
 
@@ -18,7 +18,7 @@ import java.time.Duration;
  * @author livk
  * @date 2022/3/17
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 public class Resilience4jConfig {
 
     @Bean
