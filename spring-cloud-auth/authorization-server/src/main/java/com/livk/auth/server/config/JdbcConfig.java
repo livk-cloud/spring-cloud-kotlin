@@ -1,5 +1,6 @@
 package com.livk.auth.server.config;
 
+import com.livk.auth.common.constant.SecurityConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,6 +33,7 @@ public class JdbcConfig {
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                .authorizationGrantType(new AuthorizationGrantType(SecurityConstants.SMS))
                 .redirectUri("http://127.0.0.1:8080/login/oauth2/code/livk-client-oidc")
                 .redirectUri("http://127.0.0.1:8080/authorized").scope(OidcScopes.OPENID).scope("livk.read")
                 .scope("livk.write").clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())

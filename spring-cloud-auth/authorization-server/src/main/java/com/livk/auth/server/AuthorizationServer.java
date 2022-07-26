@@ -7,8 +7,6 @@ import com.livk.spring.LivkSpring;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * <p>
@@ -26,21 +24,22 @@ public class AuthorizationServer {
 
 
     Oauth2User oauth2User() {
-        return new Oauth2User(123L, "livk", "123456", "18664967020",
+        return new Oauth2User(123L, "livk", "123456", "18664960000",
                 true, true, true, true,
                 AuthorityUtils.createAuthorityList("USER"));
     }
 
     @Bean
     public Oauth2UserDetailsService users() {
-        return new Oauth2UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                if ("livk".equals(username)) {
-                    return oauth2User();
-                }
-                return null;
+
+        return username -> {
+            if ("livk".equals(username)) {
+                return oauth2User();
             }
+            if ("18664960000".equals(username)) {
+                return oauth2User();
+            }
+            return null;
         };
     }
 }
