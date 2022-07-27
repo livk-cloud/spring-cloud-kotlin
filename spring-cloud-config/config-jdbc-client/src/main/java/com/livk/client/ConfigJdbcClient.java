@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @SpringBootApplication
-public class ConfigClient {
+public class ConfigJdbcClient {
 
     @Value("${foo}")
     String foo;
 
     public static void main(String[] args) {
-        LivkSpring.run(ConfigClient.class, args);
+        LivkSpring.run(ConfigJdbcClient.class, args);
     }
 
     @RequestMapping(value = "/foo")

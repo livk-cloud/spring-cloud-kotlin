@@ -1,10 +1,10 @@
 spring:
   application:
-    name: config-client
+    name: config-local-client
   cloud:
     config:
-      uri: http://localhost:8769
+      uri: http://localhost:8770
       fail-fast: true
-      label: develop
+      label: dev
   profiles:
     active: dev

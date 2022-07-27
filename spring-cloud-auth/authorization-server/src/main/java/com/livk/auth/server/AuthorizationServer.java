@@ -15,6 +15,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
  *
  * @author livk
  * @date 2022/7/15
+ * @see com.livk.auth.common.core.UserDetailsAuthenticationProvider
  */
 @SpringBootApplication
 public class AuthorizationServer {
