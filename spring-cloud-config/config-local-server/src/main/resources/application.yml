@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-local-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/
+        bootstrap: true
+
+server:
+  port: 8770

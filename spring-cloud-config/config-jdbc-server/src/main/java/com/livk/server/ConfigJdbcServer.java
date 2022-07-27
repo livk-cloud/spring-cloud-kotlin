@@ -14,10 +14,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
  */
 @EnableConfigServer
 @SpringBootApplication
-public class ConfigServer {
+public class ConfigJdbcServer {
 
     public static void main(String[] args) {
-        LivkSpring.run(ConfigServer.class, args);
+        LivkSpring.run(ConfigJdbcServer.class, args);
     }
 
 }
