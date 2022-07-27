@@ -67,6 +67,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     @Setter
     private UserDetailsPasswordService userDetailsPasswordService;
 
+    @SuppressWarnings("deprecation")
     public UserDetailsAuthenticationProvider() {
         setMessageSource(MessageSourceUtils.get());
         setPasswordEncoder(NoOpPasswordEncoder.getInstance());
