@@ -7,6 +7,8 @@ dependencies {
     compileOnly("com.fasterxml.jackson.core:jackson-databind")
     compileOnly("org.apache.tomcat.embed:tomcat-embed-core")
     compileOnly("com.squareup.okhttp3:okhttp")
+    api("org.jetbrains.kotlin:kotlin-reflect")
+    api("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("org.apache.commons:commons-lang3")
     api("com.google.code.findbugs:annotations")
 }

@@ -1,6 +1,5 @@
 plugins {
     id("com.livk.dependency")
-    id("org.springframework.boot") apply (false)
 }
 
 val bom = setOf(project(":livk-cloud-dependencies"), project(":livk-cloud-bom"))
@@ -43,6 +42,7 @@ configure(allprojects) {
 configure(gradleModuleProjects) {
     apply(plugin = "com.livk.compile-args")
     apply(plugin = "com.livk.dependency")
+    apply(plugin = "org.jetbrains.kotlin.jvm")
 
     dependencies {
         dependencyBom(platform(project(":livk-cloud-dependencies")))

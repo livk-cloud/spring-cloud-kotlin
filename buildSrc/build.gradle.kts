@@ -12,9 +12,11 @@ repositories {
 }
 
 val bootVersion: String = libs.versions.springBoot.get()
+val kotlinVersion: String = libs.versions.kotlin.get()
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-gradle-plugin:$bootVersion")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 }
 
 tasks.withType<KotlinCompile> {

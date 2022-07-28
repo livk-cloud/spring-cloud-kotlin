@@ -7,6 +7,7 @@ mybatisPlus = "3.5.2"
 swagger = "3.0.0"
 googleFindbugs = "3.0.1"
 oauth2Authorization = "0.3.1"
+kotlin = "1.7.10"
 
 [libraries]
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
@@ -20,3 +21,4 @@ oauth2-authorization-server = { group = "org.springframework.security", name = "
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
