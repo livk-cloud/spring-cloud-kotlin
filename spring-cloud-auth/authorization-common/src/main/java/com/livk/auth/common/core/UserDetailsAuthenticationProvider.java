@@ -111,7 +111,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
         prepareTimingAttackProtection();
         HttpServletRequest request = RequestUtils.getRequest();
 
-        Map<String, String> paramMap = RequestUtils.getParamMap();
+        Map<String, String> paramMap = RequestUtils.getParamMap(",");
         String grantType = paramMap.get(OAuth2ParameterNames.GRANT_TYPE);
         String clientId = paramMap.get(OAuth2ParameterNames.CLIENT_ID);
 
