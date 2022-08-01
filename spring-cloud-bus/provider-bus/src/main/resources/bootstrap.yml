@@ -22,13 +22,14 @@ spring:
           enabled: true
       config:
         enabled: true
-        prefixes: spring-cloud-demo
+        prefixes: config
+        default-context: consumer-bus
+        profile-separator: '-'
         format: yaml
-        data-key: consumer-bus
+        data-key: config
         watch:
           enabled: true
           delay: 1000
-        default-context: spring-cloud-bus-demo
   profiles:
     active: dev
 

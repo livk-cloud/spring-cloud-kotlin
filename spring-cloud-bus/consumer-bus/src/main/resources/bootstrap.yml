@@ -7,8 +7,8 @@ spring:
   #    host: livk.com
   #    username: admin
   #    password: admin
-  kafka:
-    bootstrap-servers: livk.com:9092
+  #  kafka:
+  #    bootstrap-servers: livk.com:9092
   cloud:
     consul:
       host: livk.com
@@ -22,12 +22,13 @@ spring:
           enabled: true
       config:
         enabled: true
-        #        prefixes: spring-cloud-config
+        prefixes: config
+        default-context: ${spring.application.name}
+        profile-separator: '-'
         format: yaml
-        data-key: name
+        data-key: config
         watch:
           enabled: true
           delay: 1000
-        default-context: ${spring.application.name}
   profiles:
     active: dev
