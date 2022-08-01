@@ -1,6 +1,8 @@
 package com.livk.spring;
 
+import com.livk.util.DateUtils;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.Banner;
@@ -9,11 +11,8 @@ import org.springframework.core.env.Environment;
 
 import java.io.PrintStream;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * <p>
@@ -27,50 +26,46 @@ import java.util.function.Function;
 class LivkBanner implements Banner {
 
     private static final String banner = """
-            ██ ██          ██       ██                          ██
-            ░██░░          ░██      ░██                         ░██
-            ░██ ██ ██    ██░██  ██  ░██       ██████   ██████  ██████
-            ░██░██░██   ░██░██ ██   ░██████  ██░░░░██ ██░░░░██░░░██░
-            ░██░██░░██ ░██ ░████    ░██░░░██░██   ░██░██   ░██  ░██
-            ░██░██ ░░████  ░██░██   ░██  ░██░██   ░██░██   ░██  ░██
-            ███░██  ░░██   ░██░░██  ░██████ ░░██████ ░░██████   ░░██
-            ░░░ ░░    ░░    ░░  ░░   ░░░░░    ░░░░░░   ░░░░░░     ░░
+             ██       ██          ██         ██████   ██                       ██
+            ░██      ░░          ░██        ██░░░░██ ░██                      ░██
+            ░██       ██ ██    ██░██  ██   ██    ░░  ░██  ██████  ██   ██     ░██
+            ░██      ░██░██   ░██░██ ██   ░██        ░██ ██░░░░██░██  ░██  ██████
+            ░██      ░██░░██ ░██ ░████    ░██        ░██░██   ░██░██  ░██ ██░░░██
+            ░██      ░██ ░░████  ░██░██   ░░██    ██ ░██░██   ░██░██  ░██░██  ░██
+            ░████████░██  ░░██   ░██░░██   ░░██████  ███░░██████ ░░██████░░██████
+            ░░░░░░░░ ░░    ░░    ░░  ░░     ░░░░░░  ░░░  ░░░░░░   ░░░░░░  ░░░░░░\s
             """;
 
     @SneakyThrows
     @Override
     public void printBanner(Environment environment, Class<?> sourceClass, PrintStream out) {
         out.println(banner);
-        int max = Arrays.stream(banner.split("\n")).map(String::length).max(Comparator.naturalOrder()).orElse(0);
+        int max = Arrays.stream(banner.split("\n")).mapToInt(String::length).max().orElse(0);
         max = max % 2 == 0 ? max : max + 1;
-        var format = Format.create(out, max);
+        var format = Format.create(max, out);
         format.accept(" Spring Boot Version: " + SpringBootVersion.getVersion() + " ");
-        format.accept(" Current time: " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now())
-                      + " ");
+        format.accept(" Current time: " + DateUtils.format(LocalDateTime.now(), DateUtils.YMD_HMS) + " ");
         format.accept(" Current JDK Version: " + System.getProperty("java.version") + " ");
         format.accept(" Operating System: " + System.getProperty("os.name") + " ");
         out.flush();
     }
 
-    private record Format(int n, PrintStream out, char ch) implements Function<String, String>, Consumer<String> {
-        public static Format create(PrintStream out, int n) {
-            return new Format(n, out, '*');
-        }
+    @RequiredArgsConstructor(staticName = "create")
+    private static class Format implements Consumer<String> {
+
+        private final static char ch = '*';
+        private final int n;
+        private final PrintStream out;
 
         @Override
-        public String apply(String str) {
+        public void accept(String str) {
             var length = str.length();
-            if (length >= n) {
-                return str;
+            if (length < n) {
+                var index = (n - length) >> 1;
+                str = StringUtils.leftPad(str, length + index, ch);
+                str = StringUtils.rightPad(str, n, ch);
             }
-            var index = (n - length) >> 1;
-            str = StringUtils.leftPad(str, length + index, ch);
-            return StringUtils.rightPad(str, n, ch);
-        }
-
-        @Override
-        public void accept(String s) {
-            out.println(this.apply(s));
+            out.println(str);
         }
     }
 
