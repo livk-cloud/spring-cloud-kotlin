@@ -18,7 +18,7 @@ import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
  */
 abstract class ManagementPlugin : Plugin<Project> {
     companion object {
-        const val DEPENDENCY_BOM = "management"
+        const val MANAGEMENT = "management"
 
         val DEPENDENCY_NAMES_SET = HashSet<String>()
 
@@ -40,17 +40,17 @@ abstract class ManagementPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val configurations = project.configurations
         project.pluginManager.apply(JavaPlugin::class.java)
-        configurations.create(DEPENDENCY_BOM) { dependencyBom ->
-            dependencyBom.isVisible = false
-            dependencyBom.isCanBeResolved = false
-            dependencyBom.isCanBeConsumed = false
+        configurations.create(MANAGEMENT) { management ->
+            management.isVisible = false
+            management.isCanBeResolved = false
+            management.isCanBeConsumed = false
             val plugins = project.plugins
             plugins.withType(JavaPlugin::class.java) {
-                DEPENDENCY_NAMES_SET.forEach { configurations.getByName(it).extendsFrom(dependencyBom) }
+                DEPENDENCY_NAMES_SET.forEach { configurations.getByName(it).extendsFrom(management) }
             }
             plugins.withType(JavaTestFixturesPlugin::class.java) {
-                configurations.getByName("testFixturesCompileClasspath").extendsFrom(dependencyBom)
-                configurations.getByName("testFixturesRuntimeClasspath").extendsFrom(dependencyBom)
+                configurations.getByName("testFixturesCompileClasspath").extendsFrom(management)
+                configurations.getByName("testFixturesRuntimeClasspath").extendsFrom(management)
             }
             plugins.withType(MavenPublishPlugin::class.java) {
                 project.extensions
