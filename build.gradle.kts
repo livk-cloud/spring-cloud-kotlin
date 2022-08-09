@@ -2,7 +2,7 @@ plugins {
     id("com.livk.dependency")
 }
 
-val bom = setOf(project(":livk-cloud-dependencies"), project(":livk-cloud-bom"))
+val bom = setOf(project(":livk-cloud-dependencies"))
 val gradleModuleProjects = subprojects.filter {
     it.buildFile.exists()
 }.toSet() - bom
