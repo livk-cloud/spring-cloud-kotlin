@@ -24,6 +24,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -59,7 +60,8 @@ public class AuthorizationServerConfiguration {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http,
-                                                                      OAuth2AuthorizationService authorizationService) throws Exception {
+                                                                      OAuth2AuthorizationService authorizationService,
+                                                                      PasswordEncoder passwordEncoder) throws Exception {
         OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
         OAuth2AuthorizationServerConfigurer<HttpSecurity> configurer = authorizationServerConfigurer.tokenEndpoint(tokenEndpoint ->
                         tokenEndpoint.accessTokenRequestConverter(accessTokenRequestConverter())
@@ -78,7 +80,7 @@ public class AuthorizationServerConfiguration {
                 .and()
                 .build();
 
-        addCustomOAuth2GrantAuthenticationProvider(http);
+        addCustomOAuth2GrantAuthenticationProvider(http, passwordEncoder);
         return securityFilterChain;
     }
 
@@ -126,7 +128,7 @@ public class AuthorizationServerConfiguration {
     }
 
     @SuppressWarnings("unchecked")
-    private void addCustomOAuth2GrantAuthenticationProvider(HttpSecurity http) {
+    private void addCustomOAuth2GrantAuthenticationProvider(HttpSecurity http, PasswordEncoder passwordEncoder) {
         OAuth2TokenGenerator<Jwt> tokenGenerator = (OAuth2TokenGenerator<Jwt>) http.getSharedObject(OAuth2TokenGenerator.class);
 
         AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
@@ -140,7 +142,7 @@ public class AuthorizationServerConfiguration {
                 authenticationManager, authorizationService, tokenGenerator);
 
         // 处理 UsernamePasswordAuthenticationToken
-        http.authenticationProvider(new UserDetailsAuthenticationProvider());
+        http.authenticationProvider(new UserDetailsAuthenticationProvider(passwordEncoder));
 
         // 处理 OAuth2ResourceOwnerPasswordAuthenticationToken s
         http.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);

@@ -22,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
@@ -67,10 +66,9 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     @Setter
     private UserDetailsPasswordService userDetailsPasswordService;
 
-    @SuppressWarnings("deprecation")
-    public UserDetailsAuthenticationProvider() {
+    public UserDetailsAuthenticationProvider(PasswordEncoder passwordEncoder) {
         setMessageSource(MessageSourceUtils.get());
-        setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        setPasswordEncoder(passwordEncoder);
     }
 
     @Override

@@ -12,6 +12,12 @@ dependencies {
     get(bom).forEach { api(platform(it)) }
     constraints {
         get(dependency).forEach { api(it) }
+        rootProject.allprojects
+            .filter {
+                it.name.endsWith("-common")
+                        || it.name.endsWith("-starter")
+                        || it.name.endsWith("-api")
+            }.forEach { api(it) }
     }
 }
 
