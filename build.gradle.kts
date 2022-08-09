@@ -45,13 +45,14 @@ configure(gradleModuleProjects) {
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
     dependencies {
-        dependencyBom(platform(project(":livk-cloud-dependencies")))
+        management(platform(project(":livk-cloud-dependencies")))
         annotationProcessor("org.projectlombok:lombok")
 
         compileOnly("org.projectlombok:lombok")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
-        testImplementation("org.projectlombok:lombok")
+        testImplementation("org.springframework:spring-tx")
+        testCompileOnly("org.projectlombok:lombok")
 
         testAnnotationProcessor("org.projectlombok:lombok")
     }

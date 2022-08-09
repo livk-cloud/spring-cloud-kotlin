@@ -1,4 +1,4 @@
-package com.livk
+package com.livk.management
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,9 +16,9 @@ import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
  * @author livk
  * @date 2022/7/8
  */
-abstract class DependencyBomPlugin : Plugin<Project> {
+abstract class ManagementPlugin : Plugin<Project> {
     companion object {
-        const val DEPENDENCY_BOM = "dependencyBom"
+        const val DEPENDENCY_BOM = "management"
 
         val DEPENDENCY_NAMES_SET = HashSet<String>()
 
