@@ -1,4 +1,4 @@
-package com.livk.compile
+package com.livk.cloud.compile
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

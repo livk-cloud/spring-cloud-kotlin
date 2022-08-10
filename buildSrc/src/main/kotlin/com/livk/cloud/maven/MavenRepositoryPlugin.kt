@@ -1,4 +1,4 @@
-package com.livk.maven
+package com.livk.cloud.maven
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

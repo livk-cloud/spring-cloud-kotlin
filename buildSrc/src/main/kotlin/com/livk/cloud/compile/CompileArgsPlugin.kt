@@ -1,6 +1,6 @@
-package com.livk.compile
+package com.livk.cloud.compile
 
-import com.livk.info.ManifestPlugin
+import com.livk.cloud.info.ManifestPlugin
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project

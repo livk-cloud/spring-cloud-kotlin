@@ -1,4 +1,4 @@
-package com.livk.config
+package com.livk.cloud.config
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -28,6 +28,12 @@ abstract class AllConfiguration : Plugin<Project> {
                         .using(dependency.module("org.springframework.boot:spring-boot-starter-undertow:" + springBootVersion))
                 }
             }
+        }
+
+        project.rootProject.allprojects.forEach {
+            it.repositories.maven { it.setUrl("https://maven.aliyun.com/repository/public") }
+            it.repositories.maven { it.setUrl("https://plugins.gradle.org/m2/") }
+            it.repositories.maven { it.setUrl("https://repo.spring.io/release") }
         }
     }
 }

@@ -28,36 +28,25 @@ tasks.withType<KotlinCompile> {
 
 gradlePlugin {
     plugins {
-        create("compileArgsPlugin") {
-            id = "com.livk.compile-args"
-            implementationClass = "com.livk.compile.CompileArgsPlugin"
-            description = "Add compile parameters"
+        create("bomPlugin") {
+            id = "com.livk.bom"
+            implementationClass = "com.livk.cloud.BomPlugin"
         }
-        create("dependencyBomPlugin") {
-            id = "com.livk.dependency"
-            implementationClass = "com.livk.management.ManagementPlugin"
-            description = "build dependency BOM"
+        create("modulePlugin") {
+            id = "com.livk.module"
+            implementationClass = "com.livk.cloud.ModulePlugin"
         }
-        create("resourcesPlugin") {
-            id = "com.livk.resources"
-            implementationClass = "com.livk.compile.ResourcesPlugin"
-            description = "Add resource handling"
+        create("commonPlugin") {
+            id = "com.livk.common"
+            implementationClass = "com.livk.cloud.CommonPlugin"
         }
-        create("deployedPlugin") {
-            id = "com.livk.maven.deployed"
-            implementationClass = "com.livk.maven.DeployedPlugin"
+        create("rootProjectPlugin") {
+            id = "com.livk.root"
+            implementationClass = "com.livk.cloud.RootProjectPlugin"
         }
-        create("bootPlugin") {
-            id = "com.livk.build.boot"
-            implementationClass = "com.livk.info.BootPlugin"
-        }
-        create("deleteExpand") {
-            id = "com.livk.clean.expand"
-            implementationClass = "com.livk.tasks.DeleteExpand"
-        }
-        create("allConfiguration") {
-            id = "com.livk.all.configuration"
-            implementationClass = "com.livk.config.AllConfiguration"
+        create("servicePlugin") {
+            id = "com.livk.service"
+            implementationClass = "com.livk.cloud.ServicePlugin"
         }
     }
 }
