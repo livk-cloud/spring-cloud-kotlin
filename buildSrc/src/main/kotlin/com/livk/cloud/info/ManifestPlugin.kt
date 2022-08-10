@@ -1,4 +1,4 @@
-package com.livk.info
+package com.livk.cloud.info
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
