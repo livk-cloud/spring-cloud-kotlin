@@ -19,7 +19,6 @@ class ServicePlugin :Plugin<Project> {
     override fun apply(project: Project) {
         project.pluginManager.apply(JavaPlugin::class.java)
         project.pluginManager.apply(ModulePlugin::class.java)
-        project.pluginManager.apply(CompileArgsPlugin::class.java)
         project.pluginManager.apply(BuildInfoPlugin::class.java)
     }
 }
