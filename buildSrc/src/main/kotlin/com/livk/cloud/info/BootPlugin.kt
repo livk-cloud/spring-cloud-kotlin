@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
  * @author livk
  * @date 2022/7/7
  */
-abstract class BuildInfoPlugin : Plugin<Project> {
+abstract class BootPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.pluginManager.apply(JavaPlugin::class.java)
         project.pluginManager.apply(SpringBootPlugin::class.java)
