@@ -1,6 +1,6 @@
 dependencies {
-    compileOnly("org.springframework.cloud:spring-cloud-gateway-server")
-    compileOnly("org.springframework:spring-webflux")
+    optional("org.springframework.cloud:spring-cloud-gateway-server")
+    optional("org.springframework:spring-webflux")
     api("org.springframework.boot:spring-boot-starter-data-redis-reactive")
     api("io.springfox:springfox-boot-starter")
     api("org.springframework.cloud:spring-cloud-commons")

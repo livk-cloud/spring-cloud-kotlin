@@ -29,11 +29,5 @@ abstract class AllConfiguration : Plugin<Project> {
                 }
             }
         }
-
-        project.rootProject.allprojects.forEach {
-            it.repositories.maven { it.setUrl("https://maven.aliyun.com/repository/public") }
-            it.repositories.maven { it.setUrl("https://plugins.gradle.org/m2/") }
-            it.repositories.maven { it.setUrl("https://repo.spring.io/release") }
-        }
     }
 }
