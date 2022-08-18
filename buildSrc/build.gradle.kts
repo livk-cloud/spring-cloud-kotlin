@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("java-gradle-plugin")
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version (libs.versions.kotlin.get())
 }
 
 repositories {
@@ -11,12 +11,9 @@ repositories {
     maven { setUrl("https://repo.spring.io/release") }
 }
 
-val bootVersion: String = libs.versions.springBoot.get()
-val kotlinVersion: String = libs.versions.kotlin.get()
-
 dependencies {
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:$bootVersion")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    implementation(libs.kotlin.jvm.plugin)
+    implementation(libs.spring.boot.plugin)
 }
 
 tasks.withType<KotlinCompile> {
