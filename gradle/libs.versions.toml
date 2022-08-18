@@ -1,5 +1,5 @@
 [versions]
-springBoot = "2.7.2"
+springBoot = "2.7.3"
 springCloud = "2021.0.3"
 springCloudSquare = "0.4.1"
 pagehelper = "1.4.3"
@@ -7,9 +7,11 @@ mybatisPlus = "3.5.2"
 swagger = "3.0.0"
 googleFindbugs = "3.0.1"
 oauth2Authorization = "0.3.1"
-kotlin = "1.7.10"
+kotlin = "1.7.20-Beta"
 
 [libraries]
+spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
+kotlin-jvm-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
 pagehelper-starter = { group = "com.github.pagehelper", name = "pagehelper-spring-boot-starter", version.ref = "pagehelper" }
