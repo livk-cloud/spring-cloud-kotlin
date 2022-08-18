@@ -3,9 +3,8 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 val versionCatalog = rootProject.extensions
     .getByType(VersionCatalogsExtension::class.java)
     .named("libs")
-val bom = versionCatalog.libraryAliases
-    .filter { it.endsWith("dependencies") || it.endsWith("bom") }
-val dependency = versionCatalog.libraryAliases - bom.toSet()
+val bom = versionCatalog.libraryAliases.filter { it.endsWith("dependencies") || it.endsWith("bom") }
+val dependency = versionCatalog.libraryAliases.filter { !it.endsWith("plugin") } - bom.toSet()
 
 dependencies {
     api(platform(SpringBootPlugin.BOM_COORDINATES))
