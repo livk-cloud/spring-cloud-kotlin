@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.bus.BusProperties;
+import org.springframework.cloud.bus.event.Destination;
+import org.springframework.cloud.bus.event.PathDestinationFactory;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +42,9 @@ class BusController {
 
     @GetMapping("refresh")
     public void refresh() {
-        applicationContext.publishEvent(new LivkBusEvent("livk", busProperties.getId(), () -> "consumer-bus:6077:**"));
+        PathDestinationFactory factory = new PathDestinationFactory();
+        Destination destination = factory.getDestination("consumer-bus:6077");
+        applicationContext.publishEvent(new LivkBusEvent("livk", busProperties.getId(), destination));
         log.info("event publish!");
     }
 
