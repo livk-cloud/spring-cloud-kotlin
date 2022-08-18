@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlatformPlugin
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
@@ -27,6 +28,8 @@ abstract class DeployedPlugin : Plugin<Project> {
         project.afterEvaluate {
             project.plugins.withType(JavaPlugin::class.java).all {
                 if ((project.tasks.getByName(JavaPlugin.JAR_TASK_NAME) as Jar).isEnabled) {
+                    val javaPluginExtension = project.extensions.getByType(JavaPluginExtension::class.java)
+                    javaPluginExtension.withSourcesJar()
                     project.components
                         .matching { it.name.equals("java") }
                         .all { publication.from(it) }
