@@ -7,6 +7,7 @@ import com.livk.spring.LivkSpring;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * <p>
@@ -25,9 +26,9 @@ public class AuthorizationServer {
 
 
     Oauth2User oauth2User() {
-        return new Oauth2User(123L, "livk", "123456", "18664960000",
-                true, true, true, true,
-                AuthorityUtils.createAuthorityList("USER"));
+        return new Oauth2User(123L, "livk", new BCryptPasswordEncoder().encode("123456"),
+                "18664960000", true, true, true,
+                true, AuthorityUtils.createAuthorityList("USER"));
     }
 
     @Bean
