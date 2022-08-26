@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -56,10 +55,10 @@ public class RequestUtils {
     }
 
     public Map<String, String> getParamMap(CharSequence delimiter) {
-        Set<Map.Entry<String, String[]>> entrySet = RequestUtils.getRequest()
+        return RequestUtils.getRequest()
                 .getParameterMap()
-                .entrySet();
-        return entrySet.stream()
+                .entrySet()
+                .stream()
                 .collect(Collectors.toMap(Map.Entry::getKey,
                         entry -> String.join(delimiter, entry.getValue())));
     }
