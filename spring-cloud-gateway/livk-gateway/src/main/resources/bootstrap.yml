@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: demo
+          uri: https://www.baidu.com
+          predicates:
+            - Path=/post/**
+          filters:
+            - RequestHashing=SHA-256
+server:
+  port: 9852
