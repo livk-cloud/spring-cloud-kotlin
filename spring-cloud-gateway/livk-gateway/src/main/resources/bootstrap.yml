@@ -1,12 +1,21 @@
 spring:
+  redis:
+    host: livk.com
+    password: 123456
   cloud:
     gateway:
       routes:
         - id: demo
-          uri: https://www.baidu.com
+          uri: http://localhost:9852
           predicates:
             - Path=/post/**
           filters:
             - RequestHashing=SHA-256
 server:
   port: 9852
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
