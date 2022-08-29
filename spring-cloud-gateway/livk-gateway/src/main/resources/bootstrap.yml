@@ -11,6 +11,12 @@ spring:
             - Path=/post/**
           filters:
             - RequestHashing=SHA-256
+        - id: auth
+          uri: http://localhost:9852
+          predicates:
+            - Path=/auth/**
+          filters:
+            - HeaderHash=SHA-256
 server:
   port: 9852
 
