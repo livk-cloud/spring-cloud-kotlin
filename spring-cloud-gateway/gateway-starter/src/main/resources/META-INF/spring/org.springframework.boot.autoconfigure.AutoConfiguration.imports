@@ -1,1 +1,2 @@
 com.livk.factory.RequestHashingGatewayFilterFactory
+com.livk.factory.HeaderHashGatewayFilterFactory
