@@ -9,4 +9,4 @@ Gradle:7.5 +
 SpringBoot:2.7.2 +
 SpringCloud:2021.0.3 +
 
-More description and usage can be moved https://github.com/livk-cloud/spring-boot-example[spring-boot-example]
+SpringBoot example and Gradle Groovy https://github.com/livk-cloud/spring-boot-example[Example move]
