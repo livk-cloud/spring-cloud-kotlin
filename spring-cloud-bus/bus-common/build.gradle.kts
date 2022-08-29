@@ -5,6 +5,5 @@ dependencies {
     api("org.springframework.cloud:spring-cloud-starter-bus-kafka")
     api("org.springframework.cloud:spring-cloud-starter-consul-discovery")
     api("org.springframework.cloud:spring-cloud-starter-consul-config")
-    api("org.springframework.cloud:spring-cloud-starter-bootstrap")
     api("org.springframework.boot:spring-boot-starter-web")
 }
