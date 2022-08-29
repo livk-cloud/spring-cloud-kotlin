@@ -8,6 +8,8 @@ swagger = "3.0.0"
 googleFindbugs = "3.0.1"
 oauth2Authorization = "0.3.1"
 kotlin = "1.7.20-Beta"
+bouncycastle = "1.70"
+wiremock = "2.27.2"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
@@ -20,6 +22,8 @@ mybatis-plus = { group = "com.baomidou", name = "mybatis-plus", version.ref = "m
 swagger-starter = { group = "io.springfox", name = "springfox-boot-starter", version.ref = "swagger" }
 google-findbugs = { group = "com.google.code.findbugs", name = "annotations", version.ref = "googleFindbugs" }
 oauth2-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server", version.ref = "oauth2Authorization" }
+bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk15on", version.ref = "bouncycastle" }
+wiremock = { group = "com.github.tomakehurst", name = "wiremock", version.ref = "wiremock" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
