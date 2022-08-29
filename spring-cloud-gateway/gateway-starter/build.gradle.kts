@@ -7,5 +7,5 @@ dependencies {
     api("org.springframework.cloud:spring-cloud-commons")
     api("com.fasterxml.jackson.core:jackson-databind")
     api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-    api("org.bouncycastle:bcprov-jdk15on:1.70")
+    api("org.bouncycastle:bcprov-jdk15on")
 }
