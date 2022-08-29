@@ -48,19 +48,20 @@ public class HeaderHashGatewayFilterFactory extends AbstractGatewayFilterFactory
                                 .request(httpRequest)
                                 .build(), messageReaders)
                         .bodyToMono(String.class)
-                        .log())
-                .flatMap(body -> {
-                    List<String> headerValueList = exchange.getRequest().getHeaders().get(HEADER_NAME);
-                    if (!CollectionUtils.isEmpty(headerValueList) &&
-                        headerValueList.contains(computeHash(config.getMessageDigest(), body))) {
-                        return chain.filter(exchange);
-                    }
-                    ServerHttpResponse response = exchange.getResponse();
-                    response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-                    response.setStatusCode(HttpStatus.OK);
-                    Map<String, String> result = Map.of("code", "403", "msg", "缺少Header <X-Hash>");
-                    return response.writeWith(Mono.just(response.bufferFactory().wrap(JacksonUtils.toJsonStr(result).getBytes(StandardCharsets.UTF_8))));
-                });
+                        .log()
+                        .flatMap(body -> {
+                            List<String> headerValueList = exchange.getRequest().getHeaders().get(HEADER_NAME);
+                            if (!CollectionUtils.isEmpty(headerValueList) &&
+                                headerValueList.contains(computeHash(config.getMessageDigest(), body))) {
+                                return chain.filter(exchange);
+                            }
+                            ServerHttpResponse response = exchange.getResponse();
+                            response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+                            response.setStatusCode(HttpStatus.OK);
+                            Map<String, String> result = Map.of("code", "403", "msg", "缺少Header:X-Hash");
+                            return response.writeWith(Mono.just(response.bufferFactory().wrap(JacksonUtils.toJsonStr(result).getBytes(StandardCharsets.UTF_8))));
+                        })
+                );
     }
 
     @Override
