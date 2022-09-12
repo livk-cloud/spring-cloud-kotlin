@@ -7,7 +7,7 @@ mybatisPlus = "3.5.2"
 swagger = "3.0.0"
 googleFindbugs = "3.0.1"
 oauth2Authorization = "0.3.1"
-kotlin = "1.7.20-Beta"
+kotlin = "1.7.20-RC"
 bouncycastle = "1.70"
 wiremock = "2.27.2"
 
