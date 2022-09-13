@@ -25,8 +25,7 @@ abstract class OptionalPlugin : Plugin<Project> {
             optional.isCanBeResolved = false
             optional.isCanBeConsumed = false
             project.plugins.withType(JavaPlugin::class.java) {
-                val sourceSets = project.extensions.getByType(JavaPluginExtension::class.java).sourceSets
-                sourceSets.all { sourceSet ->
+                project.extensions.getByType(JavaPluginExtension::class.java).sourceSets.all { sourceSet ->
                     configurations.getByName(sourceSet.compileClasspathConfigurationName).extendsFrom(optional)
                     configurations.getByName(sourceSet.runtimeClasspathConfigurationName).extendsFrom(optional)
                 }
