@@ -22,6 +22,5 @@ class ModulePlugin : Plugin<Project> {
         project.pluginManager.apply(CompileArgsPlugin::class.java)
         project.pluginManager.apply(AllConfiguration::class.java)
         project.pluginManager.apply(RootProjectPlugin::class.java)
-        project.pluginManager.apply(DeleteExpand::class.java)
     }
 }
