@@ -6,7 +6,7 @@ import com.livk.auth.common.core.exception.BadCaptchaException;
 import com.livk.auth.common.service.Oauth2UserDetailsService;
 import com.livk.auth.common.util.MessageSourceUtils;
 import com.livk.support.SpringContextHolder;
-import com.livk.util.RequestUtils;
+import com.livk.util.WebUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -74,7 +74,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
 
-        String grantType = RequestUtils.getParameter(OAuth2ParameterNames.GRANT_TYPE);
+        String grantType = WebUtils.getParameter(OAuth2ParameterNames.GRANT_TYPE);
 
         if (authentication.getCredentials() == null) {
             this.logger.debug("Failed to authenticate since no credentials provided");
@@ -107,9 +107,9 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     @Override
     protected final UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) {
         prepareTimingAttackProtection();
-        HttpServletRequest request = RequestUtils.getRequest();
+        HttpServletRequest request = WebUtils.getRequest();
 
-        Map<String, String> paramMap = RequestUtils.getParamMap(",");
+        Map<String, String> paramMap = WebUtils.getParamMap(",");
         String grantType = paramMap.get(OAuth2ParameterNames.GRANT_TYPE);
         String clientId = paramMap.get(OAuth2ParameterNames.CLIENT_ID);
 
