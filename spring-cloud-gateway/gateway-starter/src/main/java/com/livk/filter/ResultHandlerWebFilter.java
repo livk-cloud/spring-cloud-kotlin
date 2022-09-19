@@ -27,20 +27,20 @@ public abstract class ResultHandlerWebFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        var originalResponse = exchange.getResponse();
+        ServerHttpResponse originalResponse = exchange.getResponse();
         if (support(originalResponse)) {
-            var decoratedResponse = new ServerHttpResponseDecorator(originalResponse) {
+            ServerHttpResponse decoratedResponse = new ServerHttpResponseDecorator(originalResponse) {
                 @NonNull
                 @Override
                 public Mono<Void> writeWith(@NonNull Publisher<? extends DataBuffer> body) {
                     if (body instanceof Flux) {
                         @SuppressWarnings("unchecked")
-                        var fluxBody = (Flux<? extends DataBuffer>) body;
+                        Flux<? extends DataBuffer> fluxBody = (Flux<? extends DataBuffer>) body;
                         return super.writeWith(fluxBody.map(dataBuffer -> {
-                            var content = new byte[dataBuffer.readableByteCount()];
+                            byte[] content = new byte[dataBuffer.readableByteCount()];
                             dataBuffer.read(content);
                             DataBufferUtils.release(dataBuffer);
-                            var result = new String(content, StandardCharsets.UTF_8);
+                            String result = new String(content, StandardCharsets.UTF_8);
                             return originalResponse.bufferFactory()
                                     .wrap(resultHandler(result).getBytes(StandardCharsets.UTF_8));
                         }));
