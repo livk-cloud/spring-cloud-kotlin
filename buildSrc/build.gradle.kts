@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("java-gradle-plugin")
-    kotlin("jvm") version (libs.versions.kotlin.get())
+    alias { libs.plugins.kotlin.jvm }
 }
 
 repositories {
@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    libs.plugins.kotlin.jvm.get()
     implementation(libs.kotlin.jvm.plugin)
     implementation(libs.spring.boot.plugin)
 }
