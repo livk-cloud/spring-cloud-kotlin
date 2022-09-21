@@ -40,19 +40,19 @@ Content-Type: multipart/form-data; boundary=WebAppBoundary
 --WebAppBoundary
 Content-Disposition: form-data; name="grant_type"
 
-"sms"
+sms
 --WebAppBoundary
 Content-Disposition: form-data; name="scope"
 
-"livk.read"
+livk.read
 --WebAppBoundary
 Content-Disposition: form-data; name="mobile"
 
-"18664960000"
+18664960000
 --WebAppBoundary
 Content-Disposition: form-data; name="code"
 
-"1234"
+123456
 --WebAppBoundary--
 
 ###
