@@ -17,7 +17,7 @@ spring:
           enabled: true
       host: livk.com
 
-mybatis-plus:
+mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:

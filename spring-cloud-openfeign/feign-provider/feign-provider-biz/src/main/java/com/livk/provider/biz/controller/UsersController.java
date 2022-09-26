@@ -27,7 +27,7 @@ public class UsersController {
     @Cacheable(value = "users", key = "'user:all'")
     @GetMapping
     public List<Users> users() {
-        return userMapper.selectList(null);
+        return userMapper.selectList();
     }
 
     @PostMapping

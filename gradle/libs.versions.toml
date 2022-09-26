@@ -3,7 +3,7 @@ springBoot = "2.7.4"
 springCloud = "2021.0.4"
 springCloudSquare = "0.4.1"
 pagehelper = "1.4.3"
-mybatisPlus = "3.5.2"
+springMybatis = "2.2.2"
 swagger = "3.0.0"
 googleFindbugs = "3.0.1"
 oauth2Authorization = "0.3.1"
@@ -17,8 +17,7 @@ kotlin-jvm-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plug
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
 pagehelper-starter = { group = "com.github.pagehelper", name = "pagehelper-spring-boot-starter", version.ref = "pagehelper" }
-mybatis-plus-starter = { group = "com.baomidou", name = "mybatis-plus-boot-starter", version.ref = "mybatisPlus" }
-mybatis-plus = { group = "com.baomidou", name = "mybatis-plus", version.ref = "mybatisPlus" }
+mybatis-starter = { group = "org.mybatis.spring.boot", name = "mybatis-spring-boot-starter", version.ref = "springMybatis" }
 swagger-starter = { group = "io.springfox", name = "springfox-boot-starter", version.ref = "swagger" }
 google-findbugs = { group = "com.google.code.findbugs", name = "annotations", version.ref = "googleFindbugs" }
 oauth2-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server", version.ref = "oauth2Authorization" }
