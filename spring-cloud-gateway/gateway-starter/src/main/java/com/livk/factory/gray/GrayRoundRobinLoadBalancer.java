@@ -1,6 +1,5 @@
-package com.livk.factory;
+package com.livk.factory.gray;
 
-import com.livk.util.FieldUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.client.ServiceInstance;
@@ -73,14 +72,14 @@ public class GrayRoundRobinLoadBalancer implements ReactorServiceInstanceLoadBal
      * @return 可用server
      */
     private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances, Map<String, List<String>> metaData) {
-        String version = metaData.get(FieldUtils.getFieldName(GrayGatewayFilterFactory.Config::getVersion)).get(0);
-        List<String> ips = metaData.get(FieldUtils.getFieldName(GrayGatewayFilterFactory.Config::getIps));
+        String version = metaData.get(GrayConstant.VERSION).get(0);
+        List<String> ips = metaData.get(GrayConstant.IPS);
         //存放灰度server
         List<ServiceInstance> grayInstanceServer = new ArrayList<>();
         //非灰度server
         List<ServiceInstance> defaultInstanceServer = new ArrayList<>();
         for (ServiceInstance serviceInstance : instances) {
-            if (version.equals(serviceInstance.getMetadata().get(FieldUtils.getFieldName(GrayGatewayFilterFactory.Config::getVersion))) && ips.contains(serviceInstance.getHost())) {
+            if (version.equals(serviceInstance.getMetadata().get(GrayConstant.VERSION)) && ips.contains(serviceInstance.getHost())) {
                 grayInstanceServer.add(serviceInstance);
             } else {
                 Map<String, String> metadata = serviceInstance.getMetadata();
@@ -89,7 +88,7 @@ public class GrayRoundRobinLoadBalancer implements ReactorServiceInstanceLoadBal
                     defaultInstanceServer.add(serviceInstance);
                 } else {
                     //判断是否有版本号,有的话剔除,没有的话就加入到默认server中
-                    if (!StringUtils.hasText(metadata.get(FieldUtils.getFieldName(GrayGatewayFilterFactory.Config::getVersion)))) {
+                    if (!StringUtils.hasText(metadata.get(GrayConstant.VERSION))) {
                         defaultInstanceServer.add(serviceInstance);
                     }
                 }

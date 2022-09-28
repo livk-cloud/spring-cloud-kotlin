@@ -1,4 +1,4 @@
-package com.livk.factory;
+package com.livk.factory.gray;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.gateway.config.conditional.ConditionalOnEnabledFilter;

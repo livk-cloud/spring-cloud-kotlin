@@ -1,6 +1,5 @@
-package com.livk.factory;
+package com.livk.factory.gray;
 
-import com.livk.util.FieldUtils;
 import com.livk.util.JacksonUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -59,7 +58,7 @@ public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayG
             }
             ServerWebExchangeUtils.addOriginalRequestUrl(exchange, uri);
             HttpHeaders headers = exchange.getRequest().getHeaders();
-            List<String> headerVersions = headers.get(FieldUtils.getFieldName(Config::getVersion));
+            List<String> headerVersions = headers.get(GrayConstant.VERSION);
             if (CollectionUtils.isEmpty(headerVersions)) {
                 return out(exchange, "缺少Gray关键字");
             }
@@ -67,7 +66,7 @@ public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayG
                 return out(exchange, "version不匹配!");
             }
             GrayRoundRobinLoadBalancer loadBalancer = new GrayRoundRobinLoadBalancer(clientFactory.getLazyProvider(uri.getHost(), ServiceInstanceListSupplier.class), uri.getHost());
-            Map<String, List<String>> metaData = Map.of(FieldUtils.getFieldName(Config::getVersion), List.of(config.getVersion()), FieldUtils.getFieldName(Config::getIps), config.getIps());
+            Map<String, List<String>> metaData = Map.of(GrayConstant.VERSION, List.of(config.getVersion()), GrayConstant.IPS, config.getIps());
             return loadBalancer.choose(new DefaultRequest<>(metaData))
                     .doOnNext(serviceInstanceResponse -> {
                         if (!serviceInstanceResponse.hasServer()) {
