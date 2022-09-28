@@ -1,5 +1,6 @@
 dependencies {
     optional("org.springframework.cloud:spring-cloud-gateway-server")
+    optional("org.springframework.cloud:spring-cloud-loadbalancer")
     optional("org.springframework:spring-webflux")
     api(project(":spring-common"))
     api("org.springframework.boot:spring-boot-starter-data-redis-reactive")

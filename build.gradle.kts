@@ -24,6 +24,7 @@ configure(springModuleProjects) {
 
     dependencies {
         implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+        implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
         optional("org.springframework.boot:spring-boot-devtools")
     }
 }
