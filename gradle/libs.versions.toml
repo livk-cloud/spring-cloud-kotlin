@@ -4,7 +4,6 @@ springCloud = "2021.0.4"
 springCloudSquare = "0.4.1"
 pagehelper = "1.4.3"
 springMybatis = "2.2.2"
-swagger = "3.0.0"
 googleFindbugs = "3.0.1"
 oauth2Authorization = "0.3.1"
 kotlin = "1.7.20-RC"
@@ -18,7 +17,6 @@ spring-cloud-dependencies = { group = "org.springframework.cloud", name = "sprin
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
 pagehelper-starter = { group = "com.github.pagehelper", name = "pagehelper-spring-boot-starter", version.ref = "pagehelper" }
 mybatis-starter = { group = "org.mybatis.spring.boot", name = "mybatis-spring-boot-starter", version.ref = "springMybatis" }
-swagger-starter = { group = "io.springfox", name = "springfox-boot-starter", version.ref = "swagger" }
 google-findbugs = { group = "com.google.code.findbugs", name = "annotations", version.ref = "googleFindbugs" }
 oauth2-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server", version.ref = "oauth2Authorization" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk15on", version.ref = "bouncycastle" }
