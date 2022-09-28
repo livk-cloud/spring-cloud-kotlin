@@ -1,8 +1,18 @@
 spring:
+  application:
+    name: gateway
   redis:
     host: livk.com
     password: 123456
   cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        heartbeat:
+          enabled: true
+        metadata:
+          version: 1.0.0
+      host: livk.com
     gateway:
       routes:
         - id: demo
@@ -14,21 +24,24 @@ spring:
         - id: auth
           uri: http://localhost:9852
           predicates:
-            - Path=/auth/**
+            - Path=/hash/**
           filters:
             - HeaderHash=SHA-256
         - id: gray-auth
-          uri: gray-lb://livk-auth
+          uri: gray-lb://auth
           predicates:
             - Path=/auth/**
-            - Header=version
           filters:
+            - StripPrefix=1
             - name: Gray
               args:
                 version: 1.0.0
                 ips:
                   - 192.168.75.128
                   - 192.168.75.129
+                  - 127.0.0.1
+                  - 192.168.2.164
+                  - localhost
           order: -1
 
 server:

@@ -7,3 +7,14 @@ spring:
     url: jdbc:mysql://livk.com:3306/livk_oauth
     username: root
     password: 123456
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        heartbeat:
+          enabled: true
+        metadata:
+          version: 1.0.0
+      host: livk.com
+  application:
+    name: auth

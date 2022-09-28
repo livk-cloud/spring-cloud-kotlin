@@ -80,7 +80,7 @@ public class GrayRoundRobinLoadBalancer implements ReactorServiceInstanceLoadBal
         //非灰度server
         List<ServiceInstance> defaultInstanceServer = new ArrayList<>();
         for (ServiceInstance serviceInstance : instances) {
-            if (version.equals(serviceInstance.getMetadata().get(GRAY_META)) && ips.contains(serviceInstance.getHost())) {
+            if (version.equals(serviceInstance.getMetadata().get(FieldUtils.getFieldName(GrayGatewayFilterFactory.Config::getVersion))) && ips.contains(serviceInstance.getHost())) {
                 grayInstanceServer.add(serviceInstance);
             } else {
                 Map<String, String> metadata = serviceInstance.getMetadata();
@@ -89,7 +89,7 @@ public class GrayRoundRobinLoadBalancer implements ReactorServiceInstanceLoadBal
                     defaultInstanceServer.add(serviceInstance);
                 } else {
                     //判断是否有版本号,有的话剔除,没有的话就加入到默认server中
-                    if (!StringUtils.hasText(metadata.get(GaryKey))) {
+                    if (!StringUtils.hasText(metadata.get(FieldUtils.getFieldName(GrayGatewayFilterFactory.Config::getVersion)))) {
                         defaultInstanceServer.add(serviceInstance);
                     }
                 }

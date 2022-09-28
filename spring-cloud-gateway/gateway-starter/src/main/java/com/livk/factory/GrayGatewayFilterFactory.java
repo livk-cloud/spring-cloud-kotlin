@@ -4,6 +4,7 @@ import com.livk.util.FieldUtils;
 import com.livk.util.JacksonUtils;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.DefaultRequest;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerUriTools;
@@ -36,6 +37,7 @@ import java.util.Map;
  * @author livk
  * @date 2022/9/27
  */
+@Slf4j
 public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayGatewayFilterFactory.Config> {
 
     private static final String GRAY_LB = "gray-lb";
@@ -49,7 +51,8 @@ public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayG
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-            URI uri = getUri(exchange);
+            Route route = getRoute(exchange);
+            URI uri = route.getUri();
             String schemePrefix = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_SCHEME_PREFIX_ATTR);
             if (uri == null || (!GRAY_LB.equals(uri.getScheme()) && !GRAY_LB.equals(schemePrefix))) {
                 return chain.filter(exchange);
@@ -76,17 +79,23 @@ public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayG
                                 overrideScheme = requestUri.getScheme();
                             }
                             DelegatingServiceInstance serviceInstance = new DelegatingServiceInstance(serviceInstanceResponse.getServer(), overrideScheme);
-                            URI requestUrl = reconstructURI(serviceInstance, uri);
-                            exchange.getAttributes().put(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR, requestUrl);
+                            URI requestUrl = reconstructURI(serviceInstance, requestUri);
+                            Route newRoute = Route.async()
+                                    .asyncPredicate(route.getPredicate())
+                                    .id(route.getId())
+                                    .order(route.getOrder())
+                                    .uri(requestUrl)
+                                    .build();
+                            exchange.getAttributes().put(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR, newRoute);
                         }
                     }).then(chain.filter(exchange));
         };
     }
 
-    private URI getUri(ServerWebExchange exchange) {
+    private Route getRoute(ServerWebExchange exchange) {
         Object attribute = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
         if (attribute instanceof Route route) {
-            return route.getUri();
+            return route;
         }
         throw new NotFoundException("丢失route!");
     }

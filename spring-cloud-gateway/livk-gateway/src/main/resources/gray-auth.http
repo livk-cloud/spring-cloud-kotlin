@@ -1,0 +1,36 @@
+### 灰度路由测试 --> 从Auth获取Token
+
+# curl --location --request POST 'http://127.0.0.1:9852/auth/oauth2/token'
+#--header 'version: 1.0.0'
+#--header 'Authorization: Basic bGl2ay1jbGllbnQ6c2VjcmV0'
+#--header 'Cookie: JSESSIONID=TJw5Qd8j5upfQY22mEcwEEubkH_i0RbH4J9Pdq1N'
+#--form 'grant_type="password"'
+#--form 'username="livk"'
+#--form 'password="123456"'
+#--form 'scope="livk.read"'
+POST http://127.0.0.1:9852/auth/oauth2/token
+version: 1.0.0
+Authorization: Basic bGl2ay1jbGllbnQ6c2VjcmV0
+Cookie: JSESSIONID=TJw5Qd8j5upfQY22mEcwEEubkH_i0RbH4J9Pdq1N
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="grant_type"
+
+"password"
+--WebAppBoundary
+Content-Disposition: form-data; name="username"
+
+"livk"
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+
+"123456"
+--WebAppBoundary
+Content-Disposition: form-data; name="scope"
+
+"livk.read"
+--WebAppBoundary--
+
+###
+
