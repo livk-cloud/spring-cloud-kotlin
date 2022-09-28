@@ -18,9 +18,7 @@ import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -38,7 +36,6 @@ import java.util.Map;
  * @author livk
  * @date 2022/9/27
  */
-@Component
 public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayGatewayFilterFactory.Config> {
 
     private static final String GRAY_LB = "gray-lb";
@@ -58,7 +55,6 @@ public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayG
                 return chain.filter(exchange);
             }
             ServerWebExchangeUtils.addOriginalRequestUrl(exchange, uri);
-            ServerHttpRequest request = exchange.getRequest();
             HttpHeaders headers = exchange.getRequest().getHeaders();
             List<String> headerVersions = headers.get(FieldUtils.getFieldName(Config::getVersion));
             if (CollectionUtils.isEmpty(headerVersions)) {
@@ -72,7 +68,7 @@ public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayG
             return loadBalancer.choose(new DefaultRequest<>(metaData))
                     .doOnNext(serviceInstanceResponse -> {
                         if (!serviceInstanceResponse.hasServer()) {
-                            throw NotFoundException.create(true, "Unable to find instance for " + uri.getHost());
+                            throw NotFoundException.create(false, "Unable to find instance for " + uri.getHost());
                         } else {
                             URI requestUri = exchange.getRequest().getURI();
                             String overrideScheme = null;

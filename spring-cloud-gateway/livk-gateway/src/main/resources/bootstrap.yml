@@ -20,7 +20,8 @@ spring:
         - id: gray-auth
           uri: gray-lb://livk-auth
           predicates:
-            - Path=/auth-livk/**
+            - Path=/auth/**
+            - Header=version
           filters:
             - name: Gray
               args:
@@ -28,6 +29,7 @@ spring:
                 ips:
                   - 192.168.75.128
                   - 192.168.75.129
+          order: -1
 
 server:
   port: 9852
