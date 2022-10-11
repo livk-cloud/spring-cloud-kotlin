@@ -2,7 +2,7 @@
 springBoot = "2.7.4"
 springCloud = "2021.0.4"
 springCloudSquare = "0.4.1"
-pagehelper = "1.4.3"
+pagehelper = "1.4.5"
 springMybatis = "2.2.2"
 googleFindbugs = "3.0.1"
 oauth2Authorization = "0.3.1"
