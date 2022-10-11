@@ -109,8 +109,8 @@ public class JacksonUtils {
         if (inputStream == null) {
             return new Properties();
         }
-        JavaType mapType = MAPPER.getTypeFactory().constructType(Properties.class);
-        return MAPPER.readValue(inputStream, mapType);
+        JavaType javaType = MAPPER.getTypeFactory().constructType(Properties.class);
+        return MAPPER.readValue(inputStream, javaType);
     }
 
     @SneakyThrows

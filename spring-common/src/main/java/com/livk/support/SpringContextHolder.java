@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
@@ -16,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.ResolvableType;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -59,6 +61,19 @@ public class SpringContextHolder implements BeanFactoryPostProcessor, Applicatio
 
     public static <T> T getBean(String name, Class<T> typeClass) {
         return getBeanFactory().getBean(name, typeClass);
+    }
+
+    public static <T> T getBean(ResolvableType resolvableType) {
+        ObjectProvider<T> provider = applicationContext.getBeanProvider(resolvableType);
+        return provider.getIfAvailable();
+    }
+
+    public static <T> ObjectProvider<T> getBeanProvider(Class<T> typeClass) {
+        return getBeanFactory().getBeanProvider(typeClass);
+    }
+
+    public static <T> ObjectProvider<T> getBeanProvider(ResolvableType resolvableType) {
+        return applicationContext.getBeanProvider(resolvableType);
     }
 
     public static <T> Collection<T> getBeansOfType(Class<T> typeClass) {

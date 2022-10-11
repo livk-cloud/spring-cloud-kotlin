@@ -26,11 +26,8 @@ public class LivkSpring {
         return builder.run(args);
     }
 
-    public static SpringApplication application() throws IllegalAccessException {
-        if (application != null) {
-            return application;
-        }
-        throw new IllegalAccessException("SpringApplication not be init!");
+    public static SpringApplication application() {
+        return application;
     }
 
 }

@@ -11,4 +11,5 @@ dependencies {
     api("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("org.apache.commons:commons-lang3")
     api("com.google.code.findbugs:annotations")
+    optional("io.undertow:undertow-websockets-jsr")
 }
