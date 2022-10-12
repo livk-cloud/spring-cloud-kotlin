@@ -21,7 +21,7 @@ spring:
         heartbeat:
           enabled: true
       config:
-#        文件信息 ${prefixes}/${default-context}-${spring.profiles.active}/data-key
+#        文件信息 ${prefixes}/${default-context}-${spring.profiles.active}/${data-key}
         enabled: true
         prefixes: config
         default-context: consumer-bus
