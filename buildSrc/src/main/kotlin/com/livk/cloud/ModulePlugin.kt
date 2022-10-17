@@ -2,7 +2,6 @@ package com.livk.cloud
 
 import com.livk.cloud.compile.CompileArgsPlugin
 import com.livk.cloud.config.AllConfiguration
-import com.livk.cloud.dependency.ManagementPlugin
 import com.livk.cloud.tasks.DeleteExpand
 import org.gradle.api.Plugin
 import org.gradle.api.Project
