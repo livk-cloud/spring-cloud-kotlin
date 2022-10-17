@@ -11,6 +11,13 @@ val commonModuleProjects = gradleModuleProjects.filter {
 }.toSet()
 val springModuleProjects = gradleModuleProjects - commonModuleProjects
 
+ext {
+    set("bom", bom)
+    set("gradleModuleProjects", gradleModuleProjects)
+    set("commonModuleProjects", commonModuleProjects)
+    set("springModuleProjects", springModuleProjects)
+}
+
 configure(bom) {
     apply(plugin = "com.livk.bom")
 }

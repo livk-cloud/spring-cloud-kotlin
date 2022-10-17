@@ -11,13 +11,16 @@ dependencies {
     get(bom).forEach { api(platform(it)) }
     constraints {
         get(dependency).forEach { api(it) }
-        rootProject.allprojects
-            .filter {
-                it.name.endsWith("-common")
-                        || it.name.endsWith("-starter")
-                        || it.name.endsWith("-api")
-            }.forEach { api(it) }
+        commonModuleProjectNames().forEach { api(it) }
     }
+}
+
+fun commonModuleProjectNames(): Collection<Project> {
+    val commonModuleProjects = parent?.ext?.get("commonModuleProjects")
+    if (commonModuleProjects is Collection<*>) {
+        return commonModuleProjects.filterIsInstance<Project>()
+    }
+    return setOf()
 }
 
 fun get(dependencyNames: Collection<String>): Collection<MinimalExternalModuleDependency> {
