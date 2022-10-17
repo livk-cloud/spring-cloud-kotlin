@@ -1,4 +1,5 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
+import java.util.function.Consumer
 
 val versionCatalog = rootProject.extensions
     .getByType(VersionCatalogsExtension::class.java)
@@ -11,16 +12,15 @@ dependencies {
     get(bom).forEach { api(platform(it)) }
     constraints {
         get(dependency).forEach { api(it) }
-        commonModuleProjectNames().forEach { api(it) }
+        commonModuleProjectConsumer { api(it) }
     }
 }
 
-fun commonModuleProjectNames(): Collection<Project> {
+fun commonModuleProjectConsumer(consumer: Consumer<Project>) {
     val commonModuleProjects = parent?.ext?.get("commonModuleProjects")
     if (commonModuleProjects is Collection<*>) {
-        return commonModuleProjects.filterIsInstance<Project>()
+        commonModuleProjects.filterIsInstance<Project>().forEach(consumer)
     }
-    return setOf()
 }
 
 fun get(dependencyNames: Collection<String>): Collection<MinimalExternalModuleDependency> {
