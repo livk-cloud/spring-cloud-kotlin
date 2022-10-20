@@ -52,7 +52,6 @@ configure(gradleModuleProjects) {
 configure(allprojects) {
     repositories {
         maven { setUrl("https://maven.aliyun.com/repository/public") }
-        maven { setUrl("https://plugins.gradle.org/m2/") }
         maven { setUrl("https://repo.spring.io/release") }
     }
 }
