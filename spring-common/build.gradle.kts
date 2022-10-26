@@ -12,4 +12,5 @@ dependencies {
     api("org.apache.commons:commons-lang3")
     api("com.google.code.findbugs:annotations")
     optional("io.undertow:undertow-websockets-jsr")
+    api("com.github.ben-manes.caffeine:caffeine")
 }

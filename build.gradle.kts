@@ -40,12 +40,8 @@ configure(gradleModuleProjects) {
     apply(plugin = "com.livk.module")
 
     //阿里云仓库缺少2.2.20.Final
-    configurations {
-        all {
-            resolutionStrategy {
-                force("io.undertow:undertow-websockets-jsr:2.3.0.Final")
-            }
-        }
+    configurations.all {
+        resolutionStrategy.force("io.undertow:undertow-websockets-jsr:2.3.0.Final")
     }
 
     dependencies {
