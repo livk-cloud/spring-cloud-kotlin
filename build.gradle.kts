@@ -41,9 +41,9 @@ configure(gradleModuleProjects) {
 
     dependencies {
         management(platform(project(":livk-cloud-dependencies")))
-        provider("org.projectlombok:lombok")
-        provider("org.springframework.boot:spring-boot-configuration-processor")
-        provider("org.springframework.boot:spring-boot-autoconfigure-processor")
+        compileProcessor("org.projectlombok:lombok")
+        compileProcessor("org.springframework.boot:spring-boot-configuration-processor")
+        compileProcessor("org.springframework.boot:spring-boot-autoconfigure-processor")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework:spring-tx")
     }

@@ -3,23 +3,19 @@ package com.livk.cloud.dependency
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
-import org.gradle.api.plugins.JavaTestFixturesPlugin
-import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 
 /**
  * <p>
- * ProviderPlugin
+ * CompileProcessorPlugin
  * </p>
  *
  * @author livk
  * @date 2022/8/10
  */
-abstract class ProviderPlugin :Plugin<Project>{
+abstract class CompileProcessorPlugin :Plugin<Project>{
 
     companion object {
-        const val PROVIDER = "provider"
+        const val COMPILE_PROCESSOR = "compileProcessor"
 
         val DEPENDENCY_NAMES_SET = HashSet<String>()
 
@@ -38,13 +34,13 @@ abstract class ProviderPlugin :Plugin<Project>{
     override fun apply(project: Project) {
         val configurations = project.configurations
         project.pluginManager.apply(JavaPlugin::class.java)
-        configurations.create(PROVIDER) { provider ->
-            provider.isVisible = false
-            provider.isCanBeResolved = false
-            provider.isCanBeConsumed = false
+        configurations.create(COMPILE_PROCESSOR) { compileProcessor ->
+            compileProcessor.isVisible = false
+            compileProcessor.isCanBeResolved = false
+            compileProcessor.isCanBeConsumed = false
             val plugins = project.plugins
             plugins.withType(JavaPlugin::class.java) {
-                DEPENDENCY_NAMES_SET.forEach { configurations.getByName(it).extendsFrom(provider) }
+                DEPENDENCY_NAMES_SET.forEach { configurations.getByName(it).extendsFrom(compileProcessor) }
             }
         }
     }
