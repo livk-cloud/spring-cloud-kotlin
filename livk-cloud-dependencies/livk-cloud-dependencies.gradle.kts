@@ -1,6 +1,3 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
-import java.util.function.Consumer
-
 val versionCatalog = rootProject.extensions
     .getByType(VersionCatalogsExtension::class.java)
     .named("libs")
@@ -8,18 +5,11 @@ val bom = versionCatalog.libraryAliases.filter { it.endsWith("dependencies") || 
 val dependency = versionCatalog.libraryAliases.filter { !it.endsWith("plugin") } - bom.toSet()
 
 dependencies {
-    api(platform(SpringBootPlugin.BOM_COORDINATES))
+    api(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     get(bom).forEach { api(platform(it)) }
     constraints {
         get(dependency).forEach { api(it) }
-        commonModuleProjectConsumer { api(it) }
-    }
-}
-
-fun commonModuleProjectConsumer(consumer: Consumer<Project>) {
-    val commonModuleProjects = parent?.ext?.get("commonModuleProjects")
-    if (commonModuleProjects is Collection<*>) {
-        commonModuleProjects.filterIsInstance<Project>().forEach(consumer)
+        (parent?.ext?.get("commonModuleProjects") as Collection<*>).filterIsInstance<Project>().forEach{api(it)}
     }
 }
 

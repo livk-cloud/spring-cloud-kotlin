@@ -11,3 +11,5 @@ SpringBoot:2.7.4 +
 SpringCloud:2021.0.4 +
 
 SpringBoot example和Gradle Groovy https://github.com/livk-cloud/spring-boot-example[示例移步]
+
+https://qm.qq.com/cgi-bin/qm/qr?k=7mqPb8JcXoDpFkk4Vx7CcFFrIXrIxbVE&jump_from=webapi&authKey=twOCFhCWeYIiP4DNWM91BjGcPXuxpWikyk2Dh+fFctht5xcvT9N8PUsVMUcKQvJf"[QQ群 857146133]
