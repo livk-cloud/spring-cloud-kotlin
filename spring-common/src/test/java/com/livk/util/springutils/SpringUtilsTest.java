@@ -26,9 +26,8 @@ import java.util.Set;
 public class SpringUtilsTest {
 
     @Autowired
-    Environment environment;
-    @Autowired
     private ResourceLoader resourceLoader;
+
     @Autowired
     private BeanFactory beanFactory;
 
@@ -39,6 +38,9 @@ public class SpringUtilsTest {
                 packages.toArray(String[]::new));
         Assertions.assertIterableEquals(Set.of(A.class), result);
     }
+
+    @Autowired
+    Environment environment;
 
     @Test
     void getSubPropertiesTest() {
