@@ -23,7 +23,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.web.authentication.www.BasicAuthenticationConverter;
 import org.springframework.util.Assert;
@@ -91,7 +90,7 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
             }
         }
         //校验密码
-        if (Objects.equals(AuthorizationGrantType.PASSWORD.getValue(), grantType)) {
+        if (Objects.equals(SecurityConstants.PASSWORD, grantType)) {
             String presentedPassword = authentication.getCredentials().toString();
             String encodedPassword = extractEncodedPassword(userDetails.getPassword());
             if (!this.passwordEncoder.matches(presentedPassword, encodedPassword)) {

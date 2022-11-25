@@ -23,7 +23,7 @@ public class DefaultSecurityConfiguration {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+        return http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
                 .build();
     }
@@ -35,6 +35,6 @@ public class DefaultSecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().antMatchers("/auth/**", "/actuator/**", "/css/**", "/error");
+        return web -> web.ignoring().requestMatchers("/auth/**", "/actuator/**", "/css/**", "/error");
     }
 }

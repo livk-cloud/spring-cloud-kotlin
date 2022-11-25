@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
@@ -44,7 +43,7 @@ public class AuthenticationFailureEventHandler implements AuthenticationFailureH
 
         String username = request.getParameter(SecurityConstants.SMS_PARAMETER_NAME);
 
-        if (AuthorizationGrantType.PASSWORD.getValue().equals(grantType)) {
+        if (SecurityConstants.PASSWORD.equals(grantType)) {
             username = request.getParameter(OAuth2ParameterNames.USERNAME);
         }
 

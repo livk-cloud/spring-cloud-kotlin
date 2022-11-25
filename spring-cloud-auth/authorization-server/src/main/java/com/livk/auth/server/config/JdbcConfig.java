@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.client.JdbcRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
-import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 
 /**
  * <p>
@@ -34,7 +34,7 @@ public class JdbcConfig {
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                .authorizationGrantType(new AuthorizationGrantType(SecurityConstants.PASSWORD))
                 .authorizationGrantType(new AuthorizationGrantType(SecurityConstants.SMS))
                 .redirectUri("http://127.0.0.1:8080/login/oauth2/code/livk-client-oidc")
                 .redirectUri("http://127.0.0.1:8080/authorized").scope(OidcScopes.OPENID).scope("livk.read")

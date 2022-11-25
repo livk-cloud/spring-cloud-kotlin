@@ -1,6 +1,7 @@
 package com.livk.auth.common.converter;
 
 
+import com.livk.auth.common.constant.SecurityConstants;
 import com.livk.auth.common.token.OAuth2PasswordAuthenticationToken;
 import com.livk.auth.common.util.OAuth2EndpointUtils;
 import org.springframework.security.core.Authentication;
@@ -30,12 +31,12 @@ public class OAuth2PasswordAuthenticationConverter implements OAuth2BaseAuthenti
      */
     @Override
     public boolean support(String grantType) {
-        return AuthorizationGrantType.PASSWORD.getValue().equals(grantType);
+        return SecurityConstants.PASSWORD.equals(grantType);
     }
 
     @Override
     public OAuth2PasswordAuthenticationToken buildToken(Authentication clientPrincipal, Set<String> requestedScopes, Map<String, Object> additionalParameters) {
-        return new OAuth2PasswordAuthenticationToken(AuthorizationGrantType.PASSWORD, clientPrincipal, requestedScopes, additionalParameters);
+        return new OAuth2PasswordAuthenticationToken(new AuthorizationGrantType(SecurityConstants.PASSWORD), clientPrincipal, requestedScopes, additionalParameters);
     }
 
     /**

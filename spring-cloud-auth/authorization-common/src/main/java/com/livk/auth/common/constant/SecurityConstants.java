@@ -15,6 +15,8 @@ public interface SecurityConstants {
      */
     String SMS = "sms";
 
+    String PASSWORD = "password";
+
     /**
      * {bcrypt} 加密的特征码
      */

@@ -15,10 +15,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
-import org.springframework.security.oauth2.server.authorization.context.ProviderContextHolder;
+import org.springframework.security.oauth2.server.authorization.context.AuthorizationServerContextHolder;
 import org.springframework.security.oauth2.server.authorization.token.DefaultOAuth2TokenContext;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenContext;
@@ -142,7 +143,7 @@ public abstract class OAuth2BaseAuthenticationProvider<T extends OAuth2BaseAuthe
             DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
                     .registeredClient(registeredClient)
                     .principal(principal)
-                    .providerContext(ProviderContextHolder.getProviderContext())
+                    .authorizationServerContext(AuthorizationServerContextHolder.getContext())
                     .authorizedScopes(authorizedScopes)
                     .authorizationGrantType(baseAuthentication.getAuthorizationGrantType())
                     .authorizationGrant(baseAuthentication);
@@ -169,7 +170,7 @@ public abstract class OAuth2BaseAuthenticationProvider<T extends OAuth2BaseAuthe
                     .withRegisteredClient(registeredClient).principalName(principal.getName())
                     .authorizationGrantType(baseAuthentication.getAuthorizationGrantType())
                     .attribute(Principal.class.getName(), principal)
-                    .attribute(OAuth2Authorization.AUTHORIZED_SCOPE_ATTRIBUTE_NAME, authorizedScopes);
+                    .attribute(OAuth2Authorization.class.getName().concat(".AUTHORIZED_SCOPE"), authorizedScopes);
 
             /**
              * 如果Generator有扩展信息输出增强

@@ -22,8 +22,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -31,7 +29,9 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.token.DelegatingOAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.token.JwtGenerator;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2RefreshTokenGenerator;
@@ -62,8 +62,8 @@ public class AuthorizationServerConfiguration {
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http,
                                                                       OAuth2AuthorizationService authorizationService,
                                                                       PasswordEncoder passwordEncoder) throws Exception {
-        OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
-        OAuth2AuthorizationServerConfigurer<HttpSecurity> configurer = authorizationServerConfigurer.tokenEndpoint(tokenEndpoint ->
+        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
+        OAuth2AuthorizationServerConfigurer configurer = authorizationServerConfigurer.tokenEndpoint(tokenEndpoint ->
                         tokenEndpoint.accessTokenRequestConverter(accessTokenRequestConverter())
                                 .accessTokenResponseHandler(new AuthenticationSuccessEventHandler())
                                 .errorResponseHandler(new AuthenticationFailureEventHandler()))
@@ -72,8 +72,8 @@ public class AuthorizationServerConfiguration {
         http.apply(configurer);
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
-        DefaultSecurityFilterChain securityFilterChain = http.requestMatcher(endpointsMatcher)
-                .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+        DefaultSecurityFilterChain securityFilterChain = http.securityMatcher(endpointsMatcher)
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .apply(configurer.authorizationService(authorizationService))
                 .and()
                 .apply(new FormIdentityLoginConfigurer())
@@ -102,8 +102,8 @@ public class AuthorizationServerConfiguration {
     }
 
     @Bean
-    public ProviderSettings providerSettings(@Value("${server.port}") Integer port) {
-        return ProviderSettings.builder()
+    public AuthorizationServerSettings authorizationServerSettings(@Value("${server.port}") Integer port) {
+        return AuthorizationServerSettings.builder()
                 .tokenEndpoint("/oauth2/token")
                 .authorizationEndpoint("/oauth2/authorize")
                 .tokenIntrospectionEndpoint("/oauth2/introspect")
