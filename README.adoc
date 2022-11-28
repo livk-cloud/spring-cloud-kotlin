@@ -6,7 +6,7 @@ link:README-en.adoc[English]|link:README.adoc[简体中文] +
 里面的代码或多或少应该可以帮助到你 +
 如果觉得不错，可以star一下 +
 JDk:17 +
-Gradle:7.5.1 +
+Gradle:7.6 +
 SpringBoot:2.7.4 +
 SpringCloud:2021.0.4 +
 

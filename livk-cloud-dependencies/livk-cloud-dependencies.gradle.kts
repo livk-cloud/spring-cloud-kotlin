@@ -13,6 +13,6 @@ dependencies {
     }
 }
 
-fun get(dependencyNames: Collection<String>): Collection<MinimalExternalModuleDependency> {
-    return dependencyNames.map { versionCatalog.findLibrary(it).get().get() }
+fun get(dependencyNames: Collection<String>): Collection<String> {
+    return dependencyNames.map { versionCatalog.findLibrary(it).get().get().toString() }
 }

@@ -6,7 +6,7 @@ Here is a various example on SpringCloud +
 The code inside should more or less help you +
 If you feel good, you can star it +
 JDk:17 +
-Gradle:7.5.1 +
+Gradle:7.6 +
 SpringBoot:2.7.4 +
 SpringCloud:2021.0.4 +
 
