@@ -1,7 +1,7 @@
 package com.livk.consumer;
 
 
-import com.livk.spring.LivkSpring;
+import com.livk.commons.spring.LivkSpring;
 import com.livk.stream.entity.StreamMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

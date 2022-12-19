@@ -9,6 +9,7 @@ oauth2Authorization = "1.0.0"
 kotlin = "1.7.21"
 bouncycastle = "1.70"
 wiremock = "2.27.2"
+guava = "31.1-jre"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
@@ -21,6 +22,7 @@ google-findbugs = { group = "com.google.code.findbugs", name = "annotations", ve
 oauth2-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server", version.ref = "oauth2Authorization" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk15on", version.ref = "bouncycastle" }
 wiremock = { group = "com.github.tomakehurst", name = "wiremock", version.ref = "wiremock" }
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }

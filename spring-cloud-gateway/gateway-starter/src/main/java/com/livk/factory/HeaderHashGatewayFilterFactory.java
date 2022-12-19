@@ -1,6 +1,6 @@
 package com.livk.factory;
 
-import com.livk.util.JacksonUtils;
+import com.livk.commons.util.JacksonUtils;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;

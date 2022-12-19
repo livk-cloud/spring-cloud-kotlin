@@ -17,15 +17,16 @@ import org.gradle.util.GradleVersion
 abstract class ManifestPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.pluginManager.apply(JavaPlugin::class.java)
-        (project.tasks.getByName(JavaPlugin.JAR_TASK_NAME) as Jar)
-            .manifest.attributes(
-                mapOf(
-                    "Implementation-Group" to project.group,
-                    "Implementation-Title" to project.name,
-                    "Implementation-Version" to project.version,
-                    "Created-By" to System.getProperty("java.version") + " (" + (System.getProperty("java.specification.vendor")) + ")",
-                    "Gradle-Version" to GradleVersion.current()
-                )
+        project.tasks.withType(Jar::class.java) {
+            val attributes = it.manifest.attributes
+            attributes.putIfAbsent("Implementation-Group", project.group)
+            attributes.putIfAbsent("Implementation-Title", project.name)
+            attributes.putIfAbsent("Implementation-Version", project.version)
+            attributes.putIfAbsent(
+                "Created-By",
+                System.getProperty("java.version") + " (" + System.getProperty("java.specification.vendor") + ")"
             )
+            attributes.putIfAbsent("Gradle-Version", GradleVersion.current())
+        }
     }
 }

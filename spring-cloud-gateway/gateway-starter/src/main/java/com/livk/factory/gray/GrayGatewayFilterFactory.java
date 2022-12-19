@@ -1,6 +1,6 @@
 package com.livk.factory.gray;
 
-import com.livk.util.JacksonUtils;
+import com.livk.commons.util.JacksonUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

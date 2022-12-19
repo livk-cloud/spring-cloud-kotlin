@@ -2,7 +2,7 @@ package com.livk.auth.server;
 
 import com.livk.auth.common.core.principal.Oauth2User;
 import com.livk.auth.common.service.Oauth2UserDetailsService;
-import com.livk.spring.LivkSpring;
+import com.livk.commons.spring.LivkSpring;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.AuthorityUtils;

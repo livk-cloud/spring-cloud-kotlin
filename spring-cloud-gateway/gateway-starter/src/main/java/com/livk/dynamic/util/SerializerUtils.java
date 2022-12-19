@@ -21,10 +21,9 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 public class SerializerUtils {
 
     public <T> RedisSerializer<T> getJacksonSerializer(ObjectMapper mapper, Class<T> targetClass) {
-        Jackson2JsonRedisSerializer<T> serializer = new Jackson2JsonRedisSerializer<>(targetClass);
+        Jackson2JsonRedisSerializer<T> serializer = new Jackson2JsonRedisSerializer<>(mapper, targetClass);
         mapper.registerModule(new JavaTimeModule());
         mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        serializer.setObjectMapper(mapper);
         return serializer;
     }
 

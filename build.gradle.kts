@@ -7,7 +7,7 @@ val gradleModuleProjects = subprojects.filter {
     it.buildFile.exists()
 }.toSet() - bom
 val commonModuleProjects = gradleModuleProjects.filter {
-    it.name.endsWith("-common") || it.name.endsWith("-starter") || it.name.endsWith("-api")
+    it.name.endsWith("-commons") || it.name.endsWith("-starter") || it.name.endsWith("-api")
 }.toSet()
 val springModuleProjects = gradleModuleProjects - commonModuleProjects
 
@@ -32,7 +32,6 @@ configure(springModuleProjects) {
     dependencies {
         implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
         implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
-        optional("org.springframework.boot:spring-boot-devtools")
     }
 }
 

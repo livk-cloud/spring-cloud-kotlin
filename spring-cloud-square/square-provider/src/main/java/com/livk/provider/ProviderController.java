@@ -1,7 +1,6 @@
 package com.livk.provider;
 
-
-import com.livk.support.SpringContextHolder;
+import com.livk.commons.support.SpringContextHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

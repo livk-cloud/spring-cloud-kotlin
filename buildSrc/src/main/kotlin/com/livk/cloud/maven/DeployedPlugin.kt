@@ -33,6 +33,7 @@ abstract class DeployedPlugin : Plugin<Project> {
                     project.components
                         .matching { it.name.equals("java") }
                         .all { publication.from(it) }
+                    mavenInfo(publication, project)
                 }
             }
         }
@@ -40,6 +41,7 @@ abstract class DeployedPlugin : Plugin<Project> {
             project.components
                 .matching { it.name.equals("javaPlatform") }
                 .all { publication.from(it) }
+            mavenInfo(publication, project)
         }
     }
 
@@ -51,5 +53,29 @@ abstract class DeployedPlugin : Plugin<Project> {
             .publications
             .create(NAME, MavenPublication::class.java)
 
+    }
+
+    private fun mavenInfo(publication: MavenPublication, project: Project) {
+        publication.pom {
+            it.name.set(project.name)
+            it.description.set(project.description)
+            it.url.set("https://github.com/livk-cloud/spring-boot-example/" + project.name)
+            it.licenses {
+                it.license {
+                    it.name.set("The Apache License, Version 2.0")
+                    it.url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                }
+            }
+            it.developers {
+                it.developer {
+                    it.name.set("livk")
+                    it.email.set("1375632510@qq.com")
+                }
+            }
+            it.scm {
+                it.connection.set("git@github.com:livk-cloud/spring-boot-example.git")
+                it.url.set("https://github.com/livk-cloud/spring-boot-example")
+            }
+        }
     }
 }

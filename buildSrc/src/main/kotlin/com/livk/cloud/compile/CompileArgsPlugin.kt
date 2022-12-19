@@ -7,6 +7,7 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 /**
  * <p>
@@ -39,13 +40,20 @@ abstract class CompileArgsPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         project.pluginManager.apply(JavaPlugin::class.java)
-        project.pluginManager.apply(ManifestPlugin::class.java)
-        val javaCompile = project.tasks
-            .getByName(JavaPlugin.COMPILE_JAVA_TASK_NAME) as JavaCompile
-        javaCompile.options.compilerArgs.addAll(COMPILER_ARGS)
-        javaCompile.options.encoding = UTF_8
-        javaCompile.sourceCompatibility = JavaVersion.VERSION_17.toString()
-        javaCompile.targetCompatibility = JavaVersion.VERSION_17.toString()
+        val javaCompile = project.tasks.getByName(JavaPlugin.COMPILE_JAVA_TASK_NAME) as JavaCompile
+
+        addCompile(javaCompile)
+
+        val test = project.tasks.getByName(JavaPlugin.COMPILE_TEST_JAVA_TASK_NAME)
+        val javaTestCompile = test as JavaCompile
+        addCompile(javaTestCompile)
+
+        project.tasks.withType(KotlinCompile::class.java) {
+            it.kotlinOptions {
+                freeCompilerArgs = listOf("-Xjsr305=strict")
+                jvmTarget = "17"
+            }
+        }
 
         project.tasks.withType(Test::class.java) {
             it.useJUnitPlatform()
@@ -60,5 +68,12 @@ abstract class CompileArgsPlugin : Plugin<Project> {
                 javaCompile.options.compilerArgs.addAll(MAPSTRUCT_COMPILER_ARGS)
             }
         }
+    }
+
+    fun addCompile(javaCompile: JavaCompile) {
+        javaCompile.options.compilerArgs.addAll(COMPILER_ARGS)
+        javaCompile.options.encoding = UTF_8
+        javaCompile.sourceCompatibility = JavaVersion.VERSION_17.toString()
+        javaCompile.targetCompatibility = JavaVersion.VERSION_17.toString()
     }
 }

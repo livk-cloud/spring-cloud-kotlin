@@ -21,7 +21,6 @@ class CommonPlugin : Plugin<Project> {
         project.pluginManager.apply(JavaLibraryPlugin::class.java)
         project.pluginManager.apply(ModulePlugin::class.java)
         project.pluginManager.apply(ResourcesPlugin::class.java)
-        project.pluginManager.apply(ManifestPlugin::class.java)
         project.pluginManager.apply(DeployedPlugin::class.java)
     }
 }

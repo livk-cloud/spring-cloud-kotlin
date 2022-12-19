@@ -1,3 +1,3 @@
 dependencies {
-    implementation(project(":spring-cloud-bus:bus-common"))
+    implementation(project(":spring-cloud-bus:bus-commons"))
 }

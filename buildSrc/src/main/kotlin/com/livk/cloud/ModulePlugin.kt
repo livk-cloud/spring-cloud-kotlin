@@ -1,8 +1,6 @@
 package com.livk.cloud
 
 import com.livk.cloud.compile.CompileArgsPlugin
-import com.livk.cloud.config.AllConfiguration
-import com.livk.cloud.tasks.DeleteExpand
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
@@ -19,7 +17,6 @@ class ModulePlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.pluginManager.apply(KotlinPluginWrapper::class.java)
         project.pluginManager.apply(CompileArgsPlugin::class.java)
-        project.pluginManager.apply(AllConfiguration::class.java)
-        project.pluginManager.apply(RootProjectPlugin::class.java)
+        project.pluginManager.apply(CorePlugin::class.java)
     }
 }
