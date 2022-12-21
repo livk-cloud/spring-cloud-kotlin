@@ -1,7 +1,4 @@
 spring:
-  redis:
-    host: livk.com
-    password: 123456
   application:
     name: feign-consumer
   cloud:
@@ -11,14 +8,17 @@ spring:
         heartbeat:
           enabled: true
       host: livk.com
+    openfeign:
+      okhttp:
+        enabled: true
+      httpclient:
+        enabled: false
+  data:
+    redis:
+      host: livk.com
+      password: 123456
 server:
   port: 8661
-
-feign:
-  httpclient:
-    enabled: false
-  okhttp:
-    enabled: true
 
 logging:
   level:

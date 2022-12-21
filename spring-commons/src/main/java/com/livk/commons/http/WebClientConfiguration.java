@@ -6,9 +6,12 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.reactive.function.client.WebClientCustomizer;
+import org.springframework.cloud.client.loadbalancer.reactive.ReactiveLoadBalancer;
+import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.client.reactive.ReactorResourceFactory;
@@ -40,6 +43,16 @@ public class WebClientConfiguration {
     @ConditionalOnMissingBean
     public WebClient webClient(WebClient.Builder webClientBuilder) {
         return webClientBuilder.build();
+    }
+
+    @AutoConfiguration
+    @ConditionalOnBean(ReactiveLoadBalancer.Factory.class)
+    public static class WebClientLoadBalanceConfiguration {
+        @Bean
+        @ConditionalOnBean(ReactorLoadBalancerExchangeFilterFunction.class)
+        public WebClientCustomizer loadbalanceWebClientCustomizer(ReactorLoadBalancerExchangeFilterFunction reactorLoadBalancerExchangeFilterFunction) {
+            return webClientBuilder -> webClientBuilder.filter(reactorLoadBalancerExchangeFilterFunction);
+        }
     }
 
     @AutoConfiguration

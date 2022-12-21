@@ -16,4 +16,5 @@ dependencies {
     api("com.google.code.findbugs:annotations")
     api("com.google.guava:guava")
     api("com.github.ben-manes.caffeine:caffeine")
+    optional("org.springframework.cloud:spring-cloud-loadbalancer")
 }

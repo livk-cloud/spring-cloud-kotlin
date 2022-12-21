@@ -1,11 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://livk.com:3306/security_demo?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://livk.com:3306/livk_oauth?serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
-  redis:
-    host: livk.com
     password: 123456
   application:
     name: feign-provider-biz
@@ -15,6 +12,10 @@ spring:
         service-name: ${spring.application.name}
         heartbeat:
           enabled: true
+      host: livk.com
+  data:
+    redis:
+      password: 123456
       host: livk.com
 
 mybatis:
