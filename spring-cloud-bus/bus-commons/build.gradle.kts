@@ -1,5 +1,5 @@
 dependencies {
-    api(project(":spring-commons"))
+    api(project(":spring-cloud-commons"))
     api("org.springframework.cloud:spring-cloud-starter-bus-stream")
 //    api("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     api("org.springframework.cloud:spring-cloud-starter-bus-kafka")
