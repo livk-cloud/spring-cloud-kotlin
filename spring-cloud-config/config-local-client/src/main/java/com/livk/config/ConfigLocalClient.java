@@ -27,7 +27,7 @@ public class ConfigLocalClient {
         LivkSpring.run(ConfigLocalClient.class, args);
     }
 
-    @GetMapping
+    @GetMapping("get")
     public HttpEntity<String> get() {
         return ResponseEntity.ok(name);
     }

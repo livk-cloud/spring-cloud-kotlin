@@ -1,5 +1,5 @@
 [versions]
-springBoot = "3.0.0"
+springBoot = "3.0.1"
 springCloud = "2022.0.0"
 springCloudSquare = "0.4.1"
 pagehelper = "1.4.5"

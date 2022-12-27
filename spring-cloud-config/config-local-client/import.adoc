@@ -1,0 +1,18 @@
+使用 `spring.config.import` 导入分布式配置文件
+[source,yaml,indent=0]
+
+----
+spring:
+  cloud:
+    config:
+      name: ${spring.application.name}
+      profile: ${spring.profiles.active}
+      label: dev
+// 需指定uri
+      uri: http://localhost:8770
+  config:
+    import:
+文件位置 host:port:classpath/{label}/file
+配置 optional:http://{host}:{port}:{file}
+      - optional:http://localhost:8770:config-local-client.yml
+----
