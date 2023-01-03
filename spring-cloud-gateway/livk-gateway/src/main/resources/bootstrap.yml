@@ -1,9 +1,6 @@
 spring:
   application:
     name: gateway
-  redis:
-    host: livk.com
-    password: 123456
   cloud:
     consul:
       discovery:
@@ -43,6 +40,10 @@ spring:
                   - 192.168.2.164
                   - localhost
           order: -1
+  data:
+    redis:
+      host: livk.com
+      password: 123456
 
 server:
   port: 9852

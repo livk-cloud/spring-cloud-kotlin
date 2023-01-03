@@ -30,7 +30,8 @@ abstract class CompileArgsPlugin : Plugin<Project> {
                     "-Xlint:-options",
                     "-Xlint:rawtypes",
                     "-Xlint:deprecation",
-                    "-Xlint:unchecked"
+                    "-Xlint:unchecked",
+                    "-parameters"
                 )
             )
             MAPSTRUCT_COMPILER_ARGS.addAll(listOf("-Amapstruct.unmappedTargetPolicy=IGNORE"))
