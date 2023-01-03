@@ -56,6 +56,11 @@ abstract class DeployedPlugin : Plugin<Project> {
     }
 
     private fun mavenInfo(publication: MavenPublication, project: Project) {
+        publication.versionMapping {
+            it.allVariants {
+                it.fromResolutionResult()
+            }
+        }
         publication.pom {
             it.name.set(project.name)
             it.description.set(project.description)
@@ -73,8 +78,8 @@ abstract class DeployedPlugin : Plugin<Project> {
                 }
             }
             it.scm {
-                it.connection.set("git@github.com:livk-cloud/spring-boot-example.git")
-                it.url.set("https://github.com/livk-cloud/spring-boot-example")
+                it.connection.set("git@github.com:livk-cloud/spring-cloud-example.git")
+                it.url.set("https://github.com/livk-cloud/spring-cloud-example")
             }
         }
     }

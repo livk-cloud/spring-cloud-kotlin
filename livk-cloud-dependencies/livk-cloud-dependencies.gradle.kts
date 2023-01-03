@@ -9,7 +9,6 @@ dependencies {
     get(bom).forEach { api(platform(it)) }
     constraints {
         get(dependency).forEach { api(it) }
-        (parent?.ext?.get("commonModuleProjects") as Collection<*>).filterIsInstance<Project>().forEach{api(it)}
     }
 }
 

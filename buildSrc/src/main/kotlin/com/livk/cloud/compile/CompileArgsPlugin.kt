@@ -21,7 +21,6 @@ abstract class CompileArgsPlugin : Plugin<Project> {
     companion object {
         val COMPILER_ARGS = ArrayList<String>()
         val MAPSTRUCT_COMPILER_ARGS = ArrayList<String>()
-        val MAPSTRUCT_NAME = "mapstruct"
         val MAPSTRUCT_PROCESSOR_NAME = "mapstruct-processor"
         val UTF_8 = "UTF-8"
 
@@ -64,7 +63,7 @@ abstract class CompileArgsPlugin : Plugin<Project> {
             project.configurations.forEach {
                 dependencyName.addAll(it.dependencies.map { dependency -> dependency.name })
             }
-            if (dependencyName.contains(MAPSTRUCT_NAME) || dependencyName.contains(MAPSTRUCT_PROCESSOR_NAME)) {
+            if (dependencyName.contains(MAPSTRUCT_PROCESSOR_NAME)) {
                 javaCompile.options.compilerArgs.addAll(MAPSTRUCT_COMPILER_ARGS)
             }
         }
