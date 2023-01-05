@@ -1,13 +1,22 @@
-= spring-cloud-example
+image:https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml/badge.svg?branch=main["Build Status",
+link="https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml"]
+
+image:https://img.shields.io/badge/Spring--Framework-6.0.3-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring--Boot-3.0.1-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring--Cloud-2022.0.0-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Gradle-7.6-blue[link="https://gradle.org/"]
+image:https://img.shields.io/badge/Java-17.0.5-brightgreen[]
+
+== spring-cloud-example
 
 link:README-en.adoc[English]|link:README.adoc[简体中文] +
+image:https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white["Build Status",link="https://github.com/livk-cloud/spring-cloud-example"] +
+image:https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white["Build Status",link="https://gitee.com/livk-cloud/spring-cloud-example"] +
+https://github.com/livk-cloud/spring-boot-example[`SpringBoot`]
 
 Here is a various example on SpringCloud +
 The code inside should more or less help you +
 If you feel good, you can star it +
-JDk:17 +
-Gradle:7.6 +
-SpringBoot:2.7.4 +
-SpringCloud:2021.0.4 +
 
-SpringBoot example and Gradle Groovy https://github.com/livk-cloud/spring-boot-example[Example move]
+link:gradle.properties[project information] +
+link:gradle/libs.versions.toml[version control] +
