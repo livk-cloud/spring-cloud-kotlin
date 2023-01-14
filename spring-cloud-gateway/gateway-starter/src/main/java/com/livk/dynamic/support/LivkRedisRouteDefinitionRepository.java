@@ -48,7 +48,12 @@ public class LivkRedisRouteDefinitionRepository implements RouteDefinitionReposi
                     .map(Map.Entry::getValue)
                     .doOnNext(r -> caffeineCache.put(r.getId(), r));
         }
-        return Flux.fromIterable(routeDefinitions);
+        return Flux.fromIterable(routeDefinitions)
+                .onErrorContinue((throwable, routeDefinition) -> {
+                    if (log.isErrorEnabled()) {
+                        log.error("get routes from redis error cause : {}", throwable.toString(), throwable);
+                    }
+                });
     }
 
     /**
