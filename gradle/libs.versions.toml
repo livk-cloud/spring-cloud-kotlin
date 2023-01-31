@@ -1,6 +1,6 @@
 [versions]
-springBoot = "3.0.1"
-springCloud = "2022.0.0"
+springBoot = "3.0.2"
+springCloud = "2022.0.1"
 springCloudSquare = "0.4.1"
 pagehelper = "1.4.5"
 springMybatis = "3.0.0"
@@ -10,10 +10,12 @@ kotlin = "1.8.0"
 bouncycastle = "1.70"
 wiremock = "2.27.2"
 guava = "31.1-jre"
+livkBoot = "1.0.0-M2"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
 kotlin-jvm-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+livk-boot-dependencies = { group = "io.github.livk-cloud", name = "livk-boot-dependencies", version.ref = "livkBoot" }
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
 pagehelper-starter = { group = "com.github.pagehelper", name = "pagehelper-spring-boot-starter", version.ref = "pagehelper" }

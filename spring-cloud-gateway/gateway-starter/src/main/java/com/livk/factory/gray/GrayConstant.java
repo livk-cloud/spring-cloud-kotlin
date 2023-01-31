@@ -1,7 +1,6 @@
 package com.livk.factory.gray;
 
-
-import com.livk.commons.util.FieldUtils;
+import com.livk.commons.util.ReflectionUtils;
 
 /**
  * <p>
@@ -13,7 +12,7 @@ import com.livk.commons.util.FieldUtils;
  */
 public interface GrayConstant {
 
-    String VERSION = FieldUtils.getFieldName(GrayGatewayFilterFactory.Config::getVersion);
+    String VERSION = ReflectionUtils.getFieldName(GrayGatewayFilterFactory.Config::getVersion);
 
-    String IPS = FieldUtils.getFieldName(GrayGatewayFilterFactory.Config::getIps);
+    String IPS = ReflectionUtils.getFieldName(GrayGatewayFilterFactory.Config::getIps);
 }
