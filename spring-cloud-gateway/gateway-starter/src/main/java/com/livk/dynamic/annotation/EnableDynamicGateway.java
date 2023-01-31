@@ -1,13 +1,13 @@
 package com.livk.dynamic.annotation;
 
-import com.livk.dynamic.LivkDynamicAutoConfig;
+import com.livk.dynamic.DynamicGatewayImportSelect;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
  * <p>
- * EnableLivkDynamic
+ * EnableDynamicGateway
  * </p>
  *
  * @author livk
@@ -17,7 +17,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import(LivkDynamicAutoConfig.class)
-public @interface EnableLivkDynamic {
+@Import(DynamicGatewayImportSelect.class)
+public @interface EnableDynamicGateway {
 
 }

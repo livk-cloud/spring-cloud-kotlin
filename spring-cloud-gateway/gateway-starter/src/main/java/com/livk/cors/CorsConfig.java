@@ -1,5 +1,6 @@
 package com.livk.cors;
 
+import com.livk.auto.service.annotation.SpringAutoService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -17,6 +18,7 @@ import java.util.Collections;
  * @date 2022/9/27
  */
 @Configuration
+@SpringAutoService
 public class CorsConfig {
 
     @Bean

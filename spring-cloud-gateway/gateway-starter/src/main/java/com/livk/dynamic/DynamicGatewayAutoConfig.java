@@ -1,5 +1,7 @@
 package com.livk.dynamic;
 
+import com.livk.auto.service.annotation.SpringAutoService;
+import com.livk.dynamic.annotation.EnableDynamicGateway;
 import com.livk.dynamic.support.LivkReactiveRedisTemplate;
 import com.livk.dynamic.support.LivkRedisRouteDefinitionRepository;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -10,14 +12,15 @@ import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 
 /**
  * <p>
- * LivkDynamicAutoConfig
+ * DynamicGatewayAutoConfig
  * </p>
  *
  * @author livk
  * @date 2021/12/28
  */
+@SpringAutoService(auto = EnableDynamicGateway.class)
 @AutoConfiguration(before = {GatewayAutoConfiguration.class, RedisAutoConfiguration.class})
-public class LivkDynamicAutoConfig {
+public class DynamicGatewayAutoConfig {
 
     @Bean
     public LivkReactiveRedisTemplate livkReactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {

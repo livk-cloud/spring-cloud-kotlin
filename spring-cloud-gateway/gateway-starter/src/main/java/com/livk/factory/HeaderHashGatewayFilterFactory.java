@@ -1,5 +1,6 @@
 package com.livk.factory;
 
+import com.livk.auto.service.annotation.SpringAutoService;
 import com.livk.commons.jackson.JacksonUtils;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -31,6 +32,7 @@ import java.util.Map;
  * @date 2022/3/31
  */
 @Component
+@SpringAutoService
 public class HeaderHashGatewayFilterFactory extends AbstractGatewayFilterFactory<HeaderHashGatewayFilterFactory.Config> {
 
     private static final String HEADER_NAME = "X-Hash";

@@ -1,5 +1,6 @@
 package com.livk.factory;
 
+import com.livk.auto.service.annotation.SpringAutoService;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -31,6 +32,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.C
  * @date 2022/8/29
  */
 @Component
+@SpringAutoService
 public class RequestHashingGatewayFilterFactory extends
         AbstractGatewayFilterFactory<RequestHashingGatewayFilterFactory.Config> {
 

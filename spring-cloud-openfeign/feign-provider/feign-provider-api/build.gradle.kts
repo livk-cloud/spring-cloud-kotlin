@@ -6,4 +6,5 @@ dependencies {
     api("org.springframework.cloud:spring-cloud-starter-consul-discovery")
     api("io.github.openfeign:feign-okhttp")
     api("org.springframework.boot:spring-boot-starter-data-redis")
+    compileProcessor("io.github.livk-cloud:spring-auto-processor")
 }
