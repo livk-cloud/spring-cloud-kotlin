@@ -11,8 +11,6 @@ image:https://img.shields.io/badge/Spring%20Cloud-2022.0.0-green[link="https://s
 == spring-cloud-example
 
 link:README-en.adoc[English]|link:README.adoc[简体中文] +
-image:https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white["Build Status",link="https://github.com/livk-cloud/spring-cloud-example"] +
-image:https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white["Build Status",link="https://gitee.com/livk-cloud/spring-cloud-example"] +
 https://github.com/livk-cloud/spring-boot-example[`SpringBoot` 移步]
 
 这是一个关于SpringCloud的各种示例 +
