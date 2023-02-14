@@ -2,14 +2,9 @@
 springBoot = "3.0.2"
 springCloud = "2022.0.1"
 springCloudSquare = "0.4.1"
-pagehelper = "1.4.5"
-springMybatis = "3.0.0"
-googleFindbugs = "3.0.1"
-oauth2Authorization = "1.0.0"
-kotlin = "1.8.0"
+kotlin = "1.8.10"
 bouncycastle = "1.70"
 wiremock = "2.27.2"
-guava = "31.1-jre"
 livkBoot = "1.0.0-M2"
 
 [libraries]
@@ -18,13 +13,8 @@ kotlin-jvm-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plug
 livk-boot-dependencies = { group = "io.github.livk-cloud", name = "livk-boot-dependencies", version.ref = "livkBoot" }
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
-pagehelper-starter = { group = "com.github.pagehelper", name = "pagehelper-spring-boot-starter", version.ref = "pagehelper" }
-mybatis-starter = { group = "org.mybatis.spring.boot", name = "mybatis-spring-boot-starter", version.ref = "springMybatis" }
-google-findbugs = { group = "com.google.code.findbugs", name = "annotations", version.ref = "googleFindbugs" }
-oauth2-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server", version.ref = "oauth2Authorization" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk15on", version.ref = "bouncycastle" }
 wiremock = { group = "com.github.tomakehurst", name = "wiremock", version.ref = "wiremock" }
-guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }

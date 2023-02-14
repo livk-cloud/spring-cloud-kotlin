@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("java-gradle-plugin")
-    kotlin("jvm") version ("1.8.0")
+    kotlin("jvm") version ("1.8.10")
 }
 
 repositories {
