@@ -1,7 +1,6 @@
 package com.livk.server;
 
-
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
 
@@ -17,7 +16,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 public class ConfigJdbcServer {
 
     public static void main(String[] args) {
-        LivkSpring.run(ConfigJdbcServer.class, args);
+        SpringLauncher.run(ConfigJdbcServer.class, args);
     }
 
 }

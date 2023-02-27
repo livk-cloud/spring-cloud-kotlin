@@ -1,7 +1,6 @@
 package com.livk.provider;
 
-
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -16,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SquareProviderApp {
 
     public static void main(String[] args) {
-        LivkSpring.run(SquareProviderApp.class, args);
+        SpringLauncher.run(SquareProviderApp.class, args);
     }
 
 }

@@ -1,7 +1,6 @@
 package com.livk.consumer;
 
-
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import com.livk.stream.entity.StreamMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +22,7 @@ import java.util.function.Consumer;
 public class KafkaConsumer {
 
     public static void main(String[] args) {
-        LivkSpring.run(KafkaConsumer.class, args);
+        SpringLauncher.run(KafkaConsumer.class, args);
     }
 
     @Bean

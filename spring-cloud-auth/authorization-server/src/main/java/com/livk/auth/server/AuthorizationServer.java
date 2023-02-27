@@ -2,7 +2,7 @@ package com.livk.auth.server;
 
 import com.livk.auth.common.core.principal.Oauth2User;
 import com.livk.auth.common.service.Oauth2UserDetailsService;
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -20,7 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
 public class AuthorizationServer {
     public static void main(String[] args) {
-        LivkSpring.run(AuthorizationServer.class, args);
+        SpringLauncher.run(AuthorizationServer.class, args);
     }
 
 

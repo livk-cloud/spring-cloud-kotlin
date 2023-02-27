@@ -1,7 +1,6 @@
 package com.livk.consumer;
 
-
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import com.livk.stream.entity.StreamMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +22,7 @@ import java.util.function.Consumer;
 public class RabbitConsumer {
 
     public static void main(String[] args) {
-        LivkSpring.run(RabbitConsumer.class, args);
+        SpringLauncher.run(RabbitConsumer.class, args);
     }
 
     @Bean

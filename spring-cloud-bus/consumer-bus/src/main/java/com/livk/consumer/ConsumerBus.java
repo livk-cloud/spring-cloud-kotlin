@@ -1,7 +1,7 @@
 package com.livk.consumer;
 
 import com.livk.bus.listener.EnableRemoteEventListener;
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -21,7 +21,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class ConsumerBus {
 
     public static void main(String[] args) {
-        LivkSpring.run(ConsumerBus.class, args);
+        SpringLauncher.run(ConsumerBus.class, args);
     }
 
 }

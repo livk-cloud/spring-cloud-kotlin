@@ -61,7 +61,7 @@ public class HeaderHashGatewayFilterFactory extends AbstractGatewayFilterFactory
                             response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
                             response.setStatusCode(HttpStatus.OK);
                             Map<String, String> result = Map.of("code", "403", "msg", "缺少Header:X-Hash");
-                            return response.writeWith(Mono.just(response.bufferFactory().wrap(JacksonUtils.toJsonStr(result).getBytes(StandardCharsets.UTF_8))));
+                            return response.writeWith(Mono.just(response.bufferFactory().wrap(JacksonUtils.writeValueAsString(result).getBytes(StandardCharsets.UTF_8))));
                         })
                 );
     }

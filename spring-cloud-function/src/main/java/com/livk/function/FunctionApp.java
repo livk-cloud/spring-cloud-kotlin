@@ -1,6 +1,6 @@
 package com.livk.function;
 
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class FunctionApp {
 
     public static void main(String[] args) {
-        LivkSpring.run(FunctionApp.class, args);
+        SpringLauncher.run(FunctionApp.class, args);
     }
 
     @Bean

@@ -1,7 +1,7 @@
 package com.livk.provider;
 
 import com.livk.bus.event.LivkBusEvent;
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProviderBus {
 
     public static void main(String[] args) {
-        LivkSpring.run(ProviderBus.class, args);
+        SpringLauncher.run(ProviderBus.class, args);
     }
 
 }

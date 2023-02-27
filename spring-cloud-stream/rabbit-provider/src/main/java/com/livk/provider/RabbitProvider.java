@@ -1,7 +1,6 @@
 package com.livk.provider;
 
-
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import com.livk.stream.entity.StreamMessage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +29,7 @@ public class RabbitProvider {
     Sinks.Many<StreamMessage<String>> buffer = Sinks.many().multicast().onBackpressureBuffer();
 
     public static void main(String[] args) {
-        LivkSpring.run(RabbitProvider.class, args);
+        SpringLauncher.run(RabbitProvider.class, args);
     }
 
     @PostMapping("send")

@@ -1,6 +1,6 @@
 package com.livk.gateway;
 
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -14,6 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LivkGateway {
     public static void main(String[] args) {
-        LivkSpring.run(LivkGateway.class, args);
+        SpringLauncher.run(LivkGateway.class, args);
     }
 }

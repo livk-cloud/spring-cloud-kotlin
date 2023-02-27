@@ -1,6 +1,6 @@
 package com.livk.config;
 
-import com.livk.commons.spring.LivkSpring;
+import com.livk.commons.spring.SpringLauncher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpEntity;
@@ -24,7 +24,7 @@ public class ConfigLocalClient {
     String name;
 
     public static void main(String[] args) {
-        LivkSpring.run(ConfigLocalClient.class, args);
+        SpringLauncher.run(ConfigLocalClient.class, args);
     }
 
     @GetMapping("get")

@@ -1,11 +1,10 @@
 package com.livk.auth.common.core;
 
-
 import com.livk.auth.common.constant.SecurityConstants;
 import com.livk.auth.common.core.exception.BadCaptchaException;
 import com.livk.auth.common.service.Oauth2UserDetailsService;
 import com.livk.auth.common.util.MessageSourceUtils;
-import com.livk.commons.support.SpringContextHolder;
+import com.livk.commons.spring.context.SpringContextHolder;
 import com.livk.commons.web.util.WebUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;

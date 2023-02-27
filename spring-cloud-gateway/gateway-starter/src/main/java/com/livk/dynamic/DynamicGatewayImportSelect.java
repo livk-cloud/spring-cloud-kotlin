@@ -1,6 +1,6 @@
 package com.livk.dynamic;
 
-import com.livk.commons.spring.AbstractImportSelector;
+import com.livk.commons.spring.context.AbstractImportSelector;
 import com.livk.dynamic.annotation.EnableDynamicGateway;
 
 /**
