@@ -1,11 +1,11 @@
 image:https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml/badge.svg?branch=main["Build Status",
 link="https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml"]
 
-image:https://img.shields.io/badge/Gradle-8.0-blue[link="https://gradle.org/"]
+image:https://img.shields.io/badge/Gradle-8.0.1-blue[link="https://gradle.org/"]
 image:https://img.shields.io/badge/Java-17.0.6-brightgreen[]
 
-image:https://img.shields.io/badge/Spring%20Framework-6.0.3-green[link="https://spring.io/projects/spring-framework"]
-image:https://img.shields.io/badge/Spring%20Boot-3.0.2-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Framework-6.0.5-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Boot-3.0.3-green[link="https://spring.io/projects/spring-framework"]
 image:https://img.shields.io/badge/Spring%20Cloud-2022.0.1-green[link="https://spring.io/projects/spring-framework"]
 
 == spring-cloud-example
