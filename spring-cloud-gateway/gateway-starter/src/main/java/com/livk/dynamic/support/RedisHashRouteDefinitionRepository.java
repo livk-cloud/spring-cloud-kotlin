@@ -2,11 +2,15 @@ package com.livk.dynamic.support;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.livk.autoconfigure.redis.supprot.UniversalReactiveRedisTemplate;
+import com.livk.autoconfigure.redis.util.JacksonSerializerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
 import org.springframework.cloud.gateway.support.NotFoundException;
 import org.springframework.data.redis.core.ReactiveHashOperations;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -24,7 +28,7 @@ import java.util.Map;
  * @date 2021/12/28
  */
 @Slf4j
-public class LivkRedisRouteDefinitionRepository implements RouteDefinitionRepository {
+public class RedisHashRouteDefinitionRepository implements RouteDefinitionRepository {
 
     public static final String ROUTE_KEY = "RouteDefinition";
 
@@ -32,8 +36,12 @@ public class LivkRedisRouteDefinitionRepository implements RouteDefinitionReposi
 
     private final ReactiveHashOperations<String, String, RouteDefinition> reactiveHashOperations;
 
-    public LivkRedisRouteDefinitionRepository(LivkReactiveRedisTemplate livkReactiveRedisTemplate) {
-        reactiveHashOperations = livkReactiveRedisTemplate.opsForHash(RedisSerialization.json(RouteDefinition.class));
+    public RedisHashRouteDefinitionRepository(UniversalReactiveRedisTemplate reactiveRedisTemplate) {
+        RedisSerializationContext<String, RouteDefinition> serializationContext = RedisSerializationContext.
+                <String, RouteDefinition>newSerializationContext()
+                .key(RedisSerializer.string()).value(JacksonSerializerUtils.json(RouteDefinition.class))
+                .hashKey(RedisSerializer.string()).hashValue(JacksonSerializerUtils.json(RouteDefinition.class)).build();
+        reactiveHashOperations = reactiveRedisTemplate.opsForHash(serializationContext);
         caffeineCache = Caffeine.newBuilder().initialCapacity(128).maximumSize(1024).build();
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
  * @author livk
  */
 @AutoConfiguration
-@SpringAutoService(auto = EnableHttpClient.class)
+@SpringAutoService(EnableHttpClient.class)
 @ConditionalOnBean(ReactiveLoadBalancer.Factory.class)
 public class RestTemplateLoadBalanceConfiguration {
 

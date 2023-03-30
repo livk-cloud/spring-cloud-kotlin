@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Bean;
  * @author livk
  */
 @AutoConfiguration
-@SpringAutoService(auto = EnableWebClient.class)
+@SpringAutoService(EnableWebClient.class)
 @ConditionalOnBean(ReactiveLoadBalancer.Factory.class)
 public class WebClientLoadBalanceConfiguration {
     @Bean

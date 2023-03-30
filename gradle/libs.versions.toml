@@ -1,16 +1,16 @@
 [versions]
-springBoot = "3.0.4"
-springCloud = "2022.0.1"
+springBoot = "3.0.5"
+springCloud = "2022.0.2"
 springCloudSquare = "0.4.1"
 kotlin = "1.8.10"
 bouncycastle = "1.70"
 wiremock = "2.27.2"
-livkBoot = "1.0.0-M4"
+livkBoot = "1.0.0-M5"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
 kotlin-jvm-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-livk-boot-dependencies = { group = "io.github.livk-cloud", name = "livk-boot-dependencies", version.ref = "livkBoot" }
+livk-boot-dependencies = { group = "io.github.livk-cloud", name = "spring-extension-dependencies", version.ref = "livkBoot" }
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk15on", version.ref = "bouncycastle" }
