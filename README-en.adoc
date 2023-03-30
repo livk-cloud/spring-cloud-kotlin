@@ -1,17 +1,17 @@
 image:https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml/badge.svg?branch=main["Build Status",
 link="https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml"]
 
-image:https://img.shields.io/badge/Gradle-8.0.1-blue[link="https://gradle.org/"]
+image:https://img.shields.io/badge/Gradle-8.0.2-blue[link="https://gradle.org/"]
 image:https://img.shields.io/badge/Java-17.0.6-brightgreen[]
 
-image:https://img.shields.io/badge/Spring%20Framework-6.0.5-green[link="https://spring.io/projects/spring-framework"]
-image:https://img.shields.io/badge/Spring%20Boot-3.0.3-green[link="https://spring.io/projects/spring-framework"]
-image:https://img.shields.io/badge/Spring%20Cloud-2022.0.1-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Framework-6.0.7-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Boot-3.0.5-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Cloud-2022.0.2-green[link="https://spring.io/projects/spring-framework"]
 
 == spring-cloud-example
 
 link:README-en.adoc[English]|link:README.adoc[简体中文] +
-https://github.com/livk-cloud/spring-boot-example[`SpringBoot`]
+https://github.com/livk-cloud/spring-boot-extension[`SpringBoot`]
 
 Here is a various example on SpringCloud +
 The code inside should more or less help you +
