@@ -12,7 +12,7 @@ import com.livk.commons.function.FieldFunc;
  */
 public interface GrayConstant {
 
-    String VERSION = FieldFunc.get(GrayGatewayFilterFactory.Config::getVersion);
+    String VERSION = FieldFunc.getName(GrayGatewayFilterFactory.Config::getVersion);
 
-    String IPS = FieldFunc.get(GrayGatewayFilterFactory.Config::getIps);
+    String IPS = FieldFunc.getName(GrayGatewayFilterFactory.Config::getIps);
 }
