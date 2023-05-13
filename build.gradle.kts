@@ -1,5 +1,5 @@
 plugins {
-    id("com.livk.root")
+    com.livk.root
 }
 
 val bom = setOf(project(":livk-cloud-dependencies"))
@@ -11,13 +11,6 @@ val commonModuleProjects = gradleModuleProjects.filter {
 }.toSet()
 val springModuleProjects = gradleModuleProjects - commonModuleProjects
 
-ext {
-    set("bom", bom)
-    set("gradleModuleProjects", gradleModuleProjects)
-    set("commonModuleProjects", commonModuleProjects)
-    set("springModuleProjects", springModuleProjects)
-}
-
 configure(bom) {
     apply(plugin = "com.livk.bom")
 }
@@ -28,11 +21,6 @@ configure(commonModuleProjects) {
 
 configure(springModuleProjects) {
     apply(plugin = "com.livk.service")
-
-    dependencies {
-        implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
-        implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
-    }
 }
 
 configure(gradleModuleProjects) {

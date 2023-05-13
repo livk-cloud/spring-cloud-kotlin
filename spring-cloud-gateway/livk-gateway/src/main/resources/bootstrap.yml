@@ -12,6 +12,12 @@ spring:
       host: livk.com
     gateway:
       routes:
+        - id: json
+          uri: http://localhost:8082
+          predicates:
+            - Path=/web/**
+          filters:
+            - StripPrefix=1
         - id: demo
           uri: http://localhost:9852
           predicates:

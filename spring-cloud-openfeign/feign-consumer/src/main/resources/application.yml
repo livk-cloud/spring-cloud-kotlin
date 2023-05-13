@@ -23,3 +23,4 @@ server:
 logging:
   level:
     com.livk.provider.api.feign: debug
+    org.springframework.web.reactive.function.client.WebClient: debug

@@ -1,7 +1,6 @@
 package com.livk.dynamic.annotation;
 
-import com.livk.dynamic.DynamicGatewayImportSelect;
-import org.springframework.context.annotation.Import;
+import com.livk.commons.spring.context.AutoImport;
 
 import java.lang.annotation.*;
 
@@ -17,7 +16,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import(DynamicGatewayImportSelect.class)
+@AutoImport
 public @interface EnableDynamicGateway {
 
 }

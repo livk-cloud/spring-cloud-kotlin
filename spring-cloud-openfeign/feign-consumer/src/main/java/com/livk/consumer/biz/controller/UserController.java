@@ -1,5 +1,6 @@
 package com.livk.consumer.biz.controller;
 
+import com.livk.consumer.biz.HttpUserRemoteService;
 import com.livk.provider.api.domain.Users;
 import com.livk.provider.api.feign.UserRemoteService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,12 @@ public class UserController {
 
     private final UserRemoteService userRemoteService;
 
+    private final HttpUserRemoteService httpUserRemoteService;
+
     @GetMapping
     public List<Users> users() {
         log.info("consumer");
+        log.info("{}", httpUserRemoteService.users());
         return userRemoteService.users();
     }
 

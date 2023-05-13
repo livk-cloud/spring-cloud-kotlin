@@ -21,7 +21,7 @@ open class TaskExample {
 
     @Bean
     open fun commandLineRunner(): CommandLineRunner {
-        return HelloWorldCommandLineRunner();
+        return HelloWorldCommandLineRunner()
     }
 
     class HelloWorldCommandLineRunner : CommandLineRunner {
