@@ -1,7 +1,7 @@
 package com.livk.factory;
 
 import com.livk.auto.service.annotation.SpringAutoService;
-import com.livk.commons.jackson.JacksonUtils;
+import com.livk.commons.jackson.util.JsonMapperUtils;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -61,7 +61,7 @@ public class HeaderHashGatewayFilterFactory extends AbstractGatewayFilterFactory
                             response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
                             response.setStatusCode(HttpStatus.OK);
                             Map<String, String> result = Map.of("code", "403", "msg", "缺少Header:X-Hash");
-                            return response.writeWith(Mono.just(response.bufferFactory().wrap(JacksonUtils.writeValueAsString(result).getBytes(StandardCharsets.UTF_8))));
+                            return response.writeWith(Mono.just(response.bufferFactory().wrap(JsonMapperUtils.writeValueAsString(result).getBytes(StandardCharsets.UTF_8))));
                         })
                 );
     }

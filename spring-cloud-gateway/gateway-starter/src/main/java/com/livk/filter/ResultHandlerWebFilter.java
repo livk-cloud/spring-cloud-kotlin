@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.livk.auto.service.annotation.SpringAutoService;
-import com.livk.commons.jackson.JacksonUtils;
+import com.livk.commons.jackson.util.JsonMapperUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -67,12 +67,12 @@ public class ResultHandlerWebFilter implements GlobalFilter, Ordered {
     }
 
     protected byte[] resultHandler(String result) {
-        JsonNode jsonNode = JacksonUtils.readTree(result);
+        JsonNode jsonNode = JsonMapperUtils.readTree(result);
         ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
         node.put("code", 200)
                 .put("msg", "ok")
                 .set("data", jsonNode);
-        return JacksonUtils.writeValueAsBytes(node);
+        return JsonMapperUtils.writeValueAsBytes(node);
     }
 
     @Override

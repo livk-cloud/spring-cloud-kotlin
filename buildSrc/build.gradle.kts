@@ -48,14 +48,13 @@ gradlePlugin {
     }
 }
 
-project.tasks.withType(Jar::class.java) {
-    val attributes = this.manifest.attributes
-    attributes.putIfAbsent("Implementation-Group", project.group)
-    attributes.putIfAbsent("Implementation-Title", project.name)
-    attributes.putIfAbsent("Implementation-Version", project.version)
-    attributes.putIfAbsent(
+tasks.withType<Jar> {
+    manifest.attributes.putIfAbsent("Implementation-Group", project.group)
+    manifest.attributes.putIfAbsent("Implementation-Title", project.name)
+    manifest.attributes.putIfAbsent("Implementation-Version", project.version)
+    manifest.attributes.putIfAbsent(
         "Created-By",
         System.getProperty("java.version") + " (" + System.getProperty("java.specification.vendor") + ")"
     )
-    attributes.putIfAbsent("Gradle-Version", GradleVersion.current())
+    manifest.attributes.putIfAbsent("Gradle-Version", GradleVersion.current())
 }

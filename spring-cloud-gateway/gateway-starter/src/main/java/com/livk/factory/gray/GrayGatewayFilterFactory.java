@@ -1,6 +1,6 @@
 package com.livk.factory.gray;
 
-import com.livk.commons.jackson.JacksonUtils;
+import com.livk.commons.jackson.util.JsonMapperUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -108,7 +108,7 @@ public class GrayGatewayFilterFactory extends AbstractGatewayFilterFactory<GrayG
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         response.setStatusCode(HttpStatus.OK);
         Map<String, String> result = Map.of("code", "503", "msg", msg);
-        return response.writeWith(Mono.just(response.bufferFactory().wrap(JacksonUtils.writeValueAsString(result).getBytes(StandardCharsets.UTF_8))));
+        return response.writeWith(Mono.just(response.bufferFactory().wrap(JsonMapperUtils.writeValueAsString(result).getBytes(StandardCharsets.UTF_8))));
     }
 
     @Setter
