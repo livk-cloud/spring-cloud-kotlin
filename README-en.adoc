@@ -1,13 +1,13 @@
 image:https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml/badge.svg?branch=main["Build Status",
 link="https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml"]
 
-image:https://img.shields.io/badge/Gradle-8.1-blue[link="https://gradle.org/"]
+image:https://img.shields.io/badge/Gradle-8.1.1-blue[link="https://gradle.org/"]
 image:https://img.shields.io/badge/Java-17.0.7-brightgreen[]
-image:https://img.shields.io/badge/Spring%20Boot%20Extension-1.0.6-green[link="https://github.com/livk-cloud/spring-boot-extension"]
+image:https://img.shields.io/badge/Spring%20Boot%20Extension-1.1.0-green[link="https://github.com/livk-cloud/spring-boot-extension"]
 
-image:https://img.shields.io/badge/Spring%20Framework-6.0.8-green[link="https://spring.io/projects/spring-framework"]
-image:https://img.shields.io/badge/Spring%20Boot-3.0.6-green[link="https://spring.io/projects/spring-framework"]
-image:https://img.shields.io/badge/Spring%20Cloud-2022.0.2-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Framework-6.0.9-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Boot-3.1.0-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Cloud-2022.0.3-green[link="https://spring.io/projects/spring-framework"]
 
 == spring-cloud-example
 
