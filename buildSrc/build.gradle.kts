@@ -49,9 +49,6 @@ gradlePlugin {
 }
 
 tasks.withType<Jar> {
-    manifest.attributes.putIfAbsent("Implementation-Group", project.group)
-    manifest.attributes.putIfAbsent("Implementation-Title", project.name)
-    manifest.attributes.putIfAbsent("Implementation-Version", project.version)
     manifest.attributes.putIfAbsent(
         "Created-By",
         System.getProperty("java.version") + " (" + System.getProperty("java.specification.vendor") + ")"
