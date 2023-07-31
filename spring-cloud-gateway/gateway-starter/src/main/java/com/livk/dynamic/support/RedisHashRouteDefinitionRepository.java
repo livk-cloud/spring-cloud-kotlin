@@ -2,7 +2,7 @@ package com.livk.dynamic.support;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.livk.autoconfigure.redis.supprot.UniversalReactiveRedisTemplate;
+import com.livk.autoconfigure.redis.supprot.ReactiveRedisOps;
 import com.livk.autoconfigure.redis.util.JacksonSerializerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -36,12 +36,9 @@ public class RedisHashRouteDefinitionRepository implements RouteDefinitionReposi
 
     private final ReactiveHashOperations<String, String, RouteDefinition> reactiveHashOperations;
 
-    public RedisHashRouteDefinitionRepository(UniversalReactiveRedisTemplate reactiveRedisTemplate) {
-        RedisSerializationContext<String, RouteDefinition> serializationContext = RedisSerializationContext.
-                <String, RouteDefinition>newSerializationContext()
-                .key(RedisSerializer.string()).value(JacksonSerializerUtils.json(RouteDefinition.class))
-                .hashKey(RedisSerializer.string()).hashValue(JacksonSerializerUtils.json(RouteDefinition.class)).build();
-        reactiveHashOperations = reactiveRedisTemplate.opsForHash(serializationContext);
+    public RedisHashRouteDefinitionRepository(ReactiveRedisOps reactiveRedisOps) {
+        RedisSerializationContext<String, RouteDefinition> serializationContext = RedisSerializationContext.<String, RouteDefinition>newSerializationContext().key(RedisSerializer.string()).value(JacksonSerializerUtils.json(RouteDefinition.class)).hashKey(RedisSerializer.string()).hashValue(JacksonSerializerUtils.json(RouteDefinition.class)).build();
+        reactiveHashOperations = reactiveRedisOps.opsForHash(serializationContext);
         caffeineCache = Caffeine.newBuilder().initialCapacity(128).maximumSize(1024).build();
     }
 
@@ -52,16 +49,13 @@ public class RedisHashRouteDefinitionRepository implements RouteDefinitionReposi
     public Flux<RouteDefinition> getRouteDefinitions() {
         Collection<RouteDefinition> routeDefinitions = caffeineCache.asMap().values();
         if (routeDefinitions.isEmpty()) {
-            return reactiveHashOperations.entries(ROUTE_KEY)
-                    .map(Map.Entry::getValue)
-                    .doOnNext(r -> caffeineCache.put(r.getId(), r));
+            return reactiveHashOperations.entries(ROUTE_KEY).map(Map.Entry::getValue).doOnNext(r -> caffeineCache.put(r.getId(), r));
         }
-        return Flux.fromIterable(routeDefinitions)
-                .onErrorContinue((throwable, routeDefinition) -> {
-                    if (log.isErrorEnabled()) {
-                        log.error("get routes from redis error cause : {}", throwable.toString(), throwable);
-                    }
-                });
+        return Flux.fromIterable(routeDefinitions).onErrorContinue((throwable, routeDefinition) -> {
+            if (log.isErrorEnabled()) {
+                log.error("get routes from redis error cause : {}", throwable.toString(), throwable);
+            }
+        });
     }
 
     /**
@@ -70,18 +64,25 @@ public class RedisHashRouteDefinitionRepository implements RouteDefinitionReposi
      */
     @Override
     public Mono<Void> save(Mono<RouteDefinition> route) {
-        return route.flatMap(r -> this.reactiveHashOperations.put(ROUTE_KEY, r.getId(), r)
-                .doOnNext(success -> caffeineCache.invalidateAll())
-                .flatMap(success -> Boolean.TRUE.equals(success) ? Mono.empty() : Mono.defer(() -> Mono.error(
-                        new RuntimeException(String.format("Could not add route to redis repository: %s", r))))));
+        return route.flatMap(r -> {
+            caffeineCache.put(r.getId(), r);
+            return reactiveHashOperations.put(ROUTE_KEY, r.getId(), r)
+                    .flatMap(success -> Boolean.TRUE.equals(success) ? Mono.empty() :
+                            defer(String.format("Could not add route to redis repository: %s", r)));
+        });
     }
 
     @Override
     public Mono<Void> delete(Mono<String> routeId) {
-        return routeId.flatMap(id -> this.reactiveHashOperations.remove(ROUTE_KEY, id)
-                .doOnNext(success -> caffeineCache.invalidateAll())
-                .flatMap(success -> success != 0 ? Mono.empty() : Mono.defer(() -> Mono.error(new NotFoundException(
-                        String.format("Could not remove route from redis repository with id: %s", id))))));
+        return routeId.flatMap(id -> {
+            caffeineCache.invalidate(id);
+            return reactiveHashOperations.remove(ROUTE_KEY, id)
+                    .flatMap(success -> success != 0 ? Mono.empty() :
+                            defer(String.format("Could not remove route from redis repository with id: %s", id)));
+        });
     }
 
+    private <T> Mono<T> defer(String msg) {
+        return Mono.defer(() -> Mono.error(new NotFoundException(msg)));
+    }
 }

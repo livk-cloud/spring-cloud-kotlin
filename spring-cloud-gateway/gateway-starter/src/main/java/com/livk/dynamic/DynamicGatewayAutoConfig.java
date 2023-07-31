@@ -1,7 +1,7 @@
 package com.livk.dynamic;
 
 import com.livk.auto.service.annotation.SpringAutoService;
-import com.livk.autoconfigure.redis.supprot.UniversalReactiveRedisTemplate;
+import com.livk.autoconfigure.redis.supprot.ReactiveRedisOps;
 import com.livk.dynamic.annotation.EnableDynamicGateway;
 import com.livk.dynamic.support.RedisHashRouteDefinitionRepository;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -22,9 +22,8 @@ import org.springframework.context.annotation.Bean;
 public class DynamicGatewayAutoConfig {
 
     @Bean
-    public RedisHashRouteDefinitionRepository redisRouteDefinitionWriter(
-            UniversalReactiveRedisTemplate reactiveRedisTemplate) {
-        return new RedisHashRouteDefinitionRepository(reactiveRedisTemplate);
+    public RedisHashRouteDefinitionRepository redisRouteDefinitionWriter(ReactiveRedisOps reactiveRedisOps) {
+        return new RedisHashRouteDefinitionRepository(reactiveRedisOps);
     }
 
 }

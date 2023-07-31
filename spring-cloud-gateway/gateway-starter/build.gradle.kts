@@ -7,7 +7,7 @@ dependencies {
     api("org.springframework.cloud:spring-cloud-commons")
     api("com.fasterxml.jackson.core:jackson-databind")
     api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-    api("org.bouncycastle:bcprov-jdk15on")
+    api("org.bouncycastle:bcprov-jdk18on")
     api("com.github.ben-manes.caffeine:caffeine")
     api("io.github.livk-cloud:redis-spring-boot-starter")
     compileProcessor("io.github.livk-cloud:spring-auto-service")

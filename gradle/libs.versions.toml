@@ -1,11 +1,11 @@
 [versions]
-springBoot = "3.1.0"
-springCloud = "2022.0.3"
+springBoot = "3.1.2"
+springCloud = "2022.0.4"
 springCloudSquare = "0.4.1"
-kotlin = "1.8.21"
-bouncycastle = "1.70"
+kotlin = "1.9.0"
+bouncycastle = "1.75"
 wiremock = "2.27.2"
-springExtension = "1.1.0"
+springExtension = "1.1.2"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
@@ -13,7 +13,7 @@ kotlin-jvm-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plug
 spring-extension-dependencies = { group = "io.github.livk-cloud", name = "spring-extension-dependencies", version.ref = "springExtension" }
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
-bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk15on", version.ref = "bouncycastle" }
+bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bouncycastle" }
 wiremock = { group = "com.github.tomakehurst", name = "wiremock", version.ref = "wiremock" }
 
 [plugins]

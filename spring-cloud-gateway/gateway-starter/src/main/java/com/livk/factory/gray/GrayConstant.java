@@ -1,6 +1,6 @@
 package com.livk.factory.gray;
 
-import com.livk.commons.function.FieldFunc;
+import com.livk.commons.beans.BeanLambdaFunc;
 
 /**
  * <p>
@@ -12,7 +12,7 @@ import com.livk.commons.function.FieldFunc;
  */
 public interface GrayConstant {
 
-    String VERSION = FieldFunc.getName(GrayGatewayFilterFactory.Config::getVersion);
+    String VERSION = BeanLambdaFunc.fieldName(GrayGatewayFilterFactory.Config::getVersion);
 
-    String IPS = FieldFunc.getName(GrayGatewayFilterFactory.Config::getIps);
+    String IPS = BeanLambdaFunc.fieldName(GrayGatewayFilterFactory.Config::getIps);
 }
