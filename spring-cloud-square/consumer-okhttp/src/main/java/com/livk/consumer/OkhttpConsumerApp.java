@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OkhttpConsumerApp {
 
     public static void main(String[] args) {
-        SpringLauncher.run(OkhttpConsumerApp.class, args);
+        SpringLauncher.run(args);
     }
 
 }

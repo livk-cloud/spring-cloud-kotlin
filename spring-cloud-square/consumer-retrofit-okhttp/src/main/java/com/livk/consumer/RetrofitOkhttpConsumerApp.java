@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RetrofitOkhttpConsumerApp {
 
     public static void main(String[] args) {
-        SpringLauncher.run(RetrofitOkhttpConsumerApp.class, args);
+        SpringLauncher.run(args);
     }
 
 }

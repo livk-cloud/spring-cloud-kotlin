@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public class KafkaConsumer {
 
     public static void main(String[] args) {
-        SpringLauncher.run(KafkaConsumer.class, args);
+        SpringLauncher.run(args);
     }
 
     @Bean

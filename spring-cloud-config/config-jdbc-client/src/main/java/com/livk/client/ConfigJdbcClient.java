@@ -21,7 +21,7 @@ public class ConfigJdbcClient {
     String foo;
 
     public static void main(String[] args) {
-        SpringLauncher.run(ConfigJdbcClient.class, args);
+        SpringLauncher.run(args);
     }
 
     @RequestMapping(value = "/foo")

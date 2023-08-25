@@ -16,7 +16,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 public class ConfigJdbcServer {
 
     public static void main(String[] args) {
-        SpringLauncher.run(ConfigJdbcServer.class, args);
+        SpringLauncher.run(args);
     }
 
 }

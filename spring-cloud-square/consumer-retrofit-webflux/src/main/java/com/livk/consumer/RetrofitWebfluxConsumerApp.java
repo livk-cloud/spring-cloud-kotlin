@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RetrofitWebfluxConsumerApp {
 
     public static void main(String[] args) {
-        SpringLauncher.run(RetrofitWebfluxConsumerApp.class, args);
+        SpringLauncher.run(args);
     }
 
 }

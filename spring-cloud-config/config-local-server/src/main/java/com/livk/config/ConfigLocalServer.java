@@ -16,6 +16,6 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication
 public class ConfigLocalServer {
     public static void main(String[] args) {
-        SpringLauncher.run(ConfigLocalServer.class, args);
+        SpringLauncher.run(args);
     }
 }

@@ -22,7 +22,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class ConsumerApp {
 
     public static void main(String[] args) {
-        SpringLauncher.run(ConsumerApp.class, args);
+        SpringLauncher.run(args);
     }
 
 }

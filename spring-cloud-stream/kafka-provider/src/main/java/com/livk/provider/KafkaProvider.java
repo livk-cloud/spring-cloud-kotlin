@@ -29,7 +29,7 @@ public class KafkaProvider {
     Sinks.Many<StreamMessage<String>> buffer = Sinks.many().multicast().onBackpressureBuffer();
 
     public static void main(String[] args) {
-        SpringLauncher.run(KafkaProvider.class, args);
+        SpringLauncher.run(args);
     }
 
     @PostMapping("send")

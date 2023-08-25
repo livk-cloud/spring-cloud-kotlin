@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProviderBus {
 
     public static void main(String[] args) {
-        SpringLauncher.run(ProviderBus.class, args);
+        SpringLauncher.run(args);
     }
 
 }

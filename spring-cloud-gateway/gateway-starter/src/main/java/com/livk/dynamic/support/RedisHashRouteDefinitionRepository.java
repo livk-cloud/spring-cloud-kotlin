@@ -20,8 +20,8 @@ import java.util.Map;
 /**
  * <p>
  * 使用Redis Hash存储路由信息
- * 也可以参考{@link org.springframework.cloud.gateway.route.RedisRouteDefinitionRepository}
- * 使用Redis Value存储
+ * <p>
+ * 也可以参考{@link org.springframework.cloud.gateway.route.RedisRouteDefinitionRepository}使用Redis Value存储
  * </p>
  *
  * @author livk
@@ -37,7 +37,12 @@ public class RedisHashRouteDefinitionRepository implements RouteDefinitionReposi
     private final ReactiveHashOperations<String, String, RouteDefinition> reactiveHashOperations;
 
     public RedisHashRouteDefinitionRepository(ReactiveRedisOps reactiveRedisOps) {
-        RedisSerializationContext<String, RouteDefinition> serializationContext = RedisSerializationContext.<String, RouteDefinition>newSerializationContext().key(RedisSerializer.string()).value(JacksonSerializerUtils.json(RouteDefinition.class)).hashKey(RedisSerializer.string()).hashValue(JacksonSerializerUtils.json(RouteDefinition.class)).build();
+        RedisSerializationContext<String, RouteDefinition> serializationContext = RedisSerializationContext.<String, RouteDefinition>newSerializationContext()
+                .key(RedisSerializer.string())
+                .value(JacksonSerializerUtils.json(RouteDefinition.class))
+                .hashKey(RedisSerializer.string())
+                .hashValue(JacksonSerializerUtils.json(RouteDefinition.class))
+                .build();
         reactiveHashOperations = reactiveRedisOps.opsForHash(serializationContext);
         caffeineCache = Caffeine.newBuilder().initialCapacity(128).maximumSize(1024).build();
     }

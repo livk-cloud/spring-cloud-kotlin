@@ -19,7 +19,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class ProviderApp {
 
     public static void main(String[] args) {
-        SpringLauncher.run(ProviderApp.class, args);
+        SpringLauncher.run(args);
     }
 
 }

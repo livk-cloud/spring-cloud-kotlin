@@ -24,7 +24,7 @@ public class ConfigLocalClient {
     String name;
 
     public static void main(String[] args) {
-        SpringLauncher.run(ConfigLocalClient.class, args);
+        SpringLauncher.run(args);
     }
 
     @GetMapping("get")

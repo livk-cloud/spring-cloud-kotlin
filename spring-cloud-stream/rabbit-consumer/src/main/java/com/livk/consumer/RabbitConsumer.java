@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public class RabbitConsumer {
 
     public static void main(String[] args) {
-        SpringLauncher.run(RabbitConsumer.class, args);
+        SpringLauncher.run(args);
     }
 
     @Bean

@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class FunctionApp {
 
     public static void main(String[] args) {
-        SpringLauncher.run(FunctionApp.class, args);
+        SpringLauncher.run(args);
     }
 
     @Bean
