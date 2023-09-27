@@ -38,12 +38,9 @@ configure(gradleModuleProjects) {
 
 configure(allprojects) {
     repositories {
-        maven { setUrl("https://plugins.gradle.org/m2/") }
-        maven { setUrl("https://repo.spring.io/release") }
-        maven { setUrl("https://maven.aliyun.com/repository/public") }
-        maven {
-            setUrl("http://mirrors.cloud.tencent.com/nexus/repository/maven-public/")
-            isAllowInsecureProtocol = true
-        }
+        maven("https://plugins.gradle.org/m2/")
+        maven("https://repo.spring.io/release")
+        maven("https://maven.aliyun.com/repository/public")
+        maven("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/")
     }
 }
