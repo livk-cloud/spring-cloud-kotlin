@@ -1,11 +1,11 @@
 [versions]
-springBoot = "3.1.4"
+springBoot = "3.1.5"
 springCloud = "2022.0.4"
 springCloudSquare = "0.4.1"
-kotlin = "1.9.10"
-bouncycastle = "1.75"
-wiremock = "2.27.2"
-springExtension = "1.1.4"
+kotlin = "1.9.20"
+bouncycastle = "1.76"
+wiremock = "3.2.0"
+springExtension = "1.1.5"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
@@ -14,7 +14,7 @@ spring-extension-dependencies = { group = "io.github.livk-cloud", name = "spring
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bouncycastle" }
-wiremock = { group = "com.github.tomakehurst", name = "wiremock", version.ref = "wiremock" }
+wiremock = { group = "org.wiremock", name = "wiremock", version.ref = "wiremock" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
