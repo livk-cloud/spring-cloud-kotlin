@@ -1,6 +1,6 @@
 package com.livk.consumer.biz;
 
-import com.livk.commons.spring.SpringLauncher;
+import com.livk.commons.SpringLauncher;
 import com.livk.provider.api.feign.UserRemoteService;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;

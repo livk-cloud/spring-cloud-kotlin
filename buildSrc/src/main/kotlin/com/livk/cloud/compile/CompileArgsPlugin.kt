@@ -51,7 +51,7 @@ abstract class CompileArgsPlugin : Plugin<Project> {
         project.tasks.withType(KotlinCompile::class.java) {
             it.kotlinOptions {
                 freeCompilerArgs = listOf("-Xjsr305=strict")
-                jvmTarget = "17"
+                jvmTarget = JavaVersion.VERSION_21.toString()
             }
         }
 
@@ -73,7 +73,7 @@ abstract class CompileArgsPlugin : Plugin<Project> {
     fun addCompile(javaCompile: JavaCompile) {
         javaCompile.options.compilerArgs.addAll(COMPILER_ARGS)
         javaCompile.options.encoding = UTF_8
-        javaCompile.sourceCompatibility = JavaVersion.VERSION_17.toString()
-        javaCompile.targetCompatibility = JavaVersion.VERSION_17.toString()
+        javaCompile.sourceCompatibility = JavaVersion.VERSION_21.toString()
+        javaCompile.targetCompatibility = JavaVersion.VERSION_21.toString()
     }
 }

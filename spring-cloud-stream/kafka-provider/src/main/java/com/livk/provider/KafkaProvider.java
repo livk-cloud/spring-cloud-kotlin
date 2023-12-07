@@ -1,6 +1,6 @@
 package com.livk.provider;
 
-import com.livk.commons.spring.SpringLauncher;
+import com.livk.commons.SpringLauncher;
 import com.livk.stream.entity.StreamMessage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

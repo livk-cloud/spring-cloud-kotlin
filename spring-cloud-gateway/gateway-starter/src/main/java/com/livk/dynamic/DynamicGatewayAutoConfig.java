@@ -1,7 +1,7 @@
 package com.livk.dynamic;
 
 import com.livk.auto.service.annotation.SpringAutoService;
-import com.livk.autoconfigure.redis.supprot.ReactiveRedisOps;
+import com.livk.core.redis.ReactiveRedisOps;
 import com.livk.dynamic.annotation.EnableDynamicGateway;
 import com.livk.dynamic.support.RedisHashRouteDefinitionRepository;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

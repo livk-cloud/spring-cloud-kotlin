@@ -24,10 +24,6 @@ abstract class DeleteExpand : Plugin<Project> {
             it.delete(project.projectDir.absolutePath + "/build")
             it.delete(project.projectDir.absolutePath + "/out")
             it.delete(project.projectDir.absolutePath + "/bin")
-        }
-
-        project.tasks.register(CLEAN_ALL_TASK_NAME, Delete::class.java) {
-            it.group = LifecycleBasePlugin.BUILD_GROUP
             it.delete(project.projectDir.absolutePath + "/src/main/generated")
             it.delete(project.projectDir.absolutePath + "/src/test/generated_tests")
         }

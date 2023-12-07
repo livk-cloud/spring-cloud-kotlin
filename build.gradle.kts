@@ -2,7 +2,7 @@ plugins {
     com.livk.root
 }
 
-val bom = setOf(project(":livk-cloud-dependencies"))
+val bom = setOf(project(":dependencies"))
 val gradleModuleProjects = subprojects.filter {
     it.buildFile.exists()
 }.toSet() - bom
@@ -27,7 +27,7 @@ configure(gradleModuleProjects) {
     apply(plugin = "com.livk.module")
 
     dependencies {
-        management(platform(project(":livk-cloud-dependencies")))
+        management(platform(project(":dependencies")))
         compileProcessor("org.projectlombok:lombok")
         compileProcessor("org.springframework.boot:spring-boot-configuration-processor")
         compileProcessor("org.springframework.boot:spring-boot-autoconfigure-processor")
@@ -38,7 +38,6 @@ configure(gradleModuleProjects) {
 
 configure(allprojects) {
     repositories {
-        maven("https://plugins.gradle.org/m2/")
         maven("https://repo.spring.io/release")
         maven("https://maven.aliyun.com/repository/public")
         maven("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/")
