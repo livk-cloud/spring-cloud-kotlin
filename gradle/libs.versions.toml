@@ -4,7 +4,7 @@ springCloud = "2023.0.0"
 springCloudSquare = "0.4.1"
 kotlin = "1.9.22"
 bouncycastle = "1.77"
-wiremock = "3.3.1"
+wiremock = "3.4.0"
 springExtension = "1.2.2"
 
 [libraries]
