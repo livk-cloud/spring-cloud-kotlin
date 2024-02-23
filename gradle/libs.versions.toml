@@ -5,7 +5,7 @@ springCloudSquare = "0.4.1"
 kotlin = "1.9.22"
 bouncycastle = "1.77"
 wiremock = "3.4.1"
-springExtension = "1.2.2"
+springExtension = "1.2.3"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
