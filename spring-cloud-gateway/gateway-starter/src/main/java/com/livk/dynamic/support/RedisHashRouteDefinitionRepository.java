@@ -2,8 +2,8 @@ package com.livk.dynamic.support;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.livk.core.redis.JacksonSerializerUtils;
-import com.livk.core.redis.ReactiveRedisOps;
+import com.livk.context.redis.JacksonSerializerUtils;
+import com.livk.context.redis.ReactiveRedisOps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;

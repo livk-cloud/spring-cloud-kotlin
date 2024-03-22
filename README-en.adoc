@@ -3,10 +3,10 @@ link="https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradl
 
 image:https://img.shields.io/badge/Gradle-8.6-blue[link="https://gradle.org/"]
 image:https://img.shields.io/badge/Java-21-brightgreen[]
-image:https://img.shields.io/badge/Spring%20Boot%20Extension-1.2.3-green[link="https://github.com/livk-cloud/spring-boot-extension"]
+image:https://img.shields.io/badge/Spring%20Boot%20Extension-1.2.4-green[link="https://github.com/livk-cloud/spring-boot-extension"]
 
-image:https://img.shields.io/badge/Spring%20Framework-6.1.4-green[link="https://spring.io/projects/spring-framework"]
-image:https://img.shields.io/badge/Spring%20Boot-3.2.3-green[link="https://spring.io/projects/spring-boot"]
+image:https://img.shields.io/badge/Spring%20Framework-6.1.5-green[link="https://spring.io/projects/spring-framework"]
+image:https://img.shields.io/badge/Spring%20Boot-3.2.4-green[link="https://spring.io/projects/spring-boot"]
 image:https://img.shields.io/badge/Spring%20Cloud-2023.0.0-green[link="https://spring.io/projects/spring-cloud"]
 
 == spring-cloud-example
