@@ -3,7 +3,7 @@ springBoot = "3.2.4"
 springCloud = "2023.0.1"
 springCloudSquare = "0.4.1"
 kotlin = "1.9.23"
-bouncycastle = "1.78"
+bouncycastle = "1.78.1"
 wiremock = "3.5.3"
 springExtension = "1.2.4"
 
