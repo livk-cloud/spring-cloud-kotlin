@@ -26,9 +26,9 @@ open class TaskExample {
 
     class HelloWorldCommandLineRunner : CommandLineRunner {
 
-        private val logger = LoggerFactory.getLogger(HelloWorldCommandLineRunner::class.java)
+        private val logger = LoggerFactory.getLogger(this::class.java)
 
-        override fun run(vararg args: String?) {
+        override fun run(vararg args: String) {
             logger.info("{}", "hello,world!")
         }
 

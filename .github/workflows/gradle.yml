@@ -28,8 +28,9 @@ jobs:
         with:
           java-version: 21
           distribution: 'temurin'
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v3.3.0
-        with:
-          arguments: build -x test
-          gradle-version: current
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.3.1
+
+      - name: Gradle Run Build
+        run: ./gradlew build -x test

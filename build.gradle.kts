@@ -4,10 +4,10 @@ plugins {
 
 val bom = setOf(project(":dependencies"))
 val gradleModuleProjects = subprojects.filter {
-    it.buildFile.exists()
+    buildFile.exists()
 }.toSet() - bom
 val commonModuleProjects = gradleModuleProjects.filter {
-    it.name.endsWith("-commons") || it.name.endsWith("-starter") || it.name.endsWith("-api")
+    name.endsWith("-commons") || name.endsWith("-starter") || name.endsWith("-api")
 }.toSet()
 val springModuleProjects = gradleModuleProjects - commonModuleProjects
 
