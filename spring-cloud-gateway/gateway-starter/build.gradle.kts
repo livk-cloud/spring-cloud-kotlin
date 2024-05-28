@@ -9,6 +9,6 @@ dependencies {
     api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     api("org.bouncycastle:bcprov-jdk18on")
     api("com.github.ben-manes.caffeine:caffeine")
-    api("io.github.livk-cloud:redis-spring-boot-starter")
+    api("io.github.livk-cloud:redis-ops-boot-starter")
     compileProcessor("io.github.livk-cloud:spring-auto-service")
 }
