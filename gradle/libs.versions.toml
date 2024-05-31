@@ -1,6 +1,6 @@
 [versions]
 springBoot = "3.3.0"
-springCloud = "2023.0.1"
+springCloud = "2023.0.2"
 springCloudSquare = "0.4.1"
 kotlin = "2.0.0"
 bouncycastle = "1.78.1"
