@@ -1,3 +1,7 @@
+plugins {
+    com.livk.common
+}
+
 dependencies {
     optional("org.springframework.cloud:spring-cloud-gateway-server")
     optional("org.springframework.cloud:spring-cloud-loadbalancer")

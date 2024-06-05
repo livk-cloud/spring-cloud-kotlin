@@ -1,3 +1,7 @@
+plugins {
+    com.livk.common
+}
+
 dependencies {
     optional("org.springframework:spring-webflux")
     optional("org.springframework.boot:spring-boot-starter")

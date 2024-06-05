@@ -1,3 +1,7 @@
+plugins {
+    com.livk.common
+}
+
 dependencies {
     api(project(":spring-cloud-commons"))
     api("org.springframework.cloud:spring-cloud-starter-bus-stream")

@@ -1,3 +1,7 @@
+plugins {
+    com.livk.service
+}
+
 dependencies {
     implementation(project(":spring-cloud-commons"))
     implementation("org.springframework.cloud:spring-cloud-starter-config")

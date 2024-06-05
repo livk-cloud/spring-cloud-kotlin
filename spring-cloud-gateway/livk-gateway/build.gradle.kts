@@ -1,3 +1,7 @@
+plugins {
+    com.livk.service
+}
+
 dependencies {
     implementation(project(":spring-cloud-gateway:gateway-starter"))
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
