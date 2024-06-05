@@ -1,12 +1,12 @@
 package com.livk.cloud.compile
 
-import com.livk.cloud.info.ManifestPlugin
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 /**
@@ -49,9 +49,9 @@ abstract class CompileArgsPlugin : Plugin<Project> {
         addCompile(javaTestCompile)
 
         project.tasks.withType(KotlinCompile::class.java) {
-            it.kotlinOptions {
-                freeCompilerArgs = listOf("-Xjsr305=strict")
-                jvmTarget = JavaVersion.VERSION_21.toString()
+            it.compilerOptions {
+                freeCompilerArgs.set(listOf("-Xjsr305=strict"))
+                jvmTarget.set(JvmTarget.JVM_21)
             }
         }
 

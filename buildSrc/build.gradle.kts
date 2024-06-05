@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -14,11 +15,15 @@ repositories {
 dependencies {
     implementation(libs.kotlin.jvm.plugin)
     implementation(libs.spring.boot.plugin)
+    implementation(libs.kotlin.ksp.plugin)
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
+    compilerOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
+        suppressWarnings = true
+        allWarningsAsErrors = true
+        jvmTarget = JvmTarget.JVM_21
     }
 }
 
