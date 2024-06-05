@@ -11,7 +11,6 @@ import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSType
-import com.livk.auto.service.annotation.SpringAutoService
 import java.io.IOException
 import java.util.SortedSet
 
@@ -29,7 +28,7 @@ class SpringAutoServiceProcessorProvider : SymbolProcessorProvider {
         private val providers =
             Multimaps.synchronizedSetMultimap(LinkedHashMultimap.create<String, Pair<String, KSFile>>())
 
-        override fun supportAnnotation(): String = SpringAutoService::class.java.name
+        override fun supportAnnotation(): String = "com.livk.auto.service.annotation.SpringAutoService"
 
         override fun processAnnotations(autoServiceType: KSType, symbolAnnotations: Sequence<KSClassDeclaration>) {
             for (symbolAnnotation in symbolAnnotations) {

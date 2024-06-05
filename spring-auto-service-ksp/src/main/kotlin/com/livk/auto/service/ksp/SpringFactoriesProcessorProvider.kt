@@ -12,7 +12,6 @@ import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSType
-import com.livk.auto.service.annotation.SpringFactories
 import java.io.IOException
 import java.util.SortedSet
 
@@ -37,7 +36,7 @@ class SpringFactoriesProcessorProvider : SymbolProcessorProvider {
         private val aotFactoriesMap =
             Multimaps.synchronizedSetMultimap(LinkedHashMultimap.create<String, Pair<String, KSFile>>())
 
-        override fun supportAnnotation(): String = SpringFactories::class.java.name
+        override fun supportAnnotation(): String = "com.livk.auto.service.annotation.SpringFactories"
 
         override fun processAnnotations(autoServiceType: KSType, symbolAnnotations: Sequence<KSClassDeclaration>) {
             for (symbolAnnotation in symbolAnnotations) {
