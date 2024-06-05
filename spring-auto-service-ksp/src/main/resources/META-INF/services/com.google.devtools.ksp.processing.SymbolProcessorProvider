@@ -1,0 +1,2 @@
+com.livk.auto.service.ksp.SpringAutoServiceProcessorProvider
+com.livk.auto.service.ksp.SpringFactoriesProcessorProvider

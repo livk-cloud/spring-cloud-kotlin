@@ -1,21 +1,23 @@
 [versions]
-springBoot = "3.3.0"
-springCloud = "2023.0.2"
-springCloudSquare = "0.4.1"
+spring-boot = "3.3.0"
+spring-cloud = "2023.0.2"
+spring-cloud-square = "0.4.1"
 kotlin = "2.0.0"
+kotlin-ksp = "2.0.0-1.0.21"
 bouncycastle = "1.78.1"
 wiremock = "3.6.0"
-springExtension = "1.3.0"
+spring-extension = "1.3.0"
 
 [libraries]
-spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "springBoot" }
+spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "spring-boot" }
 kotlin-jvm-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-spring-extension-dependencies = { group = "io.github.livk-cloud", name = "spring-extension-dependencies", version.ref = "springExtension" }
-spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
-spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "springCloudSquare" }
+kotlin-ksp-plugin = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "kotlin-ksp" }
+spring-extension-dependencies = { group = "io.github.livk-cloud", name = "spring-extension-dependencies", version.ref = "spring-extension" }
+spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "spring-cloud" }
+spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "spring-cloud-square" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bouncycastle" }
 wiremock = { group = "org.wiremock", name = "wiremock", version.ref = "wiremock" }
 
 [plugins]
-spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
