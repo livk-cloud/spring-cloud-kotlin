@@ -10,9 +10,6 @@ configure(gradleModuleProjects) {
 
     dependencies {
         management(platform(project(":dependencies")))
-        compileProcessor("org.projectlombok:lombok")
-        compileProcessor("org.springframework.boot:spring-boot-configuration-processor")
-        compileProcessor("org.springframework.boot:spring-boot-autoconfigure-processor")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework:spring-tx")
     }

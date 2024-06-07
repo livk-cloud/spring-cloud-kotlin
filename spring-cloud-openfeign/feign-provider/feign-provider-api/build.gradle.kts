@@ -1,5 +1,6 @@
 plugins {
     com.livk.common
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
@@ -13,5 +14,6 @@ dependencies {
     api("io.micrometer:micrometer-tracing-bridge-otel")
     api("io.github.openfeign:feign-micrometer")
     api("org.springframework.boot:spring-boot-starter-actuator")
-    compileProcessor("io.github.livk-cloud:spring-auto-service")
+    compileOnly("io.github.livk-cloud:spring-auto-service")
+    ksp(project(":spring-auto-service-ksp"))
 }

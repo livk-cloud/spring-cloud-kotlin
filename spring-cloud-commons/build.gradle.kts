@@ -1,5 +1,6 @@
 plugins {
     com.livk.common
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
@@ -10,6 +11,8 @@ dependencies {
     api("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("com.github.ben-manes.caffeine:caffeine")
     api("io.github.livk-cloud:spring-extension-commons")
-    compileProcessor("io.github.livk-cloud:spring-auto-service")
     optional("org.springframework.cloud:spring-cloud-loadbalancer")
+
+    compileOnly("io.github.livk-cloud:spring-auto-service")
+    ksp(project(":spring-auto-service-ksp"))
 }

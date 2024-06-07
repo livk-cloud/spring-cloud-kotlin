@@ -1,5 +1,6 @@
 plugins {
     com.livk.common
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
@@ -14,5 +15,6 @@ dependencies {
     api("org.bouncycastle:bcprov-jdk18on")
     api("com.github.ben-manes.caffeine:caffeine")
     api("io.github.livk-cloud:redis-ops-boot-starter")
-    compileProcessor("io.github.livk-cloud:spring-auto-service")
+    compileOnly("io.github.livk-cloud:spring-auto-service")
+    ksp(project(":spring-auto-service-ksp"))
 }

@@ -7,6 +7,8 @@ import org.gradle.api.plugins.JavaTestFixturesPlugin
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
 /**
  * <p>
@@ -50,6 +52,12 @@ abstract class ManagementPlugin : Plugin<Project> {
             plugins.withType(JavaTestFixturesPlugin::class.java) {
                 configurations.getByName("testFixturesCompileClasspath").extendsFrom(management)
                 configurations.getByName("testFixturesRuntimeClasspath").extendsFrom(management)
+            }
+            plugins.withType(KotlinPluginWrapper::class.java) {
+                project.extensions.getByType(KotlinJvmProjectExtension::class.java).sourceSets.all { sourceSet ->
+                    configurations.getByName(sourceSet.compileOnlyConfigurationName).extendsFrom(management)
+                    configurations.getByName(sourceSet.runtimeOnlyConfigurationName).extendsFrom(management)
+                }
             }
             plugins.withType(MavenPublishPlugin::class.java) {
                 project.extensions.getByType(PublishingExtension::class.java).publications

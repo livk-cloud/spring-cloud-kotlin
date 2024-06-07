@@ -1,5 +1,6 @@
 plugins {
     com.livk.common
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
@@ -10,5 +11,6 @@ dependencies {
     api("org.springframework.cloud:spring-cloud-starter-consul-discovery")
     api("org.springframework.cloud:spring-cloud-starter-consul-config")
     api("org.springframework.boot:spring-boot-starter-web")
-    compileProcessor("io.github.livk-cloud:spring-auto-service")
+    compileOnly("io.github.livk-cloud:spring-auto-service")
+    ksp(project(":spring-auto-service-ksp"))
 }
