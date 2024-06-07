@@ -7,6 +7,7 @@ kotlin-ksp = "2.0.0-1.0.22"
 bouncycastle = "1.78.1"
 wiremock = "3.6.0"
 spring-extension = "1.3.0"
+kotlinpoet = "1.17.0"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "spring-boot" }
@@ -17,6 +18,8 @@ spring-cloud-dependencies = { group = "org.springframework.cloud", name = "sprin
 spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "spring-cloud-square" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bouncycastle" }
 wiremock = { group = "org.wiremock", name = "wiremock", version.ref = "wiremock" }
+symbol-processing = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "kotlin-ksp" }
+kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version.ref = "kotlinpoet" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
