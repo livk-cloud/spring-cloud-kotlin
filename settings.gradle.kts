@@ -1,4 +1,4 @@
-rootProject.name = "spring-cloud-example"
+rootProject.name = "spring-cloud-kotlin"
 
 fileTree(rootDir) {
     include("**/*.gradle.kts")
