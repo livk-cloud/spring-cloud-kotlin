@@ -9,6 +9,7 @@ import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.ClassKind
+import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSType
@@ -19,9 +20,8 @@ import java.util.SortedSet
  * @author livk
  */
 class SpringFactoriesProcessorProvider : SymbolProcessorProvider {
-    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor {
-        return SpringFactoriesProcessor(environment)
-    }
+    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
+        SpringFactoriesProcessor(environment)
 
     internal class SpringFactoriesProcessor(environment: SymbolProcessorEnvironment) : AbstractProcessor(environment) {
 
@@ -31,43 +31,36 @@ class SpringFactoriesProcessorProvider : SymbolProcessorProvider {
             const val AOT_LOCATION: String = "META-INF/spring/aot.factories"
         }
 
-        private val providers =
-            Multimaps.synchronizedSetMultimap(LinkedHashMultimap.create<String, Pair<String, KSFile>>())
         private val aotFactoriesMap =
             Multimaps.synchronizedSetMultimap(LinkedHashMultimap.create<String, Pair<String, KSFile>>())
 
         override fun supportAnnotation(): String = "com.livk.auto.service.annotation.SpringFactories"
 
-        override fun processAnnotations(autoServiceType: KSType, symbolAnnotations: Sequence<KSClassDeclaration>) {
-            for (symbolAnnotation in symbolAnnotations) {
-                for (annotation in symbolAnnotation.annotations.filter { it.annotationType.resolve() == autoServiceType }) {
-                    val implService = getArgument(annotation, "value") as KSType
-                    var providerName = implService.declaration.closestClassDeclaration()?.toBinaryName()
-                    if (providerName == Void::class.java.name) {
-                        val interfaceList = symbolAnnotation.superTypes
-                            .map { it.resolve().declaration }
-                            .filter { resolver.getClassDeclarationByName(it.simpleName)?.classKind == ClassKind.INTERFACE }
-                        providerName = if (interfaceList.count() == 1) {
-                            interfaceList.first().closestClassDeclaration()?.toBinaryName()
-                        } else {
-                            ""
-                        }
-                    }
-                    if (providerName.isNullOrBlank()) {
-                        continue
-                    }
-                    val aotSupport = getArgument(annotation, "aot") as Boolean
-                    if (aotSupport) {
-                        aotFactoriesMap.put(
-                            providerName,
-                            symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!
-                        )
-                    } else {
-                        providers.put(
-                            providerName,
-                            symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!
-                        )
-                    }
+        override fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration) {
+            val implService = getArgument(annotation, "value") as KSType
+            var providerName = implService.declaration.closestClassDeclaration()?.toBinaryName()
+            if (providerName == Void::class.java.name) {
+                val interfaceList = symbolAnnotation.superTypes
+                    .map { it.resolve().declaration }
+                    .filter { resolver.getClassDeclarationByName(it.simpleName)?.classKind == ClassKind.INTERFACE }
+                providerName = if (interfaceList.count() == 1) {
+                    interfaceList.first().closestClassDeclaration()?.toBinaryName()
+                } else {
+                    ""
+                }
+            }
+            if (!providerName.isNullOrBlank()) {
+                val aotSupport = getArgument(annotation, "aot") as Boolean
+                if (aotSupport) {
+                    aotFactoriesMap.put(
+                        providerName,
+                        symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!
+                    )
+                } else {
+                    providers.put(
+                        providerName,
+                        symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!
+                    )
                 }
             }
         }

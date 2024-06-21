@@ -1,7 +1,5 @@
 package com.livk.auto.service.ksp
 
-import com.google.common.collect.LinkedHashMultimap
-import com.google.common.collect.Multimaps
 import com.google.common.collect.Sets
 import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.processing.Dependencies
@@ -16,30 +14,33 @@ import java.io.IOException
 import java.util.SortedSet
 
 /**
+ * <p>
+ * GoogleAutoServiceProcessorProvider
+ * </p>
+ *
  * @author livk
+ * @date 2024/6/20
  */
-class SpringAutoServiceProcessorProvider : SymbolProcessorProvider {
-    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
-        SpringAutoServiceProcessor(environment)
+class GoogleAutoServiceProcessorProvider : SymbolProcessorProvider {
 
-    internal class SpringAutoServiceProcessor(environment: SymbolProcessorEnvironment) :
+    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
+        GoogleAutoServiceProcessor(environment)
+
+    internal class GoogleAutoServiceProcessor(environment: SymbolProcessorEnvironment) :
         AbstractProcessor(environment) {
 
-        override fun supportAnnotation(): String = "com.livk.auto.service.annotation.SpringAutoService"
+        override fun supportAnnotation(): String = "com.google.auto.service.AutoService"
 
         override fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration) {
             val implService = getArgument(annotation, "value") as KSType
-            var providerName = implService.declaration.closestClassDeclaration()?.toBinaryName()
-            if (providerName == Annotation::class.qualifiedName) {
-                providerName = "org.springframework.boot.autoconfigure.AutoConfiguration"
-            }
+            val providerName = implService.declaration.closestClassDeclaration()?.toBinaryName()
             providers.put(providerName, symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!)
         }
 
         override fun generateAndClearConfigFiles() {
             if (!providers.isEmpty) {
                 for (providerInterface in providers.keySet()) {
-                    val resourceFile = "META-INF/spring/${providerInterface}.imports"
+                    val resourceFile = "META-INF/service/${providerInterface}"
                     logger.info("Working on resource file: $resourceFile")
                     try {
                         val allServices: SortedSet<String> = Sets.newTreeSet()

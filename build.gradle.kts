@@ -12,10 +12,14 @@ configure(gradleModuleProjects) {
         management(platform(project(":dependencies")))
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework:spring-tx")
+
+        implementation(kotlin("stdlib-jdk8"))
+        implementation(kotlin("reflect"))
+        testImplementation(kotlin("test"))
     }
 }
 
-configure(allprojects) {
+allprojects {
     repositories {
         maven("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/")
     }

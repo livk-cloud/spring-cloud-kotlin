@@ -1,5 +1,7 @@
 package com.livk.auto.service.ksp
 
+import com.google.common.collect.LinkedHashMultimap
+import com.google.common.collect.Multimaps
 import com.google.devtools.ksp.isLocal
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
@@ -7,6 +9,7 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSType
 import com.squareup.kotlinpoet.ClassName
 
@@ -26,6 +29,9 @@ abstract class AbstractProcessor(environment: SymbolProcessorEnvironment) : Symb
 
     protected lateinit var resolver: Resolver
 
+    protected val providers =
+        Multimaps.synchronizedSetMultimap(LinkedHashMultimap.create<String, Pair<String, KSFile>>())
+
 
     final override fun process(resolver: Resolver): List<KSAnnotated> {
         this.resolver = resolver
@@ -36,17 +42,19 @@ abstract class AbstractProcessor(environment: SymbolProcessorEnvironment) : Symb
                     logger.info(message)
                     return emptyList()
                 }
-        processAnnotations(
-            autoServiceType,
-            resolver.getSymbolsWithAnnotation(supportAnnotation()).filterIsInstance<KSClassDeclaration>()
-        )
+        for (symbolAnnotation in resolver.getSymbolsWithAnnotation(supportAnnotation())
+            .filterIsInstance<KSClassDeclaration>()) {
+            for (annotation in symbolAnnotation.annotations.filter { it.annotationType.resolve() == autoServiceType }) {
+                accept(annotation, symbolAnnotation)
+            }
+        }
         generateAndClearConfigFiles()
         return emptyList()
     }
 
     protected abstract fun supportAnnotation(): String
 
-    protected abstract fun processAnnotations(autoServiceType: KSType, symbolAnnotations: Sequence<KSClassDeclaration>)
+    protected abstract fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration);
 
     protected abstract fun generateAndClearConfigFiles()
 

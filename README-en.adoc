@@ -9,8 +9,6 @@ image:https://img.shields.io/badge/Spring%20Framework-6.1.8-green[link="https://
 image:https://img.shields.io/badge/Spring%20Boot-3.3.0-green[link="https://spring.io/projects/spring-boot"]
 image:https://img.shields.io/badge/Spring%20Cloud-2023.0.2-green[link="https://spring.io/projects/spring-cloud"]
 
-== spring-cloud-example
-
 link:README-en.adoc[English]|link:README.adoc[简体中文] +
 
 Here is a various example on SpringCloud +
