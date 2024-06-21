@@ -1,5 +1,6 @@
 package com.livk.auto.service.ksp
 
+import com.google.auto.service.AutoService
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimaps
 import com.google.common.collect.Sets
@@ -19,6 +20,7 @@ import java.util.SortedSet
 /**
  * @author livk
  */
+@AutoService(SymbolProcessorProvider::class)
 class SpringFactoriesProcessorProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
         SpringFactoriesProcessor(environment)

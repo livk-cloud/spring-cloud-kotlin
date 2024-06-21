@@ -1,5 +1,6 @@
 package com.livk.auto.service.ksp
 
+import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.processing.Dependencies
@@ -32,9 +33,11 @@ class GoogleAutoServiceProcessorProvider : SymbolProcessorProvider {
         override fun supportAnnotation(): String = "com.google.auto.service.AutoService"
 
         override fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration) {
-            val implService = getArgument(annotation, "value") as KSType
-            val providerName = implService.declaration.closestClassDeclaration()?.toBinaryName()
-            providers.put(providerName, symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!)
+            for (any in getArgument(annotation, "value") as List<*>) {
+                val implService = any as KSType
+                val providerName = implService.declaration.closestClassDeclaration()?.toBinaryName()
+                providers.put(providerName, symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!)
+            }
         }
 
         override fun generateAndClearConfigFiles() {

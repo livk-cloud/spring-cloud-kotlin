@@ -1,9 +1,11 @@
 plugins {
     com.livk.common
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
-    implementation("com.google.guava:guava")
-    implementation("com.google.devtools.ksp:symbol-processing-api")
-    implementation("com.squareup:kotlinpoet")
+    api(project(":google-auto-service-ksp"))
+
+    optional("com.google.auto.service:auto-service")
+    ksp(project(":google-auto-service-ksp"))
 }

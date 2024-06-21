@@ -10,16 +10,10 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSFile
-import com.google.devtools.ksp.symbol.KSType
 import com.squareup.kotlinpoet.ClassName
 
 /**
- * <p>
- * AbstractProcessor
- * </p>
- *
  * @author livk
- * @date 2024/5/22
  */
 abstract class AbstractProcessor(environment: SymbolProcessorEnvironment) : SymbolProcessor {
 
