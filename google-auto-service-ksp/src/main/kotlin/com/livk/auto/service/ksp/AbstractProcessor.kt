@@ -32,8 +32,7 @@ abstract class AbstractProcessor(environment: SymbolProcessorEnvironment) : Symb
         val autoServiceType =
             resolver.getClassDeclarationByName(resolver.getKSNameFromString(supportAnnotation()))?.asType(emptyList())
                 ?: run {
-                    val message = "@SpringAutoService type not found on the classpath, skipping processing."
-                    logger.info(message)
+                    logger.info("@${supportAnnotation()} type not found on the classpath, skipping processing.")
                     return emptyList()
                 }
         for (symbolAnnotation in resolver.getSymbolsWithAnnotation(supportAnnotation())
