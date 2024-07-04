@@ -11,9 +11,7 @@ import java.util.function.Function
 @SpringBootApplication
 open class FunctionApp {
     @Bean
-    open fun livk(): Function<String, Any> {
-        return Function { value -> StringBuilder(value).reverse().toString() }
-    }
+    open fun livk(): Function<String, Any> = Function { value -> StringBuilder(value).reverse().toString() }
 }
 
 fun main(args: Array<String>) {

@@ -28,9 +28,7 @@ class UserController(
     }
 
     @PostMapping
-    fun save(@RequestBody users: Users): Boolean {
-        return userRemoteService.save(users)
-    }
+    fun save(@RequestBody users: Users): Boolean = userRemoteService.save(users)
 
     companion object {
         private val log: Logger = LoggerFactory.getLogger(UserController::class.java)

@@ -34,8 +34,8 @@ class RequestHashingGatewayFilterFactory : AbstractGatewayFilterFactory<RequestH
 ) {
     private val messageReaders: List<HttpMessageReader<*>> = HandlerStrategies.withDefaults().messageReaders()
 
-    override fun apply(config: Config): GatewayFilter {
-        return GatewayFilter { exchange: ServerWebExchange, chain: GatewayFilterChain ->
+    override fun apply(config: Config): GatewayFilter =
+        GatewayFilter { exchange: ServerWebExchange, chain: GatewayFilterChain ->
             ServerWebExchangeUtils
                 .cacheRequestBodyAndRequest(exchange) { httpRequest ->
                     ServerRequest
@@ -71,15 +71,11 @@ class RequestHashingGatewayFilterFactory : AbstractGatewayFilterFactory<RequestH
                         })
                 }
         }
-    }
 
-    override fun shortcutFieldOrder(): List<String> {
-        return listOf("algorithm")
-    }
+    override fun shortcutFieldOrder(): List<String> = listOf("algorithm")
 
-    private fun computeHash(messageDigest: MessageDigest, requestPayload: String): String {
-        return Hex.toHexString(messageDigest.digest(requestPayload.toByteArray(StandardCharsets.UTF_8)))
-    }
+    private fun computeHash(messageDigest: MessageDigest, requestPayload: String): String =
+        Hex.toHexString(messageDigest.digest(requestPayload.toByteArray(StandardCharsets.UTF_8)))
 
     class Config {
         lateinit var messageDigest: MessageDigest

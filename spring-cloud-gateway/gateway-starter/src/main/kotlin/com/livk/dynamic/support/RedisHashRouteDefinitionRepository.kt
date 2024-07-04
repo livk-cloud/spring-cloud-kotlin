@@ -45,12 +45,12 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
      * @return Flux<RouteDefinition>
     </RouteDefinition> */
     override fun getRouteDefinitions(): Flux<RouteDefinition> {
-        val routeDefinitions: Collection<RouteDefinition> = caffeineCache.asMap().values
+        val routeDefinitions = caffeineCache.asMap().values
         if (routeDefinitions.isEmpty()) {
             return reactiveHashOperations.entries(ROUTE_KEY).map { it.value }
                 .doOnNext { r: RouteDefinition -> caffeineCache.put(r.id, r) }
         }
-        return Flux.fromIterable<RouteDefinition>(routeDefinitions)
+        return Flux.fromIterable(routeDefinitions)
             .onErrorContinue { throwable: Throwable, _ ->
                 if (log.isErrorEnabled) {
                     log.error(
@@ -66,39 +66,33 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
      * @param route route
      * @return Mono.empty()
      */
-    override fun save(route: Mono<RouteDefinition>): Mono<Void> {
-        return route.flatMap { r: RouteDefinition ->
-            caffeineCache.put(r.id, r)
-            reactiveHashOperations.put(ROUTE_KEY, r.id, r)
-                .flatMap { success: Boolean ->
-                    if (java.lang.Boolean.TRUE == success) Mono.empty() else defer(
-                        String.format(
-                            "Could not add route to redis repository: %s",
-                            r
-                        )
+    override fun save(route: Mono<RouteDefinition>): Mono<Void> = route.flatMap { r: RouteDefinition ->
+        caffeineCache.put(r.id, r)
+        reactiveHashOperations.put(ROUTE_KEY, r.id, r)
+            .flatMap { success: Boolean ->
+                if (java.lang.Boolean.TRUE == success) Mono.empty() else defer(
+                    String.format(
+                        "Could not add route to redis repository: %s",
+                        r
                     )
-                }
-        }
+                )
+            }
     }
 
-    override fun delete(routeId: Mono<String>): Mono<Void> {
-        return routeId.flatMap { id: String ->
-            caffeineCache.invalidate(id)
-            reactiveHashOperations.remove(ROUTE_KEY, id)
-                .flatMap { success: Long ->
-                    if (success != 0L) Mono.empty() else defer(
-                        String.format(
-                            "Could not remove route from redis repository with id: %s",
-                            id
-                        )
+    override fun delete(routeId: Mono<String>): Mono<Void> = routeId.flatMap { id: String ->
+        caffeineCache.invalidate(id)
+        reactiveHashOperations.remove(ROUTE_KEY, id)
+            .flatMap { success: Long ->
+                if (success != 0L) Mono.empty() else defer(
+                    String.format(
+                        "Could not remove route from redis repository with id: %s",
+                        id
                     )
-                }
-        }
+                )
+            }
     }
 
-    private fun <T> defer(msg: String): Mono<T> {
-        return Mono.defer { Mono.error(NotFoundException(msg)) }
-    }
+    private fun <T> defer(msg: String): Mono<T> = Mono.defer { Mono.error(NotFoundException(msg)) }
 
     companion object {
         const val ROUTE_KEY: String = "RouteDefinition"

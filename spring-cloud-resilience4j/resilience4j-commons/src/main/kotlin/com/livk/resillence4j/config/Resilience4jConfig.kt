@@ -15,26 +15,22 @@ import java.time.Duration
 @AutoConfiguration
 open class Resilience4jConfig {
     @Bean
-    open fun defaultCustomizer(): Customizer<Resilience4JCircuitBreakerFactory> {
-        return Customizer { factory ->
-            factory.configureDefault { id ->
-                Resilience4JConfigBuilder(id)
-                    .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build())
-                    .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults()).build()
-            }
+    open fun defaultCustomizer(): Customizer<Resilience4JCircuitBreakerFactory> = Customizer { factory ->
+        factory.configureDefault { id ->
+            Resilience4JConfigBuilder(id)
+                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build())
+                .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults()).build()
         }
     }
 
     @Bean
-    open fun slowCustomizer(): Customizer<Resilience4JCircuitBreakerFactory> {
-        return Customizer { factory ->
-            factory.configure(
-                { builder ->
-                    builder.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
-                        .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(2)).build())
-                },
-                "slow"
-            )
-        }
+    open fun slowCustomizer(): Customizer<Resilience4JCircuitBreakerFactory> = Customizer { factory ->
+        factory.configure(
+            { builder ->
+                builder.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
+                    .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(2)).build())
+            },
+            "slow"
+        )
     }
 }

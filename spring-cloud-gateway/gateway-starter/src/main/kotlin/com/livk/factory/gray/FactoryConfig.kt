@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Bean
 open class FactoryConfig {
     @Bean
     @ConditionalOnEnabledFilter
-    open fun grayGatewayFilterFactory(clientFactory: LoadBalancerClientFactory): GrayGatewayFilterFactory {
-        return GrayGatewayFilterFactory(clientFactory)
-    }
+    open fun grayGatewayFilterFactory(clientFactory: LoadBalancerClientFactory): GrayGatewayFilterFactory =
+        GrayGatewayFilterFactory(clientFactory)
 }

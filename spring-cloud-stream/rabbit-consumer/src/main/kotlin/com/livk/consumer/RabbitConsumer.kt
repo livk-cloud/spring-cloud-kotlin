@@ -17,8 +17,8 @@ open class RabbitConsumer {
     private val log = LoggerFactory.getLogger(RabbitConsumer::class.java)
 
     @Bean
-    open fun send(): Consumer<Flux<StreamMessage<String>>> {
-        return Consumer<Flux<StreamMessage<String>>> { streamMessageFlux ->
+    open fun send(): Consumer<Flux<StreamMessage<String>>> =
+        Consumer<Flux<StreamMessage<String>>> { streamMessageFlux ->
             streamMessageFlux.subscribe { streamMessage ->
                 log.info(
                     "[{}]",
@@ -26,7 +26,6 @@ open class RabbitConsumer {
                 )
             }
         }
-    }
 }
 
 fun main(args: Array<String>) {

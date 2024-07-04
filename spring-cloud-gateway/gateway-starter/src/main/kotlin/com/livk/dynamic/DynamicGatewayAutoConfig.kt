@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Bean
 @AutoConfiguration(before = [GatewayAutoConfiguration::class, RedisAutoConfiguration::class])
 open class DynamicGatewayAutoConfig {
     @Bean
-    open fun redisRouteDefinitionWriter(reactiveRedisOps: ReactiveRedisOps): RedisHashRouteDefinitionRepository {
-        return RedisHashRouteDefinitionRepository(reactiveRedisOps)
-    }
+    open fun redisRouteDefinitionWriter(reactiveRedisOps: ReactiveRedisOps): RedisHashRouteDefinitionRepository =
+        RedisHashRouteDefinitionRepository(reactiveRedisOps)
 }

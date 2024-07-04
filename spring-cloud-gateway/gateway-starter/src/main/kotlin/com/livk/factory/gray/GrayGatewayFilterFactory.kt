@@ -29,8 +29,8 @@ class GrayGatewayFilterFactory(private val clientFactory: LoadBalancerClientFact
     AbstractGatewayFilterFactory<GrayGatewayFilterFactory.Config>(
         Config::class.java
     ) {
-    override fun apply(config: Config): GatewayFilter {
-        return GatewayFilter { exchange: ServerWebExchange, chain: GatewayFilterChain ->
+    override fun apply(config: Config): GatewayFilter =
+        GatewayFilter { exchange: ServerWebExchange, chain: GatewayFilterChain ->
             val route = getRoute(exchange)
             val uri = route.uri
             val schemePrefix = exchange.getAttribute<String>(ServerWebExchangeUtils.GATEWAY_SCHEME_PREFIX_ATTR)
@@ -77,7 +77,6 @@ class GrayGatewayFilterFactory(private val clientFactory: LoadBalancerClientFact
                     }
                 }.then(chain.filter(exchange))
         }
-    }
 
     private fun getRoute(exchange: ServerWebExchange): Route {
         val attribute = exchange.getAttribute<Any>(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR)
@@ -87,11 +86,10 @@ class GrayGatewayFilterFactory(private val clientFactory: LoadBalancerClientFact
         throw NotFoundException("丢失route!")
     }
 
-    private fun reconstructURI(serviceInstance: ServiceInstance, original: URI): URI {
-        return LoadBalancerUriTools.reconstructURI(serviceInstance, original)
-    }
+    private fun reconstructURI(serviceInstance: ServiceInstance, original: URI): URI =
+        LoadBalancerUriTools.reconstructURI(serviceInstance, original)
 
-    fun out(exchange: ServerWebExchange, msg: String): Mono<Void> {
+    protected fun out(exchange: ServerWebExchange, msg: String): Mono<Void> {
         val response = exchange.response
         response.headers.contentType = MediaType.APPLICATION_JSON
         response.setStatusCode(HttpStatus.OK)
