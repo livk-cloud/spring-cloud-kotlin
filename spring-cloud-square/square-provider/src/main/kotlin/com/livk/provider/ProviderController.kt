@@ -1,6 +1,6 @@
 package com.livk.provider
 
-import com.livk.commons.spring.context.SpringContextHolder
+import com.livk.commons.SpringContextHolder
 import org.springframework.cloud.client.discovery.DiscoveryClient
 import org.springframework.http.HttpEntity
 import org.springframework.http.ResponseEntity
