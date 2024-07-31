@@ -29,13 +29,14 @@ abstract class AbstractProcessor(environment: SymbolProcessorEnvironment) : Symb
 
     final override fun process(resolver: Resolver): List<KSAnnotated> {
         this.resolver = resolver
+        val annotationStr = supportAnnotation()
         val autoServiceType =
-            resolver.getClassDeclarationByName(resolver.getKSNameFromString(supportAnnotation()))?.asType(emptyList())
+            resolver.getClassDeclarationByName(resolver.getKSNameFromString(annotationStr))?.asType(emptyList())
                 ?: run {
-                    logger.info("@${supportAnnotation()} type not found on the classpath, skipping processing.")
+                    logger.info("@${annotationStr} type not found on the classpath, skipping processing.")
                     return emptyList()
                 }
-        for (symbolAnnotation in resolver.getSymbolsWithAnnotation(supportAnnotation())
+        for (symbolAnnotation in resolver.getSymbolsWithAnnotation(annotationStr)
             .filterIsInstance<KSClassDeclaration>()) {
             for (annotation in symbolAnnotation.annotations.filter { it.annotationType.resolve() == autoServiceType }) {
                 accept(annotation, symbolAnnotation)

@@ -42,7 +42,7 @@ class GoogleAutoServiceProcessorProvider : SymbolProcessorProvider {
         override fun generateAndClearConfigFiles() {
             if (!providers.isEmpty) {
                 for (providerInterface in providers.keySet()) {
-                    val resourceFile = "META-INF/service/${providerInterface}"
+                    val resourceFile = "META-INF/services/${providerInterface}"
                     logger.info("Working on resource file: $resourceFile")
                     try {
                         val allServices: SortedSet<String> = Sets.newTreeSet()
