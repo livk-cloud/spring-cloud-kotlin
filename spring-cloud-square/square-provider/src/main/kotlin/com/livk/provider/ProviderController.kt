@@ -16,8 +16,7 @@ class ProviderController(private val discoveryClient: DiscoveryClient) {
     fun instance(): HttpEntity<String> = ResponseEntity.ok(
         discoveryClient
             .getInstances(
-                SpringContextHolder.getApplicationContext().environment
-                    .getProperty("spring.application.name")
+                SpringContextHolder.getProperty("spring.application.name")
             )
             .stream().findFirst().map { obj -> obj.instanceId }.orElse("is null")
     )
