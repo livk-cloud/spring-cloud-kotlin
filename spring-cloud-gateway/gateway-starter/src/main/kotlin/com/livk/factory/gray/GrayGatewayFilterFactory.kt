@@ -20,7 +20,6 @@ import org.springframework.util.CollectionUtils
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
 import java.net.URI
-import java.nio.charset.StandardCharsets
 
 /**
  * @author livk
@@ -79,9 +78,9 @@ class GrayGatewayFilterFactory(private val clientFactory: LoadBalancerClientFact
         }
 
     private fun getRoute(exchange: ServerWebExchange): Route {
-        val attribute = exchange.getAttribute<Any>(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR)
-        if (attribute is Route) {
-            return attribute
+        val route = exchange.getAttribute<Route>(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR)
+        if (route != null) {
+            return route
         }
         throw NotFoundException("丢失route!")
     }
@@ -97,9 +96,7 @@ class GrayGatewayFilterFactory(private val clientFactory: LoadBalancerClientFact
         return response.writeWith(
             Mono.just(
                 response.bufferFactory().wrap(
-                    JsonMapperUtils.writeValueAsString(result).toByteArray(
-                        StandardCharsets.UTF_8
-                    )
+                    JsonMapperUtils.writeValueAsBytes(result)
                 )
             )
         )

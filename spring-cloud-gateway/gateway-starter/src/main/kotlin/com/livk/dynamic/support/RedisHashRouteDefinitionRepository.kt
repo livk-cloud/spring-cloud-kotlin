@@ -15,14 +15,8 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 /**
- *
- *
  * 使用Redis Hash存储路由信息
- *
- *
  * 也可以参考[org.springframework.cloud.gateway.route.RedisRouteDefinitionRepository]使用Redis Value存储
- *
- *
  * @author livk
  */
 class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : RouteDefinitionRepository {
