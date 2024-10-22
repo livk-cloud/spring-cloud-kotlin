@@ -5,7 +5,7 @@ spring-cloud-square = "0.4.1"
 kotlin = "2.0.21"
 kotlin-ksp = "2.0.21-1.0.25"
 bouncycastle = "1.78.1"
-wiremock = "3.9.1"
+wiremock = "3.9.2"
 spring-extension = "1.3.4"
 kotlinpoet = "1.18.1"
 
