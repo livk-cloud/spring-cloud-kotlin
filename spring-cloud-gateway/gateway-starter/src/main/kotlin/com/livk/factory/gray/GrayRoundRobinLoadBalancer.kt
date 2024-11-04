@@ -1,5 +1,6 @@
 package com.livk.factory.gray
 
+import kotlinx.atomicfu.atomic
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.ObjectProvider
@@ -15,9 +16,8 @@ import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier
 import org.springframework.util.CollectionUtils
 import org.springframework.util.StringUtils
 import reactor.core.publisher.Mono
-import java.util.Random
-import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.abs
+import kotlin.random.Random
 
 /**
  * @author livk
@@ -26,7 +26,7 @@ class GrayRoundRobinLoadBalancer(
     private val serviceInstanceListSupplierProvider: ObjectProvider<ServiceInstanceListSupplier>,
     private val serviceId: String
 ) : ReactorServiceInstanceLoadBalancer {
-    private val position = AtomicInteger(Random().nextInt(1000))
+    private val position = atomic(Random.nextInt(1000))
 
     @Suppress("UNCHECKED_CAST")
     override fun choose(request: Request<*>): Mono<Response<ServiceInstance>> {
@@ -80,7 +80,7 @@ class GrayRoundRobinLoadBalancer(
                 }
             }
         }
-        val pos = abs(position.incrementAndGet().toDouble()).toInt()
+        val pos = abs(position.incrementAndGet())
         val instance: ServiceInstance
         if (StringUtils.hasText(version)) {
             if (grayInstanceServer.isEmpty()) {

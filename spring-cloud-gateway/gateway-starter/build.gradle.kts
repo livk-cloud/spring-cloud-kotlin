@@ -15,6 +15,7 @@ dependencies {
     api("org.bouncycastle:bcprov-jdk18on")
     api("com.github.ben-manes.caffeine:caffeine")
     api("io.github.livk-cloud:redis-ops-boot-starter")
+    api("org.jetbrains.kotlinx:atomicfu")
     compileOnly("io.github.livk-cloud:spring-auto-service")
     ksp(project(":spring-auto-service-ksp"))
 }

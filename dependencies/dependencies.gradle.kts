@@ -11,5 +11,6 @@ dependencies {
         api(libs.wiremock)
         api(libs.symbol.processing)
         api(libs.kotlinpoet)
+        api(libs.atomicfu)
     }
 }

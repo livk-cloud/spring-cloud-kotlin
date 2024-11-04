@@ -42,7 +42,7 @@ class ResultHandlerWebFilter : GlobalFilter, Ordered {
                 }
                     .filter { list: LimitedDataBufferList -> !list.isEmpty() }
                     .map { list: LimitedDataBufferList -> list[0].factory().join(list) }
-                    .doOnDiscard(DataBuffer::class.java) { dataBuffer -> DataBufferUtils.release(dataBuffer) }
+                    .doOnDiscard(DataBuffer::class.java, DataBufferUtils::release)
                     .map { dataBuffer: DataBuffer ->
                         val content = ByteArray(dataBuffer.readableByteCount())
                         dataBuffer.read(content)

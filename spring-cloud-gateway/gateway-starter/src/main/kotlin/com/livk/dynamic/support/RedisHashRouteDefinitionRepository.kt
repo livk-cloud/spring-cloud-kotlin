@@ -64,7 +64,7 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
         caffeineCache.put(r.id, r)
         reactiveHashOperations.put(ROUTE_KEY, r.id, r)
             .flatMap { success: Boolean ->
-                if (java.lang.Boolean.TRUE == success) Mono.empty() else defer(
+                if (success) Mono.empty() else defer(
                     String.format(
                         "Could not add route to redis repository: %s",
                         r

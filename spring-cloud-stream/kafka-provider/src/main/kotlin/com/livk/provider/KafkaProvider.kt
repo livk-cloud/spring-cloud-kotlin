@@ -28,7 +28,7 @@ open class KafkaProvider {
     }
 
     @Bean
-    open fun send(): Supplier<Flux<StreamMessage<String>>> = Supplier { buffer.asFlux() }
+    open fun send(): () -> Flux<StreamMessage<String>> = buffer::asFlux
 }
 
 fun main(args: Array<String>) {

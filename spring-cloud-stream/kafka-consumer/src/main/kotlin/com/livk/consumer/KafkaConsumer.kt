@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import reactor.core.publisher.Flux
-import java.util.function.Consumer
 
 /**
  * @author livk
@@ -15,7 +14,7 @@ import java.util.function.Consumer
 @SpringBootApplication
 open class KafkaConsumer {
     @Bean
-    open fun send(): Consumer<Flux<StreamMessage<String>>> = Consumer { kafkaMessageFlux ->
+    open fun send(): (Flux<StreamMessage<String>>) -> Unit = { kafkaMessageFlux ->
         kafkaMessageFlux.subscribe { kafkaMessage ->
             log.info(
                 "[{}]",

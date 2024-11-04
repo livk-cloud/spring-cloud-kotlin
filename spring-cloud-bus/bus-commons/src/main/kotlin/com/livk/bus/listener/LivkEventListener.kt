@@ -11,7 +11,5 @@ import org.springframework.context.ApplicationListener
 class LivkEventListener : ApplicationListener<LivkBusEvent> {
     private val log: Logger = LoggerFactory.getLogger(LivkEventListener::class.java)
 
-    override fun onApplicationEvent(event: LivkBusEvent) {
-        log.info("listener:{}", event)
-    }
+    override fun onApplicationEvent(event: LivkBusEvent) = log.info("listener:{}", event)
 }

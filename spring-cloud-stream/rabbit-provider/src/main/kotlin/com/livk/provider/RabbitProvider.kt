@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Sinks
-import java.util.function.Supplier
 
 /**
  * @author livk
@@ -28,7 +27,7 @@ open class RabbitProvider {
     }
 
     @Bean
-    open fun send(): Supplier<Flux<StreamMessage<String>>> = Supplier { buffer.asFlux() }
+    open fun send(): () -> Flux<StreamMessage<String>> = buffer::asFlux
 }
 
 fun main(args: Array<String>) {

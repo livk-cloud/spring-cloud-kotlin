@@ -18,6 +18,6 @@ class ProviderController(private val discoveryClient: DiscoveryClient) {
             .getInstances(
                 SpringContextHolder.getProperty("spring.application.name")
             )
-            .stream().findFirst().map { obj -> obj.instanceId }.orElse("is null")
+            .stream().findFirst().map { it.instanceId }.orElse("is null")
     )
 }
