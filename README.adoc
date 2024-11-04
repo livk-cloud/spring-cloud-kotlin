@@ -1,14 +1,6 @@
 image:https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml/badge.svg?branch=main["Build Status",
 link="https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml"]
 
-image:https://img.shields.io/badge/Gradle-8.10-blue[link="https://gradle.org/"]
-image:https://img.shields.io/badge/Java-21-brightgreen[]
-image:https://img.shields.io/badge/Spring%20Boot%20Extension-1.3.3-green[link="https://github.com/livk-cloud/spring-boot-extension"]
-
-image:https://img.shields.io/badge/Spring%20Framework-6.1.12-green[link="https://spring.io/projects/spring-framework"]
-image:https://img.shields.io/badge/Spring%20Boot-3.3.3-green[link="https://spring.io/projects/spring-boot"]
-image:https://img.shields.io/badge/Spring%20Cloud-2023.0.3-green[link="https://spring.io/projects/spring-cloud"]
-
 link:README-en.adoc[English]|link:README.adoc[简体中文] +
 
 这是一个关于SpringCloud的各种示例 +
