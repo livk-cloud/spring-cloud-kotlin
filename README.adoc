@@ -1,8 +1,6 @@
 image:https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml/badge.svg?branch=main["Build Status",
 link="https://github.com/livk-cloud/spring-cloud-example/actions/workflows/gradle.yml"]
 
-link:README-en.adoc[English]|link:README.adoc[简体中文] +
-
 这是一个关于SpringCloud的各种示例 +
 里面的代码或多或少应该可以帮助到你 +
 如果觉得不错，可以star一下 +

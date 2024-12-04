@@ -1,6 +1,6 @@
 package com.livk.dynamic.annotation
 
-import com.livk.commons.selector.AutoImport
+import com.livk.commons.spring.AutoImport
 import java.lang.annotation.Inherited
 
 /**

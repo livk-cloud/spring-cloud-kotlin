@@ -1,12 +1,12 @@
 [versions]
-spring-boot = "3.3.5"
-spring-cloud = "2023.0.4"
+spring-boot = "3.4.0"
+spring-cloud = "2024.0.0"
 spring-cloud-square = "0.4.1"
 kotlin = "2.1.0"
 kotlin-ksp = "2.1.0-1.0.29"
 bouncycastle = "1.79"
 wiremock = "3.10.0"
-spring-extension = "1.3.5"
+spring-extension = "1.4.0"
 kotlinpoet = "2.0.0"
 atomicfu = "0.26.1"
 
