@@ -91,7 +91,7 @@ class GrayGatewayFilterFactory(private val clientFactory: LoadBalancerClientFact
     protected fun out(exchange: ServerWebExchange, msg: String): Mono<Void> {
         val response = exchange.response
         response.headers.contentType = MediaType.APPLICATION_JSON
-        response.setStatusCode(HttpStatus.OK)
+        response.statusCode = HttpStatus.OK
         val result = mapOf("code" to "503", "msg" to msg)
         return response.writeWith(
             Mono.just(

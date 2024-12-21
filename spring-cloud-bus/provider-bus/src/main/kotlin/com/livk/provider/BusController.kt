@@ -23,8 +23,7 @@ class BusController(private val applicationContext: ApplicationContext, private 
 
     @GetMapping("refresh")
     fun refresh() {
-        val factory = PathDestinationFactory()
-        val destination = factory.getDestination("consumer-bus:6077")
+        val destination = PathDestinationFactory().getDestination("consumer-bus:6077")
         applicationContext.publishEvent(LivkBusEvent("livk", busProperties.id, destination))
         log.info("event publish!")
     }

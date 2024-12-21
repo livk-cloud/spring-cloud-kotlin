@@ -33,7 +33,7 @@ class GrayRoundRobinLoadBalancer(
         val metaData = request.context as Map<String, List<String>>
         val supplier =
             serviceInstanceListSupplierProvider.getIfAvailable { NoopServiceInstanceListSupplier() }
-        return supplier[request].next().map { list: List<ServiceInstance> -> processInstanceResponse(list, metaData) }
+        return supplier[request].next().map { list -> processInstanceResponse(list, metaData) }
     }
 
     private fun processInstanceResponse(
@@ -58,12 +58,12 @@ class GrayRoundRobinLoadBalancer(
         instances: List<ServiceInstance>,
         metaData: Map<String, List<String>>
     ): Response<ServiceInstance> {
-        val version = metaData[GrayConstant.VERSION]?.first()
+        val version = metaData[GrayConstant.VERSION]?.first()!!
         val ips = metaData[GrayConstant.IPS]!!
         //存放灰度server
-        val grayInstanceServer: MutableList<ServiceInstance> = ArrayList()
+        val grayInstanceServer: MutableList<ServiceInstance> = mutableListOf()
         //非灰度server
-        val defaultInstanceServer: MutableList<ServiceInstance> = ArrayList()
+        val defaultInstanceServer: MutableList<ServiceInstance> = mutableListOf()
         for (serviceInstance in instances) {
             if (version == serviceInstance.metadata[GrayConstant.VERSION] && ips.contains(serviceInstance.host)) {
                 grayInstanceServer.add(serviceInstance)
@@ -82,7 +82,7 @@ class GrayRoundRobinLoadBalancer(
         }
         val pos = abs(position.incrementAndGet())
         val instance: ServiceInstance
-        if (StringUtils.hasText(version)) {
+        if (version.isNotBlank()) {
             if (grayInstanceServer.isEmpty()) {
                 if (log.isWarnEnabled) {
                     log.warn("请求灰度应用[{}]-对应版本[{}] 无可用路由", serviceId, version)

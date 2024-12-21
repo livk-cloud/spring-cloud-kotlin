@@ -52,7 +52,7 @@ class HeaderHashGatewayFilterFactory : AbstractGatewayFilterFactory<HeaderHashGa
                             }
                             val response = exchange.response
                             response.headers.contentType = MediaType.APPLICATION_JSON
-                            response.setStatusCode(HttpStatus.OK)
+                            response.statusCode = HttpStatus.OK
                             val result = mapOf("code" to "403", "msg" to "缺少Header:X-Hash")
                             response.writeWith(
                                 Mono.just(

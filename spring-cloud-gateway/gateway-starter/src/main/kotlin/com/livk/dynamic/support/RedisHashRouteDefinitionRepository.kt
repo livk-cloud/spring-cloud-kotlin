@@ -42,7 +42,7 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
         val routeDefinitions = caffeineCache.asMap().values
         if (routeDefinitions.isEmpty()) {
             return reactiveHashOperations.entries(ROUTE_KEY).map { it.value }
-                .doOnNext { r: RouteDefinition -> caffeineCache.put(r.id, r) }
+                .doOnNext { r -> caffeineCache.put(r.id, r) }
         }
         return Flux.fromIterable(routeDefinitions)
             .onErrorContinue { throwable: Throwable, _ ->
@@ -60,7 +60,7 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
      * @param route route
      * @return Mono.empty()
      */
-    override fun save(route: Mono<RouteDefinition>): Mono<Void> = route.flatMap { r: RouteDefinition ->
+    override fun save(route: Mono<RouteDefinition>): Mono<Void> = route.flatMap { r ->
         caffeineCache.put(r.id, r)
         reactiveHashOperations.put(ROUTE_KEY, r.id, r)
             .flatMap { success: Boolean ->
@@ -73,7 +73,7 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
             }
     }
 
-    override fun delete(routeId: Mono<String>): Mono<Void> = routeId.flatMap { id: String ->
+    override fun delete(routeId: Mono<String>): Mono<Void> = routeId.flatMap { id ->
         caffeineCache.invalidate(id)
         reactiveHashOperations.remove(ROUTE_KEY, id)
             .flatMap { success: Long ->
