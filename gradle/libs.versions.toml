@@ -8,7 +8,7 @@ bouncycastle = "1.79"
 wiremock = "3.10.0"
 spring-extension = "1.4.1"
 kotlinpoet = "2.0.0"
-atomicfu = "0.26.1"
+atomicfu = "0.27.0"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "spring-boot" }
