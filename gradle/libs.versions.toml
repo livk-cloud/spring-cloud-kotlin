@@ -1,7 +1,6 @@
 [versions]
 spring-boot = "3.4.2"
 spring-cloud = "2024.0.0"
-spring-cloud-square = "0.4.1"
 kotlin = "2.1.10"
 kotlin-ksp = "2.1.10-1.0.29"
 bouncycastle = "1.80"
@@ -16,7 +15,6 @@ kotlin-jvm-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plug
 kotlin-ksp-plugin = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "kotlin-ksp" }
 spring-extension-dependencies = { group = "io.github.livk-cloud", name = "spring-extension-dependencies", version.ref = "spring-extension" }
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "spring-cloud" }
-spring-cloud-square-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-square-dependencies", version.ref = "spring-cloud-square" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bouncycastle" }
 wiremock = { group = "org.wiremock", name = "wiremock", version.ref = "wiremock" }
 symbol-processing = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "kotlin-ksp" }
