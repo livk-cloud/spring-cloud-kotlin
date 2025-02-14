@@ -2,7 +2,7 @@
 spring-boot = "3.4.2"
 spring-cloud = "2024.0.0"
 kotlin = "2.1.10"
-kotlin-ksp = "2.1.10-1.0.29"
+kotlin-ksp = "2.1.10-1.0.30"
 bouncycastle = "1.80"
 wiremock = "3.12.0"
 spring-extension = "1.4.2"
