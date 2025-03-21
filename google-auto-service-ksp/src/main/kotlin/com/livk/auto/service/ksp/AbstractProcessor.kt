@@ -2,6 +2,7 @@ package com.livk.auto.service.ksp
 
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimaps
+import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.isLocal
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
@@ -9,6 +10,7 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSFile
 import com.squareup.kotlinpoet.ClassName
 
@@ -54,6 +56,10 @@ abstract class AbstractProcessor(environment: SymbolProcessorEnvironment) : Symb
 
     protected fun KSClassDeclaration.toBinaryName(): String {
         return toClassName().reflectionName()
+    }
+
+    protected fun KSDeclaration.closestClassDeclarationBinaryName(): String {
+        return closestClassDeclaration()!!.toBinaryName()
     }
 
     protected fun getArgument(annotation: KSAnnotation, key: String): Any? =

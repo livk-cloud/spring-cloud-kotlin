@@ -4,7 +4,6 @@ import com.google.auto.service.AutoService
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimaps
 import com.google.common.collect.Sets
-import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
@@ -15,7 +14,6 @@ import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSType
 import java.io.IOException
-import java.util.SortedSet
 
 /**
  * @author livk
@@ -40,30 +38,28 @@ class SpringFactoriesProcessorProvider : SymbolProcessorProvider {
 
         override fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration) {
             val implService = getArgument(annotation, "value") as KSType
-            var providerName = implService.declaration.closestClassDeclaration()?.toBinaryName()
+            var providerName = implService.declaration.closestClassDeclarationBinaryName()
             if (providerName == Void::class.java.name) {
                 val interfaceList = symbolAnnotation.superTypes
                     .map { it.resolve().declaration }
                     .filter { resolver.getClassDeclarationByName(it.simpleName)?.classKind == ClassKind.INTERFACE }
                 providerName = if (interfaceList.count() == 1) {
-                    interfaceList.first().closestClassDeclaration()?.toBinaryName()
+                    interfaceList.first().closestClassDeclarationBinaryName()
                 } else {
                     ""
                 }
             }
-            if (!providerName.isNullOrBlank()) {
-                val aotSupport = getArgument(annotation, "aot") as Boolean
-                if (aotSupport) {
-                    aotFactoriesMap.put(
-                        providerName,
-                        symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!
-                    )
-                } else {
-                    providers.put(
-                        providerName,
-                        symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!
-                    )
-                }
+            val aotSupport = getArgument(annotation, "aot") as Boolean
+            if (aotSupport) {
+                aotFactoriesMap.put(
+                    providerName,
+                    symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!
+                )
+            } else {
+                providers.put(
+                    providerName,
+                    symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!
+                )
             }
         }
 
@@ -77,7 +73,7 @@ class SpringFactoriesProcessorProvider : SymbolProcessorProvider {
                         for (providerInterface in implServiceSeq.keySet()) {
                             logger.info("Working on resource file: $resourceFile")
                             try {
-                                val allServices: SortedSet<String> =
+                                val allServices =
                                     Sets.newTreeSet(HashSet(implServiceSeq[providerInterface].map { it.first }))
                                 logger.info("New service file contents: $allServices")
                                 writer.write("${providerInterface}=\\")

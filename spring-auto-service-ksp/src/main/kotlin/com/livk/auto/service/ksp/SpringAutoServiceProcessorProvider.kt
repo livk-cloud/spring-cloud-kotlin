@@ -1,7 +1,6 @@
 package com.livk.auto.service.ksp
 
 import com.google.auto.service.AutoService
-import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
@@ -26,7 +25,7 @@ class SpringAutoServiceProcessorProvider : SymbolProcessorProvider {
 
         override fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration) {
             val implService = getArgument(annotation, "value") as KSType
-            var providerName = implService.declaration.closestClassDeclaration()?.toBinaryName()
+            var providerName = implService.declaration.closestClassDeclarationBinaryName()
             if (providerName == Annotation::class.qualifiedName) {
                 providerName = "org.springframework.boot.autoconfigure.AutoConfiguration"
             }
