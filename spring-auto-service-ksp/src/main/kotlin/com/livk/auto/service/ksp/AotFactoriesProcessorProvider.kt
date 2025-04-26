@@ -6,22 +6,28 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 
 /**
+ * <p>
+ * AotFactoriesProcessorProvider
+ * </p>
+ *
  * @author livk
+ * @date 2025/4/26
  */
 @AutoService(SymbolProcessorProvider::class)
-class SpringFactoriesProcessorProvider : SymbolProcessorProvider {
-    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
-        SpringFactoriesProcessor(environment)
+class AotFactoriesProcessorProvider : SymbolProcessorProvider {
 
-    private class SpringFactoriesProcessor(environment: SymbolProcessorEnvironment) :
+    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
+        AotFactoriesProcessor(environment)
+
+    private class AotFactoriesProcessor(environment: SymbolProcessorEnvironment) :
         AbstractFactoriesProcessor(environment) {
 
         companion object {
-            const val SPRING_LOCATION: String = "META-INF/spring.factories"
+            const val AOT_LOCATION: String = "META-INF/spring/aot.factories"
         }
 
-        override fun supportAnnotation(): String = "com.livk.auto.service.annotation.SpringFactories"
+        override fun supportAnnotation(): String = "com.livk.auto.service.annotation.AotFactories"
 
-        override fun getLocation(): String = SPRING_LOCATION
+        override fun getLocation(): String = AOT_LOCATION
     }
 }

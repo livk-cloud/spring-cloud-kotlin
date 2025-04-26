@@ -18,7 +18,7 @@ class SpringAutoServiceProcessorProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
         SpringAutoServiceProcessor(environment)
 
-    internal class SpringAutoServiceProcessor(environment: SymbolProcessorEnvironment) :
+    private class SpringAutoServiceProcessor(environment: SymbolProcessorEnvironment) :
         AbstractProcessor(environment) {
 
         override fun supportAnnotation(): String = "com.livk.auto.service.annotation.SpringAutoService"

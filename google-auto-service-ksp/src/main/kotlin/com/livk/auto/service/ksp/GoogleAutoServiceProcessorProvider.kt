@@ -22,7 +22,7 @@ class GoogleAutoServiceProcessorProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
         GoogleAutoServiceProcessor(environment)
 
-    internal class GoogleAutoServiceProcessor(environment: SymbolProcessorEnvironment) :
+    private class GoogleAutoServiceProcessor(environment: SymbolProcessorEnvironment) :
         AbstractProcessor(environment) {
 
         override fun supportAnnotation(): String = "com.google.auto.service.AutoService"
