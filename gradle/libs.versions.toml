@@ -6,7 +6,7 @@ kotlin-ksp = "2.1.21-2.0.1"
 bouncycastle = "1.80"
 wiremock = "3.13.0"
 spring-extension = "1.4.5"
-kotlinpoet = "2.1.0"
+kotlinpoet = "2.2.0"
 atomicfu = "0.27.0"
 
 [libraries]
