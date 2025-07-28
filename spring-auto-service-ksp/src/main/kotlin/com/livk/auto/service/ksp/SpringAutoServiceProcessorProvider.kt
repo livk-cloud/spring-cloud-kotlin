@@ -24,7 +24,7 @@ class SpringAutoServiceProcessorProvider : SymbolProcessorProvider {
         override fun supportAnnotation(): String = "com.livk.auto.service.annotation.SpringAutoService"
 
         override fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration) {
-            val implService = getArgument(annotation, "value") as KSType
+            val implService = getArgumentValue(annotation) as KSType
             var providerName = implService.declaration.closestClassDeclarationBinaryName()
             if (providerName == Annotation::class.qualifiedName) {
                 providerName = "org.springframework.boot.autoconfigure.AutoConfiguration"

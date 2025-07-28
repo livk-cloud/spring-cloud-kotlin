@@ -1,8 +1,6 @@
 package com.livk.cloud
 
-import com.livk.cloud.ModulePlugin
 import com.livk.cloud.compile.ResourcesPlugin
-import com.livk.cloud.info.ManifestPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaLibraryPlugin

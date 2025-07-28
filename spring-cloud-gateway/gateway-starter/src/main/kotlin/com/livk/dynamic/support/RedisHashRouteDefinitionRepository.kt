@@ -41,7 +41,7 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
     override fun getRouteDefinitions(): Flux<RouteDefinition> {
         val routeDefinitions = caffeineCache.asMap().values
         if (routeDefinitions.isEmpty()) {
-            return reactiveHashOperations.entries(ROUTE_KEY).map { it.value }
+            return reactiveHashOperations.values(ROUTE_KEY)
                 .doOnNext { r -> caffeineCache.put(r.id, r) }
         }
         return Flux.fromIterable(routeDefinitions)

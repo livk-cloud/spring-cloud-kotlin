@@ -28,7 +28,7 @@ class GoogleAutoServiceProcessorProvider : SymbolProcessorProvider {
         override fun supportAnnotation(): String = "com.google.auto.service.AutoService"
 
         override fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration) {
-            for (any in getArgument(annotation, "value") as List<*>) {
+            for (any in getArgumentValue(annotation) as List<*>) {
                 val implService = any as KSType
                 val providerName = implService.declaration.closestClassDeclarationBinaryName()
                 providers.put(providerName, symbolAnnotation.toBinaryName() to symbolAnnotation.containingFile!!)

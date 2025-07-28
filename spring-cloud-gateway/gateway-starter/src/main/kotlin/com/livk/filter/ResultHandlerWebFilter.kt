@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.livk.auto.service.annotation.SpringAutoService
 import com.livk.commons.io.DataBufferUtils
-import com.livk.commons.jackson.util.JsonMapperUtils
+import com.livk.commons.jackson.JsonMapperUtils
 import org.reactivestreams.Publisher
 import org.springframework.cloud.gateway.filter.GatewayFilterChain
 import org.springframework.cloud.gateway.filter.GlobalFilter

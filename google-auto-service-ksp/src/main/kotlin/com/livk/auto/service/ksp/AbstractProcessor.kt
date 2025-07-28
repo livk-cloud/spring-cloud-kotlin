@@ -62,8 +62,8 @@ abstract class AbstractProcessor(environment: SymbolProcessorEnvironment) : Symb
         return closestClassDeclaration()!!.toBinaryName()
     }
 
-    protected fun getArgument(annotation: KSAnnotation, key: String): Any? =
-        annotation.arguments.find { it.name?.getShortName() == key }!!.value
+    protected fun getArgumentValue(annotation: KSAnnotation): Any? =
+        annotation.arguments.find { it.name?.getShortName() == "value" }!!.value
 
     private fun KSClassDeclaration.toClassName(): ClassName {
         require(!isLocal()) { "Local/anonymous classes are not supported!" }

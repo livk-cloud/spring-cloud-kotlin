@@ -1,6 +1,6 @@
 package com.livk.factory.gray
 
-import com.livk.commons.jackson.util.JsonMapperUtils
+import com.livk.commons.jackson.JsonMapperUtils
 import org.springframework.cloud.client.ServiceInstance
 import org.springframework.cloud.client.loadbalancer.DefaultRequest
 import org.springframework.cloud.client.loadbalancer.LoadBalancerUriTools

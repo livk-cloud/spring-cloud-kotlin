@@ -1,7 +1,7 @@
 package com.livk.factory
 
 import com.livk.auto.service.annotation.SpringAutoService
-import com.livk.commons.jackson.util.JsonMapperUtils
+import com.livk.commons.jackson.JsonMapperUtils
 import org.bouncycastle.util.encoders.Hex
 import org.springframework.cloud.gateway.filter.GatewayFilter
 import org.springframework.cloud.gateway.filter.GatewayFilterChain

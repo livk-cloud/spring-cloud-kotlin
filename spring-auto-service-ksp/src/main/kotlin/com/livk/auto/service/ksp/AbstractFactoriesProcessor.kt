@@ -22,7 +22,7 @@ internal abstract class AbstractFactoriesProcessor(environment: SymbolProcessorE
     protected abstract fun getLocation(): String
 
     override fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration) {
-        val implService = getArgument(annotation, "value") as KSType
+        val implService = getArgumentValue(annotation) as KSType
         var providerName = implService.declaration.closestClassDeclarationBinaryName()
         if (providerName == Void::class.java.name) {
             val interfaceList = symbolAnnotation.superTypes
