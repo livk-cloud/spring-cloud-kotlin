@@ -30,9 +30,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: current
+        uses: gradle/actions/setup-gradle@v4.4.1
 
       - name: Gradle Run Build
-        run: gradle build -x test
+        run: ./gradlew build -x test
