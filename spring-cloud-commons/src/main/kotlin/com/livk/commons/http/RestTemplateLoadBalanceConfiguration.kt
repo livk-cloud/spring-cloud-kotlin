@@ -9,7 +9,6 @@ import org.springframework.boot.web.client.RestTemplateCustomizer
 import org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor
 import org.springframework.cloud.client.loadbalancer.reactive.ReactiveLoadBalancer
 import org.springframework.context.annotation.Bean
-import org.springframework.http.client.ClientHttpRequestInterceptor
 import org.springframework.web.client.RestTemplate
 
 /**
@@ -23,8 +22,6 @@ open class RestTemplateLoadBalanceConfiguration {
     @ConditionalOnMissingBean
     open fun restTemplateCustomizer(loadBalancerInterceptor: LoadBalancerInterceptor): RestTemplateCustomizer =
         RestTemplateCustomizer { restTemplate: RestTemplate ->
-            val list: MutableList<ClientHttpRequestInterceptor> = ArrayList(restTemplate.interceptors)
-            list.add(loadBalancerInterceptor)
-            restTemplate.interceptors = list
+            restTemplate.interceptors = restTemplate.interceptors + loadBalancerInterceptor
         }
 }

@@ -36,7 +36,6 @@ abstract class BootPlugin : Plugin<Project> {
         val bootJar = project.tasks.getByName(SpringBootPlugin.BOOT_JAR_TASK_NAME) as BootJar
         bootJar.archiveBaseName.set(project.name)
         bootJar.archiveFileName.set(bootJar.archiveBaseName.get() + "." + bootJar.archiveExtension.get())
-        bootJar.launchScript()
         (project.tasks.getByName(JavaPlugin.JAR_TASK_NAME) as Jar).enabled = false
     }
 }
