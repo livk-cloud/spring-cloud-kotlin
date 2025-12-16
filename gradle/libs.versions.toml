@@ -1,7 +1,7 @@
 [versions]
 spring-boot = "3.5.8"
 spring-cloud = "2025.0.0"
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 kotlin-ksp = "2.3.3"
 bouncycastle = "1.83"
 wiremock = "3.13.2"
