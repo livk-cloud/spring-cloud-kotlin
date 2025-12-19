@@ -2,13 +2,13 @@ package com.livk.dynamic.support
 
 import com.github.benmanes.caffeine.cache.Cache
 import com.github.benmanes.caffeine.cache.Caffeine
-import com.livk.context.redis.JacksonSerializerUtils
-import com.livk.context.redis.ReactiveRedisOps
 import org.slf4j.LoggerFactory
 import org.springframework.cloud.gateway.route.RouteDefinition
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository
 import org.springframework.cloud.gateway.support.NotFoundException
 import org.springframework.data.redis.core.ReactiveHashOperations
+import org.springframework.data.redis.core.ReactiveRedisTemplate
+import org.springframework.data.redis.serializer.JacksonJsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializationContext
 import org.springframework.data.redis.serializer.RedisSerializer
 import reactor.core.publisher.Flux
@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono
  * 也可以参考[org.springframework.cloud.gateway.route.RedisRouteDefinitionRepository]使用Redis Value存储
  * @author livk
  */
-class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : RouteDefinitionRepository {
+class RedisHashRouteDefinitionRepository(redisTemplate: ReactiveRedisTemplate<String, Any>) : RouteDefinitionRepository {
     private val caffeineCache: Cache<String, RouteDefinition>
 
     private val reactiveHashOperations: ReactiveHashOperations<String, String, RouteDefinition>
@@ -27,11 +27,11 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
     init {
         val serializationContext = RedisSerializationContext.newSerializationContext<String, RouteDefinition>()
             .key(RedisSerializer.string())
-            .value(JacksonSerializerUtils.json(RouteDefinition::class.java))
+            .value(JacksonJsonRedisSerializer(RouteDefinition::class.java))
             .hashKey(RedisSerializer.string())
-            .hashValue(JacksonSerializerUtils.json(RouteDefinition::class.java))
+            .hashValue(JacksonJsonRedisSerializer(RouteDefinition::class.java))
             .build()
-        reactiveHashOperations = reactiveRedisOps.opsForHash(serializationContext)
+        reactiveHashOperations = redisTemplate.opsForHash(serializationContext)
         caffeineCache = Caffeine.newBuilder().initialCapacity(128).maximumSize(1024).build()
     }
 
@@ -42,7 +42,7 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
         val routeDefinitions = caffeineCache.asMap().values
         if (routeDefinitions.isEmpty()) {
             return reactiveHashOperations.values(ROUTE_KEY)
-                .doOnNext { r -> caffeineCache.put(r.id, r) }
+                .doOnNext { r -> caffeineCache.put(r.id!!, r) }
         }
         return Flux.fromIterable(routeDefinitions)
             .onErrorContinue { throwable: Throwable, _ ->
@@ -61,8 +61,8 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
      * @return Mono.empty()
      */
     override fun save(route: Mono<RouteDefinition>): Mono<Void> = route.flatMap { r ->
-        caffeineCache.put(r.id, r)
-        reactiveHashOperations.put(ROUTE_KEY, r.id, r)
+        caffeineCache.put(r.id!!, r)
+        reactiveHashOperations.put(ROUTE_KEY, r.id!!, r)
             .flatMap { success: Boolean ->
                 if (success) Mono.empty() else defer(
                     String.format(
@@ -86,7 +86,8 @@ class RedisHashRouteDefinitionRepository(reactiveRedisOps: ReactiveRedisOps) : R
             }
     }
 
-    private fun <T> defer(msg: String): Mono<T> = Mono.defer { Mono.error(NotFoundException(msg)) }
+    @Suppress("UNCHECKED_CAST")
+    private fun <T : Any> defer(msg: String): Mono<T> = Mono.defer { Mono.error(NotFoundException(msg)) } as Mono<T>
 
     companion object {
         const val ROUTE_KEY: String = "RouteDefinition"

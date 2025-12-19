@@ -1,8 +1,5 @@
 package com.livk.filter
 
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.node.JsonNodeFactory
-import com.fasterxml.jackson.databind.node.ObjectNode
 import com.livk.auto.service.annotation.SpringAutoService
 import com.livk.commons.io.DataBufferUtils
 import com.livk.commons.jackson.JsonMapperUtils
@@ -15,11 +12,12 @@ import org.springframework.core.io.buffer.LimitedDataBufferList
 import org.springframework.http.MediaType
 import org.springframework.http.server.reactive.ServerHttpResponse
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator
-import org.springframework.lang.NonNull
 import org.springframework.stereotype.Component
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import tools.jackson.databind.node.JsonNodeFactory
+import tools.jackson.databind.node.ObjectNode
 import java.nio.charset.StandardCharsets
 
 /**
@@ -32,8 +30,7 @@ class ResultHandlerWebFilter : GlobalFilter, Ordered {
         val originalResponse = exchange.response
         val bufferFactory = originalResponse.bufferFactory()
         val decoratedResponse: ServerHttpResponse = object : ServerHttpResponseDecorator(originalResponse) {
-            @NonNull
-            override fun writeWith(@NonNull body: Publisher<out DataBuffer>): Mono<Void> {
+            override fun writeWith(body: Publisher<out DataBuffer>): Mono<Void> {
                 val dataBufferFlux = Flux.from(body).collect(
                     { LimitedDataBufferList(-1) }) { obj: LimitedDataBufferList, buffer ->
                     obj.add(
@@ -65,7 +62,7 @@ class ResultHandlerWebFilter : GlobalFilter, Ordered {
         val node = ObjectNode(JsonNodeFactory.instance)
         node.put("code", 200)
             .put("msg", "ok")
-            .set<JsonNode>("data", jsonNode)
+            .set("data", jsonNode)
         return JsonMapperUtils.writeValueAsBytes(node)
     }
 

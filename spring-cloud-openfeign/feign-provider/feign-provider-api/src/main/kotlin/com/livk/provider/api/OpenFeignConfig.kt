@@ -2,7 +2,6 @@ package com.livk.provider.api
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.PropertyAccessor
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.livk.auto.service.annotation.SpringAutoService
 import com.livk.provider.api.feign.factory.UserRemoteServiceFallbackFactory
 import feign.Feign
@@ -16,9 +15,10 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration
 import org.springframework.data.redis.cache.RedisCacheManager
 import org.springframework.data.redis.cache.RedisCacheWriter
 import org.springframework.data.redis.connection.RedisConnectionFactory
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
+import org.springframework.data.redis.serializer.JacksonJsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializationContext
 import org.springframework.data.redis.serializer.StringRedisSerializer
+import tools.jackson.databind.json.JsonMapper
 
 /**
  * @author livk
@@ -36,9 +36,10 @@ open class OpenFeignConfig {
     @Bean
     open fun cacheManager(redisConnectionFactory: RedisConnectionFactory): CacheManager {
         var redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-        val mapper = ObjectMapper()
-        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
-        val serializer = Jackson2JsonRedisSerializer(mapper, Any::class.java)
+        val mapper = JsonMapper.builder().changeDefaultVisibility {
+            it.withVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
+        }.build()
+        val serializer = JacksonJsonRedisSerializer(mapper, Any::class.java)
         redisCacheConfiguration = redisCacheConfiguration.disableCachingNullValues()
             .serializeKeysWith(
                 RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer())

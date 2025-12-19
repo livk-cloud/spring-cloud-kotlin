@@ -1,11 +1,10 @@
 [versions]
-spring-boot = "3.5.8"
-spring-cloud = "2025.0.0"
+spring-boot = "4.0.1"
+spring-cloud = "2025.1.0"
 kotlin = "2.3.0"
 kotlin-ksp = "2.3.4"
 bouncycastle = "1.83"
-wiremock = "3.13.2"
-spring-extension = "1.5.5"
+spring-extension = "2.0.0"
 kotlinpoet = "2.2.0"
 atomicfu = "0.29.0"
 
@@ -16,7 +15,6 @@ kotlin-ksp-plugin = { group = "com.google.devtools.ksp", name = "symbol-processi
 spring-extension-dependencies = { group = "io.github.livk-cloud", name = "spring-extension-dependencies", version.ref = "spring-extension" }
 spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "spring-cloud" }
 bcprov-jdk15on = { group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bouncycastle" }
-wiremock = { group = "org.wiremock", name = "wiremock", version.ref = "wiremock" }
 symbol-processing = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "kotlin-ksp" }
 kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version.ref = "kotlinpoet" }
 atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version.ref = "atomicfu" }

@@ -35,7 +35,7 @@ class RequestHashingGatewayFilterFactory : AbstractGatewayFilterFactory<RequestH
     private val messageReaders: List<HttpMessageReader<*>> = HandlerStrategies.withDefaults().messageReaders()
 
     override fun apply(config: Config): GatewayFilter =
-        GatewayFilter { exchange: ServerWebExchange, chain: GatewayFilterChain ->
+        GatewayFilter { exchange, chain ->
             ServerWebExchangeUtils
                 .cacheRequestBodyAndRequest(exchange) { httpRequest ->
                     ServerRequest
@@ -50,7 +50,7 @@ class RequestHashingGatewayFilterFactory : AbstractGatewayFilterFactory<RequestH
                                 .attributes[HASH_ATTR] = computeHash(config.messageDigest, requestPayload)
                         }
                         .then(Mono.defer {
-                            var cachedRequest = exchange.getAttribute<ServerHttpRequest>(
+                            val cachedRequest = exchange.getAttribute<ServerHttpRequest>(
                                 ServerWebExchangeUtils.CACHED_SERVER_HTTP_REQUEST_DECORATOR_ATTR
                             )
                             Assert.notNull(
@@ -60,12 +60,13 @@ class RequestHashingGatewayFilterFactory : AbstractGatewayFilterFactory<RequestH
                             exchange.attributes
                                 .remove(ServerWebExchangeUtils.CACHED_SERVER_HTTP_REQUEST_DECORATOR_ATTR)
                             val hash = exchange.getAttribute<String>(HASH_ATTR)
-                            cachedRequest = cachedRequest!!.mutate()
-                                .header(HASH_HEADER, hash)
-                                .build()
+                            val mutate = cachedRequest!!.mutate()
+                            if (hash != null) {
+                                mutate.header(HASH_HEADER, hash)
+                            }
                             chain.filter(
                                 exchange.mutate()
-                                    .request(cachedRequest)
+                                    .request(mutate.build())
                                     .build()
                             )
                         })

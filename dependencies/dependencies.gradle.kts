@@ -7,7 +7,6 @@ dependencies {
     api(platform(libs.spring.cloud.dependencies))
     constraints {
         api(libs.bcprov.jdk15on)
-        api(libs.wiremock)
         api(libs.symbol.processing)
         api(libs.kotlinpoet)
         api(libs.atomicfu)

@@ -7,6 +7,8 @@ dependencies {
     optional("org.springframework:spring-webflux")
     optional("org.springframework.boot:spring-boot-starter")
     optional("org.springframework.cloud:spring-cloud-commons")
+    optional("org.springframework.boot:spring-boot-restclient")
+    optional("org.springframework.boot:spring-boot-webclient")
     api("org.jetbrains.kotlin:kotlin-reflect")
     api("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("com.github.ben-manes.caffeine:caffeine")

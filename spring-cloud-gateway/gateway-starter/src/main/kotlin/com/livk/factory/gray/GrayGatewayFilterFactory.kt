@@ -33,7 +33,7 @@ class GrayGatewayFilterFactory(private val clientFactory: LoadBalancerClientFact
             val route = getRoute(exchange)
             val uri = route.uri
             val schemePrefix = exchange.getAttribute<String>(ServerWebExchangeUtils.GATEWAY_SCHEME_PREFIX_ATTR)
-            if (uri == null || (GRAY_LB != uri.scheme && GRAY_LB != schemePrefix)) {
+            if (GRAY_LB != uri.scheme && GRAY_LB != schemePrefix) {
                 return@GatewayFilter chain.filter(exchange)
             }
             ServerWebExchangeUtils.addOriginalRequestUrl(exchange, uri)

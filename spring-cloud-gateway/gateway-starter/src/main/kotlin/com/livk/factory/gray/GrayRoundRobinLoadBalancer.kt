@@ -42,7 +42,7 @@ class GrayRoundRobinLoadBalancer(
     ): Response<ServiceInstance> {
         val serviceInstanceResponse = this.getInstanceResponse(serviceInstances, metaData)
         if (serviceInstanceResponse is SelectedInstanceCallback && serviceInstanceResponse.hasServer()) {
-            (serviceInstanceResponse as SelectedInstanceCallback).selectedServiceInstance(serviceInstanceResponse.server)
+            (serviceInstanceResponse as SelectedInstanceCallback).selectedServiceInstance(serviceInstanceResponse.server!!)
         }
         return serviceInstanceResponse
     }
@@ -65,7 +65,7 @@ class GrayRoundRobinLoadBalancer(
         //非灰度server
         val defaultInstanceServer: MutableList<ServiceInstance> = mutableListOf()
         for (serviceInstance in instances) {
-            if (version == serviceInstance.metadata[GrayConstant.VERSION] && ips.contains(serviceInstance.host)) {
+            if (version == serviceInstance.metadata?.get(GrayConstant.VERSION) && ips.contains(serviceInstance.host)) {
                 grayInstanceServer.add(serviceInstance)
             } else {
                 val metadata = serviceInstance.metadata
@@ -74,7 +74,7 @@ class GrayRoundRobinLoadBalancer(
                     defaultInstanceServer.add(serviceInstance)
                 } else {
                     //判断是否有版本号,有的话剔除,没有的话就加入到默认server中
-                    if (!StringUtils.hasText(metadata[GrayConstant.VERSION])) {
+                    if (!StringUtils.hasText(metadata?.get(GrayConstant.VERSION))) {
                         defaultInstanceServer.add(serviceInstance)
                     }
                 }

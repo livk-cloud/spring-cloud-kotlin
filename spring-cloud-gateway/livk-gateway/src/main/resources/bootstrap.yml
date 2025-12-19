@@ -11,41 +11,43 @@ spring:
           version: 1.0.0
       host: livk.com
     gateway:
-      routes:
-        - id: json
-          uri: http://localhost:8082
-          predicates:
-            - Path=/web/**
-          filters:
-            - StripPrefix=1
-        - id: demo
-          uri: http://localhost:9852
-          predicates:
-            - Path=/post/**
-          filters:
-            - RequestHashing=SHA-256
-        - id: auth
-          uri: http://localhost:9852
-          predicates:
-            - Path=/hash/**
-          filters:
-            - HeaderHash=SHA-256
-        - id: gray-auth
-          uri: gray-lb://auth
-          predicates:
-            - Path=/auth/**
-          filters:
-            - StripPrefix=1
-            - name: Gray
-              args:
-                version: 1.0.0
-                ips:
-                  - 192.168.75.128
-                  - 192.168.75.129
-                  - 127.0.0.1
-                  - 192.168.2.164
-                  - localhost
-          order: -1
+      server:
+        webflux:
+          routes:
+            - id: json
+              uri: http://localhost:8082
+              predicates:
+                - Path=/web/**
+              filters:
+                - StripPrefix=1
+            - id: demo
+              uri: http://localhost:9852
+              predicates:
+                - Path=/post/**
+              filters:
+                - RequestHashing=SHA-256
+            - id: auth
+              uri: http://localhost:9852
+              predicates:
+                - Path=/hash/**
+              filters:
+                - HeaderHash=SHA-256
+            - id: gray-auth
+              uri: gray-lb://auth
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
+                - name: Gray
+                  args:
+                    version: 1.0.0
+                    ips:
+                      - 192.168.75.128
+                      - 192.168.75.129
+                      - 127.0.0.1
+                      - 192.168.2.164
+                      - localhost
+              order: -1
   data:
     redis:
       host: livk.com

@@ -4,7 +4,7 @@ import com.livk.auto.service.annotation.SpringAutoService
 import com.livk.commons.http.annotation.EnableRestClient
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
-import org.springframework.boot.web.client.RestClientCustomizer
+import org.springframework.boot.restclient.RestClientCustomizer
 import org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor
 import org.springframework.cloud.client.loadbalancer.reactive.ReactiveLoadBalancer
 import org.springframework.context.annotation.Bean

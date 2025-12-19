@@ -1,112 +1,101 @@
 package com.livk.gateway.factory
 
-import com.github.tomakehurst.wiremock.WireMockServer
-import com.github.tomakehurst.wiremock.client.WireMock
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.livk.factory.RequestHashingGatewayFilterFactory
 import com.livk.gateway.LivkGateway
-import com.livk.gateway.factory.RequestHashingGatewayFilterFactoryTest.RequestHashingFilterTestConfig
+import mockwebserver3.MockResponse
+import mockwebserver3.MockWebServer
 import org.bouncycastle.util.encoders.Hex
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.cloud.gateway.route.RouteLocator
-import org.springframework.cloud.gateway.route.builder.GatewayFilterSpec
-import org.springframework.cloud.gateway.route.builder.PredicateSpec
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder
 import org.springframework.context.annotation.Bean
-import org.springframework.http.HttpStatus
 import org.springframework.test.web.reactive.server.WebTestClient
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 /**
  *
  * @author livk
  */
 @SpringBootTest(
+    value = ["spring.cloud.consul.enabled=false"],
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [RequestHashingGatewayFilterFactory::class, LivkGateway::class, RequestHashingFilterTestConfig::class]
+    classes = [RequestHashingGatewayFilterFactory::class, LivkGateway::class, RequestHashingGatewayFilterFactoryTest.RequestHashingFilterTestConfig::class]
 )
 @AutoConfigureWebTestClient
 internal class RequestHashingGatewayFilterFactoryTest {
+
     @Autowired
     lateinit var webTestClient: WebTestClient
 
     @Autowired
-    lateinit var wireMockServer: WireMockServer
-
-    @AfterEach
-    fun afterEach() {
-        wireMockServer.resetAll()
-    }
+    lateinit var mockWebServer: MockWebServer
 
     @Test
-    @Throws(NoSuchAlgorithmException::class)
-    fun shouldAddHeaderWithComputedHash() {
-        val messageDigest = MessageDigest.getInstance("SHA-512")
+    fun `should add header with computed hash`() {
+        mockWebServer.enqueue(MockResponse(200))
+
         val body = "hello world"
-        val expectedHash = Hex.toHexString(messageDigest.digest(body.toByteArray(StandardCharsets.UTF_8)))
-        wireMockServer.stubFor(WireMock.post("/post").willReturn(WireMock.ok()))
+        val digest = MessageDigest.getInstance("SHA-512")
+        val expectedHash = Hex.toHexString(digest.digest(body.toByteArray(StandardCharsets.UTF_8)))
+
         webTestClient.post()
             .uri("/post")
             .bodyValue(body)
             .exchange()
             .expectStatus()
-            .isEqualTo(HttpStatus.OK)
-        wireMockServer.verify(
-            WireMock.postRequestedFor(WireMock.urlEqualTo("/post"))
-                .withHeader("X-Hash", WireMock.equalTo(expectedHash))
-        )
+            .isOk
+
+        val request = mockWebServer.takeRequest()
+        assertEquals("/post", request.target)
+        assertEquals(expectedHash, request.headers["X-Hash"])
     }
+
 
     @Test
-    fun shouldNotAddHeaderIfNoBody() {
-        wireMockServer.stubFor(WireMock.post("/post").willReturn(WireMock.ok()))
+    fun `should not add header if no body`() {
+        mockWebServer.enqueue(MockResponse(200))
 
-        webTestClient.post().uri("/post")
+        webTestClient.post()
+            .uri("/post")
             .exchange()
             .expectStatus()
-            .isEqualTo(HttpStatus.OK)
+            .isOk
 
-        wireMockServer.verify(
-            WireMock.postRequestedFor(WireMock.urlEqualTo("/post"))
-                .withoutHeader("X-Hash")
-        )
+        val request = mockWebServer.takeRequest()
+        assertEquals("/post", request.target)
+        assertNull(request.headers["X-Hash"])
     }
 
-    @TestConfiguration
-    internal open class RequestHashingFilterTestConfig {
 
-        @Bean(destroyMethod = "stop")
-        open fun wireMockServer(): WireMockServer {
-            val options = WireMockConfiguration.wireMockConfig().dynamicPort()
-            val wireMockServer = WireMockServer(options)
-            wireMockServer.start()
-            return wireMockServer
-        }
+    @TestConfiguration
+    open class RequestHashingFilterTestConfig {
+
+        @Bean(initMethod = "start", destroyMethod = "close")
+        open fun mockWebServer(): MockWebServer = MockWebServer()
 
         @Bean
         open fun testRoutes(
             builder: RouteLocatorBuilder,
-            wireMock: WireMockServer,
-            requestHashingGatewayFilterFactory: RequestHashingGatewayFilterFactory
+            requestHashingGatewayFilterFactory: RequestHashingGatewayFilterFactory,
+            mockWebServer: MockWebServer
         ): RouteLocator {
             val config = RequestHashingGatewayFilterFactory.Config()
             config.algorithm("SHA-512")
 
-            val gatewayFilter = requestHashingGatewayFilterFactory.apply(config)
-            return builder
-                .routes()
-                .route { predicateSpec: PredicateSpec ->
-                    predicateSpec
-                        .path("/post")
-                        .filters { spec: GatewayFilterSpec -> spec.filter(gatewayFilter) }
-                        .uri(wireMock.baseUrl())
+            val filter = requestHashingGatewayFilterFactory.apply(config)
+
+            return builder.routes()
+                .route { spec ->
+                    spec.path("/post")
+                        .filters { f -> f.filter(filter) }
+                        .uri(mockWebServer.url("/").toString())
                 }
                 .build()
         }
