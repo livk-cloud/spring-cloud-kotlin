@@ -86,8 +86,7 @@ class RedisHashRouteDefinitionRepository(redisTemplate: ReactiveRedisTemplate<St
             }
     }
 
-    @Suppress("UNCHECKED_CAST")
-    private fun <T : Any> defer(msg: String): Mono<T> = Mono.defer { Mono.error(NotFoundException(msg)) } as Mono<T>
+    private fun <T> defer(msg: String): Mono<T> = Mono.defer { Mono.error(NotFoundException(msg)) }
 
     companion object {
         const val ROUTE_KEY: String = "RouteDefinition"
