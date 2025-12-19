@@ -86,7 +86,7 @@ class RedisHashRouteDefinitionRepository(redisTemplate: ReactiveRedisTemplate<St
             }
     }
 
-    private fun <T> defer(msg: String): Mono<T> = Mono.defer { Mono.error(NotFoundException(msg)) }
+    private fun <T: Any> defer(msg: String): Mono<T> = Mono.defer { Mono.error(NotFoundException(msg)) }
 
     companion object {
         const val ROUTE_KEY: String = "RouteDefinition"
