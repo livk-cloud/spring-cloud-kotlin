@@ -4,7 +4,7 @@ spring-cloud = "2025.1.0"
 kotlin = "2.3.0"
 kotlin-ksp = "2.3.4"
 bouncycastle = "1.83"
-spring-extension = "2.0.0"
+spring-extension = "2.0.1"
 kotlinpoet = "2.2.0"
 atomicfu = "0.30.0"
 
