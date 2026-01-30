@@ -1,6 +1,6 @@
 [versions]
 spring-boot = "4.0.2"
-spring-cloud = "2025.1.0"
+spring-cloud = "2025.1.1"
 kotlin = "2.3.0"
 kotlin-ksp = "2.3.5"
 bouncycastle = "1.83"
