@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: config-local-client
+  profiles:
+    active: dev
+  cloud:
+    config:
+      label: dev
+  config:
+    import:
+      - configserver:http://localhost:8770

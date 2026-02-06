@@ -19,10 +19,8 @@ class ServicePlugin : Plugin<Project> {
         project.pluginManager.apply(ModulePlugin::class.java)
         project.pluginManager.apply(BootPlugin::class.java)
 
-        val bootstrap = project.dependencies.create("org.springframework.cloud:spring-cloud-starter-bootstrap")
         val loadbalancer = project.dependencies.create("org.springframework.cloud:spring-cloud-starter-loadbalancer")
 
-        project.dependencies.add(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME, bootstrap)
         project.dependencies.add(JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME, loadbalancer)
     }
 }
