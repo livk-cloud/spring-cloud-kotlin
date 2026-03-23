@@ -1,5 +1,5 @@
 [versions]
-spring-boot = "4.0.3"
+spring-boot = "4.0.4"
 spring-cloud = "2025.1.1"
 kotlin = "2.3.20"
 kotlin-ksp = "2.3.6"
