@@ -18,15 +18,16 @@ abstract class ManifestPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.pluginManager.apply(JavaPlugin::class.java)
         project.tasks.withType(Jar::class.java) {
-            val attributes = it.manifest.attributes
-            attributes.putIfAbsent("Implementation-Group", project.group)
-            attributes.putIfAbsent("Implementation-Title", project.name)
-            attributes.putIfAbsent("Implementation-Version", project.version)
-            attributes.putIfAbsent(
-                "Created-By",
-                System.getProperty("java.version") + " (" + System.getProperty("java.specification.vendor") + ")"
-            )
-            attributes.putIfAbsent("Gradle-Version", GradleVersion.current())
+            manifest {
+                attributes.putIfAbsent("Implementation-Group", project.group)
+                attributes.putIfAbsent("Implementation-Title", project.name)
+                attributes.putIfAbsent("Implementation-Version", project.version)
+                attributes.putIfAbsent(
+                    "Created-By",
+                    System.getProperty("java.version") + " (" + System.getProperty("java.specification.vendor") + ")"
+                )
+                attributes.putIfAbsent("Gradle-Version", GradleVersion.current())
+            }
         }
     }
 }

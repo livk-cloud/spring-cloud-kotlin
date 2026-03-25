@@ -41,29 +41,29 @@ abstract class ManagementPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val configurations = project.configurations
         project.pluginManager.apply(JavaPlugin::class.java)
-        configurations.create(MANAGEMENT) { management ->
-            management.isCanBeResolved = false
-            management.isCanBeConsumed = false
+        configurations.create(MANAGEMENT) {
+            isCanBeResolved = false
+            isCanBeConsumed = false
             val plugins = project.plugins
             plugins.withType(JavaPlugin::class.java) {
-                DEPENDENCY_NAMES_SET.forEach { configurations.getByName(it).extendsFrom(management) }
+                DEPENDENCY_NAMES_SET.forEach { configurations.getByName(it).extendsFrom(this@create) }
             }
             plugins.withType(JavaTestFixturesPlugin::class.java) {
-                configurations.getByName("testFixturesCompileClasspath").extendsFrom(management)
-                configurations.getByName("testFixturesRuntimeClasspath").extendsFrom(management)
+                configurations.getByName("testFixturesCompileClasspath").extendsFrom(this@create)
+                configurations.getByName("testFixturesRuntimeClasspath").extendsFrom(this@create)
             }
             plugins.withType(KotlinPluginWrapper::class.java) {
-                project.extensions.getByType(KotlinJvmProjectExtension::class.java).sourceSets.all { sourceSet ->
-                    configurations.getByName(sourceSet.compileOnlyConfigurationName).extendsFrom(management)
-                    configurations.getByName(sourceSet.runtimeOnlyConfigurationName).extendsFrom(management)
+                project.extensions.getByType(KotlinJvmProjectExtension::class.java).sourceSets.forEach { sourceSet ->
+                    configurations.getByName(sourceSet.compileOnlyConfigurationName).extendsFrom(this@create)
+                    configurations.getByName(sourceSet.runtimeOnlyConfigurationName).extendsFrom(this@create)
                 }
             }
             plugins.withType(MavenPublishPlugin::class.java) {
                 project.extensions.getByType(PublishingExtension::class.java).publications
-                    .withType(MavenPublication::class.java) { mavenPublication ->
-                        mavenPublication.versionMapping { versions ->
-                            versions.allVariants {
-                                it.fromResolutionResult()
+                    .withType(MavenPublication::class.java) {
+                        versionMapping {
+                            allVariants {
+                                fromResolutionResult()
                             }
                         }
                     }

@@ -12,20 +12,20 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * </p>
  *
  * @author livk
- * @date 2022/7/7
+ * @date 2026/3/25
  */
 abstract class CompileArgsPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         project.tasks.withType(KotlinCompile::class.java) {
-            it.compilerOptions {
+            compilerOptions {
                 freeCompilerArgs.set(listOf("-Xjsr305=strict"))
                 jvmTarget.set(JvmTarget.JVM_21)
             }
         }
 
         project.tasks.withType(Test::class.java) {
-            it.useJUnitPlatform()
+            useJUnitPlatform()
         }
     }
 }

@@ -25,12 +25,10 @@ abstract class BootPlugin : Plugin<Project> {
         project.extensions
             .getByType(SpringBootExtension::class.java)
             .buildInfo {
-                it.properties { build ->
-                    build.group.set(project.group.toString())
-                    build.version.set(project.version.toString())
-                    build.time.set(
-                        ZonedDateTime.now().plusHours(8).format(DateTimeFormatter.ISO_INSTANT)
-                    )
+                properties {
+                    group.set(project.group.toString())
+                    version.set(project.version.toString())
+                    time.set(ZonedDateTime.now().plusHours(8).format(DateTimeFormatter.ISO_INSTANT))
                 }
             }
         val bootJar = project.tasks.getByName(SpringBootPlugin.BOOT_JAR_TASK_NAME) as BootJar

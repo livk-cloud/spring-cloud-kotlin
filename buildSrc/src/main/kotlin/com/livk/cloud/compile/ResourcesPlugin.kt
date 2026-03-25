@@ -11,7 +11,7 @@ import org.gradle.api.plugins.JavaPlugin
  * </p>
  *
  * @author livk
- * @date 2022/7/7
+ * @date 2026/3/25
  */
 abstract class ResourcesPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -21,3 +21,4 @@ abstract class ResourcesPlugin : Plugin<Project> {
             .dependsOn(JavaPlugin.PROCESS_RESOURCES_TASK_NAME)
     }
 }
+

@@ -16,11 +16,11 @@ abstract class DeleteExpand : Plugin<Project> {
 
     override fun apply(project: Project) {
         project.tasks.withType(Delete::class.java) {
-            it.delete(project.projectDir.absolutePath + "/build")
-            it.delete(project.projectDir.absolutePath + "/out")
-            it.delete(project.projectDir.absolutePath + "/bin")
-            it.delete(project.projectDir.absolutePath + "/src/main/generated")
-            it.delete(project.projectDir.absolutePath + "/src/test/generated_tests")
+            delete(project.projectDir.absolutePath + "/build")
+            delete(project.projectDir.absolutePath + "/out")
+            delete(project.projectDir.absolutePath + "/bin")
+            delete(project.projectDir.absolutePath + "/src/main/generated")
+            delete(project.projectDir.absolutePath + "/src/test/generated_tests")
         }
     }
 }

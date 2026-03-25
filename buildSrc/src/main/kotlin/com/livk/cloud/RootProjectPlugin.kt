@@ -19,7 +19,7 @@ class RootProjectPlugin : Plugin<Project> {
         project.pluginManager.apply(CorePlugin::class.java)
 
         project.tasks.withType(Jar::class.java){
-            it.enabled = false
+            enabled = false
         }
     }
 }
