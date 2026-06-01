@@ -6,7 +6,7 @@ kotlin-ksp = "2.3.9"
 bouncycastle = "1.84"
 spring-extension = "2.0.4"
 kotlinpoet = "2.3.0"
-atomicfu = "0.32.1"
+atomicfu = "0.33.0"
 
 [libraries]
 spring-boot-plugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "spring-boot" }
