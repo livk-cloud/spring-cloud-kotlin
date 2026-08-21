@@ -1,13 +1,13 @@
 package com.livk.filter
 
 import com.livk.auto.service.annotation.SpringAutoService
-import com.livk.commons.io.DataBufferUtils
 import com.livk.commons.jackson.JsonMapperUtils
 import org.reactivestreams.Publisher
 import org.springframework.cloud.gateway.filter.GatewayFilterChain
 import org.springframework.cloud.gateway.filter.GlobalFilter
 import org.springframework.core.Ordered
 import org.springframework.core.io.buffer.DataBuffer
+import org.springframework.core.io.buffer.DataBufferUtils
 import org.springframework.core.io.buffer.LimitedDataBufferList
 import org.springframework.http.MediaType
 import org.springframework.http.server.reactive.ServerHttpResponse
@@ -37,7 +37,7 @@ class ResultHandlerWebFilter : GlobalFilter, Ordered {
                         buffer
                     )
                 }
-                    .filter { list: LimitedDataBufferList -> !list.isEmpty() }
+                    .filter { list: LimitedDataBufferList -> list.isNotEmpty() }
                     .map { list: LimitedDataBufferList -> list[0].factory().join(list) }
                     .doOnDiscard(DataBuffer::class.java, DataBufferUtils::release)
                     .map { dataBuffer: DataBuffer ->

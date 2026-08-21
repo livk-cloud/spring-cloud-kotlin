@@ -1,6 +1,6 @@
 package com.livk.filter
 
-import com.livk.commons.io.DataBufferUtils
+import com.livk.commons.io.DataBufferConverter
 import com.livk.commons.jackson.JsonMapperUtils
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -45,7 +45,7 @@ class ResultHandlerWebFilterTests {
         filter.filter(exchange, chain).block()
 
         val response = exchange.response as MockServerHttpResponse
-        val body = DataBufferUtils.transformByte(response.body).block()
+        val body = DataBufferConverter.transformByte(response.body).block()
         val node = JsonMapperUtils.readTree(body)
 
         assertTrue(node.has("code"))
