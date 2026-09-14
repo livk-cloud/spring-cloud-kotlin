@@ -66,6 +66,7 @@ internal abstract class AbstractFactoriesProcessor(environment: SymbolProcessorE
                         logger.error("Unable to create $resourceFile, $e")
                     }
                 }
+                providers.clear()
             }
         }
     }
