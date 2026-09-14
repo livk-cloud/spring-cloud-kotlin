@@ -53,7 +53,6 @@ class SpringAutoServiceProcessorProvider : SymbolProcessorProvider {
                         logger.error(supportAnnotation() + " unable to create $resourceFile, $e")
                     }
                 }
-                providers.clear()
             }
         }
     }

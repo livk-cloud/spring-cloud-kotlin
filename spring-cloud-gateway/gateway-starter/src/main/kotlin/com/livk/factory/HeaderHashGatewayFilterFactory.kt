@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component
 import org.springframework.util.CollectionUtils
 import org.springframework.web.reactive.function.server.HandlerStrategies
 import org.springframework.web.reactive.function.server.ServerRequest
+import org.springframework.web.reactive.function.server.bodyToMono
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
 import java.nio.charset.StandardCharsets
@@ -41,7 +42,7 @@ class HeaderHashGatewayFilterFactory : AbstractGatewayFilterFactory<HeaderHashGa
                                 .request(httpRequest)
                                 .build(), messageReaders
                         )
-                        .bodyToMono(String::class.java)
+                        .bodyToMono<String>()
                         .log()
                         .flatMap { body: String ->
                             val headerValueList = exchange.request.headers[HEADER_NAME]

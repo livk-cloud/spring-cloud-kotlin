@@ -42,15 +42,14 @@ internal abstract class AbstractFactoriesProcessor(environment: SymbolProcessorE
 
     override fun generateAndClearConfigFiles() {
         val resourceFile = getLocation()
-        val implServiceSeq = providers
-        if (!implServiceSeq.isEmpty) {
-            val dependencies = Dependencies(true, *implServiceSeq.values().map { it.second }.toTypedArray())
+        if (!providers.isEmpty) {
+            val dependencies = Dependencies(true, *providers.values().map { it.second }.toTypedArray())
             generator.createNewFile(dependencies, "", resourceFile, "").bufferedWriter().use { writer ->
-                for (providerInterface in implServiceSeq.keySet()) {
+                for (providerInterface in providers.keySet()) {
                     logger.info("Working on resource file: $resourceFile")
                     try {
                         val allServices =
-                            Sets.newTreeSet(HashSet(implServiceSeq[providerInterface].map { it.first }))
+                            Sets.newTreeSet(HashSet(providers[providerInterface].map { it.first }))
                         logger.info("New service file contents: $allServices")
                         writer.write("${providerInterface}=\\")
                         writer.newLine()
@@ -67,7 +66,6 @@ internal abstract class AbstractFactoriesProcessor(environment: SymbolProcessorE
                         logger.error("Unable to create $resourceFile, $e")
                     }
                 }
-                implServiceSeq.clear()
             }
         }
     }

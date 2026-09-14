@@ -56,7 +56,6 @@ class GoogleAutoServiceProcessorProvider : SymbolProcessorProvider {
                         logger.error(supportAnnotation() + " unable to create $resourceFile, $e")
                     }
                 }
-                providers.clear()
             }
         }
     }

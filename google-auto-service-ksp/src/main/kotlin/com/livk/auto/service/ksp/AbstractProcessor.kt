@@ -48,6 +48,10 @@ abstract class AbstractProcessor(environment: SymbolProcessorEnvironment) : Symb
         return emptyList()
     }
 
+    final override fun finish() {
+        providers.clear()
+    }
+
     protected abstract fun supportAnnotation(): String
 
     protected abstract fun accept(annotation: KSAnnotation, symbolAnnotation: KSClassDeclaration);

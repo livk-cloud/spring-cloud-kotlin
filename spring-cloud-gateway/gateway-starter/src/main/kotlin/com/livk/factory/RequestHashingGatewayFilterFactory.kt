@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component
 import org.springframework.util.Assert
 import org.springframework.web.reactive.function.server.HandlerStrategies
 import org.springframework.web.reactive.function.server.ServerRequest
+import org.springframework.web.reactive.function.server.bodyToMono
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
 import java.nio.charset.StandardCharsets
@@ -44,7 +45,7 @@ class RequestHashingGatewayFilterFactory : AbstractGatewayFilterFactory<RequestH
                                 .request(httpRequest)
                                 .build(), messageReaders
                         )
-                        .bodyToMono(String::class.java)
+                        .bodyToMono<String>()
                         .doOnNext { requestPayload: String ->
                             exchange
                                 .attributes[HASH_ATTR] = computeHash(config.messageDigest, requestPayload)
