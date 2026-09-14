@@ -20,7 +20,7 @@ abstract class CompileArgsPlugin : Plugin<Project> {
         project.tasks.withType(KotlinCompile::class.java) {
             compilerOptions {
                 freeCompilerArgs.set(listOf("-Xjsr305=strict"))
-                jvmTarget.set(JvmTarget.JVM_21)
+                jvmTarget.set(JvmTarget.JVM_25)
             }
         }
 

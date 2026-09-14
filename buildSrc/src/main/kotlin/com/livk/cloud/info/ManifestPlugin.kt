@@ -19,14 +19,12 @@ abstract class ManifestPlugin : Plugin<Project> {
         project.pluginManager.apply(JavaPlugin::class.java)
         project.tasks.withType(Jar::class.java) {
             manifest {
-                attributes.putIfAbsent("Implementation-Group", project.group)
-                attributes.putIfAbsent("Implementation-Title", project.name)
-                attributes.putIfAbsent("Implementation-Version", project.version)
-                attributes.putIfAbsent(
-                    "Created-By",
-                    System.getProperty("java.version") + " (" + System.getProperty("java.specification.vendor") + ")"
-                )
-                attributes.putIfAbsent("Gradle-Version", GradleVersion.current())
+                attributes["Implementation-Group"] = project.group
+                attributes["Implementation-Title"] = project.name
+                attributes["Implementation-Version"] = project.version
+                attributes["Created-By"] =
+                    "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})"
+                attributes["Gradle-Version"] = GradleVersion.current()
             }
         }
     }

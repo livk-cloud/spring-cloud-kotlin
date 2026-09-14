@@ -22,7 +22,7 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         suppressWarnings = true
         allWarningsAsErrors = true
-        jvmTarget = JvmTarget.JVM_21
+        jvmTarget = JvmTarget.JVM_25
     }
 }
 
@@ -52,9 +52,8 @@ gradlePlugin {
 }
 
 tasks.withType<Jar> {
-    manifest.attributes.putIfAbsent(
-        "Created-By",
-        System.getProperty("java.version") + " (" + System.getProperty("java.specification.vendor") + ")"
-    )
-    manifest.attributes.putIfAbsent("Gradle-Version", GradleVersion.current())
+    manifest {
+        attributes["Created-By"] = "${System.getProperty("java.version") } (${System.getProperty("java.specification.vendor")})"
+        attributes["Gradle-Version"] = GradleVersion.current()
+    }
 }
