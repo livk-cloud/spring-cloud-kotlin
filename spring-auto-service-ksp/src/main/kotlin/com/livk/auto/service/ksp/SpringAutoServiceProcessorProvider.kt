@@ -33,13 +33,17 @@ class SpringAutoServiceProcessorProvider : SymbolProcessorProvider {
         }
 
         override fun generateAndClearConfigFiles() {
-            if (!providers.isEmpty) {
+            if (providers.isEmpty) {
+                return
+            }
+            try {
                 for (annotationName in providers.keySet()) {
-                    val resourceFile = "META-INF/spring/${annotationName}.imports"
-                    logger.info(supportAnnotation() + " on resource file: $resourceFile")
+                    val resourceFile = "META-INF/spring/$annotationName.imports"
+                    logger.info("${supportAnnotation()} working on resource file: $resourceFile")
                     try {
-                        val autoConfigurationImpls = providers[annotationName].map { it.first }
-                        logger.info(supportAnnotation() + " file contents: $autoConfigurationImpls")
+                        // .imports 文件按字典序排序，保证产物在多次编译间内容稳定可复现
+                        val autoConfigurationImpls = providers[annotationName].map { it.first }.toSortedSet()
+                        logger.info("${supportAnnotation()} file contents: $autoConfigurationImpls")
                         val ksFiles = providers[annotationName].map { it.second }.toTypedArray()
                         val dependencies = Dependencies(true, *ksFiles)
                         generator.createNewFile(dependencies, "", resourceFile, "").bufferedWriter().use { writer ->
@@ -48,11 +52,13 @@ class SpringAutoServiceProcessorProvider : SymbolProcessorProvider {
                                 writer.newLine()
                             }
                         }
-                        logger.info(supportAnnotation() + " wrote to: $resourceFile")
+                        logger.info("${supportAnnotation()} wrote to: $resourceFile")
                     } catch (e: IOException) {
-                        logger.error(supportAnnotation() + " unable to create $resourceFile, $e")
+                        logger.error("${supportAnnotation()} unable to create $resourceFile, $e")
                     }
                 }
+            } finally {
+                // 无论生成成功还是失败都清空，避免残留状态被带入 KSP 的下一处理轮次
                 providers.clear()
             }
         }

@@ -36,13 +36,17 @@ class GoogleAutoServiceProcessorProvider : SymbolProcessorProvider {
         }
 
         override fun generateAndClearConfigFiles() {
-            if (!providers.isEmpty) {
+            if (providers.isEmpty) {
+                return
+            }
+            try {
                 for (providerInterface in providers.keySet()) {
-                    val resourceFile = "META-INF/services/${providerInterface}"
-                    logger.info(supportAnnotation() + " working on resource file: $resourceFile")
+                    val resourceFile = "META-INF/services/$providerInterface"
+                    logger.info("${supportAnnotation()} working on resource file: $resourceFile")
                     try {
-                        val autoService = providers[providerInterface].map { it.first }
-                        logger.info(supportAnnotation() + " file contents: $autoService")
+                        // ServiceLoader 规范下条目顺序无关紧要，排序只是为了保证产物字节可复现
+                        val autoService = providers[providerInterface].map { it.first }.toSortedSet()
+                        logger.info("${supportAnnotation()} file contents: $autoService")
                         val dependencies =
                             Dependencies(true, *providers[providerInterface].map { it.second }.toTypedArray())
                         generator.createNewFile(dependencies, "", resourceFile, "").bufferedWriter().use { writer ->
@@ -51,11 +55,13 @@ class GoogleAutoServiceProcessorProvider : SymbolProcessorProvider {
                                 writer.newLine()
                             }
                         }
-                        logger.info(supportAnnotation() + " wrote to: $resourceFile")
+                        logger.info("${supportAnnotation()} wrote to: $resourceFile")
                     } catch (e: IOException) {
-                        logger.error(supportAnnotation() + " unable to create $resourceFile, $e")
+                        logger.error("${supportAnnotation()} unable to create $resourceFile, $e")
                     }
                 }
+            } finally {
+                // 无论生成成功还是失败都清空，避免残留状态被带入 KSP 的下一处理轮次
                 providers.clear()
             }
         }

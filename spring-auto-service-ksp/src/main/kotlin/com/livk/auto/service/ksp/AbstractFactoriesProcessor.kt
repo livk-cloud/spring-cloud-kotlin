@@ -1,6 +1,5 @@
 package com.livk.auto.service.ksp
 
-import com.google.common.collect.Sets
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.ClassKind
@@ -11,7 +10,7 @@ import java.io.IOException
 
 /**
  * <p>
- * AbstractFactoriesProcessorProvider
+ * AbstractFactoriesProcessor
  * </p>
  *
  * @author livk
@@ -27,12 +26,17 @@ internal abstract class AbstractFactoriesProcessor(environment: SymbolProcessorE
         if (providerName == Void::class.java.name) {
             val interfaceList = symbolAnnotation.superTypes
                 .map { it.resolve().declaration }
-                .filter { resolver.getClassDeclarationByName(it.simpleName)?.classKind == ClassKind.INTERFACE }
-            providerName = if (interfaceList.count() == 1) {
-                interfaceList.first().closestClassDeclarationBinaryName()
-            } else {
-                ""
+                .filterIsInstance<KSClassDeclaration>()
+                .filter { it.classKind == ClassKind.INTERFACE }
+            if (interfaceList.count() != 1) {
+                logger.error(
+                    "${symbolAnnotation.toBinaryName()} unable to determine a unique interface " +
+                        "(found ${interfaceList.count()}), please specify the target interface explicitly via value",
+                    symbolAnnotation
+                )
+                return
             }
+            providerName = interfaceList.first().closestClassDeclarationBinaryName()
         }
         providers.put(
             providerName,
@@ -41,33 +45,35 @@ internal abstract class AbstractFactoriesProcessor(environment: SymbolProcessorE
     }
 
     override fun generateAndClearConfigFiles() {
+        if (providers.isEmpty) {
+            return
+        }
         val resourceFile = getLocation()
-        if (!providers.isEmpty) {
+        try {
+            logger.info("${supportAnnotation()} working on resource file: $resourceFile")
             val dependencies = Dependencies(true, *providers.values().map { it.second }.toTypedArray())
             generator.createNewFile(dependencies, "", resourceFile, "").bufferedWriter().use { writer ->
                 for (providerInterface in providers.keySet()) {
-                    logger.info("Working on resource file: $resourceFile")
-                    try {
-                        val allServices =
-                            Sets.newTreeSet(HashSet(providers[providerInterface].map { it.first }))
-                        logger.info("New service file contents: $allServices")
-                        writer.write("${providerInterface}=\\")
-                        writer.newLine()
-                        for ((index, service) in allServices.withIndex()) {
-                            writer.write(service)
-                            if (index != allServices.count() - 1) {
-                                writer.write(",\\")
-                            }
-                            writer.newLine()
+                    val allServices = providers[providerInterface].map { it.first }.toSortedSet()
+                    logger.info("${supportAnnotation()} new service file contents: $allServices")
+                    writer.write("$providerInterface=\\")
+                    writer.newLine()
+                    for ((index, service) in allServices.withIndex()) {
+                        writer.write(service)
+                        if (index != allServices.size - 1) {
+                            writer.write(",\\")
                         }
                         writer.newLine()
-                        logger.info("Wrote to: $resourceFile")
-                    } catch (e: IOException) {
-                        logger.error("Unable to create $resourceFile, $e")
                     }
+                    writer.newLine()
                 }
-                providers.clear()
             }
+            logger.info("${supportAnnotation()} wrote to: $resourceFile")
+        } catch (e: IOException) {
+            logger.error("${supportAnnotation()} unable to create $resourceFile, $e")
+        } finally {
+            // 无论生成成功还是失败都清空，避免残留状态被带入下一处理轮次
+            providers.clear()
         }
     }
 }
