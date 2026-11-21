@@ -5,6 +5,7 @@ plugins {
 dependencies {
     implementation(project(":spring-cloud-openfeign:feign-provider:feign-provider-api"))
     implementation("com.mysql:mysql-connector-j")
+    implementation("com.h2database:h2")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter")
 }
 

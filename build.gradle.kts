@@ -10,6 +10,7 @@ configure(gradleModuleProjects) {
 
     dependencies {
         management(platform(project(":dependencies")))
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework:spring-tx")
 

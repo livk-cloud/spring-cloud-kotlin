@@ -1,14 +1,14 @@
-package com.livk.consumer.biz
+package com.livk.provider.api.feign
 
-import com.livk.provider.api.domain.Users
 import org.springframework.web.service.annotation.GetExchange
 import org.springframework.web.service.annotation.HttpExchange
+import tools.jackson.databind.JsonNode
 
 /**
  * @author livk
  */
-@HttpExchange(value = "httpUserRemoteService", url = "http://feign-provider-biz")
+@HttpExchange
 interface HttpUserRemoteService {
     @GetExchange("/users")
-    fun users(): List<Users>
+    fun users(): List<JsonNode>
 }

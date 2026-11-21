@@ -7,16 +7,22 @@ spring:
         service-name: ${spring.application.name}
         heartbeat:
           enabled: true
-      host: livk.com
+        prefer-ip-address: true
+#      host: livk.com
     openfeign:
       okhttp:
         enabled: true
       httpclient:
         enabled: false
-  data:
-    redis:
-      host: livk.com
-      password: 123456
+#  data:
+#    redis:
+#      host: livk.com
+#      password: 123456
+
+#  http:
+#    serviceclient:
+#      feign-provider-biz:
+#        base-url: lb://feign-provider-biz
 server:
   port: 8661
 

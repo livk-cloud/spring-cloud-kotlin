@@ -10,7 +10,7 @@ dependencies {
     api("org.springframework.cloud:spring-cloud-starter-bus-kafka")
     api("org.springframework.cloud:spring-cloud-starter-consul-discovery")
     api("org.springframework.cloud:spring-cloud-starter-consul-config")
-    api("org.springframework.boot:spring-boot-starter-web")
+    api("org.springframework.boot:spring-boot-starter-webmvc")
     compileOnly("io.github.livk-cloud:spring-auto-service")
     ksp(project(":spring-auto-service-ksp"))
 }

@@ -3,6 +3,7 @@ package com.livk.provider.api
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.PropertyAccessor
 import com.livk.auto.service.annotation.SpringAutoService
+import com.livk.provider.api.domain.Users
 import com.livk.provider.api.feign.factory.UserRemoteServiceFallbackFactory
 import feign.Feign
 import feign.Logger
@@ -36,15 +37,7 @@ open class OpenFeignConfig {
     @Bean
     open fun cacheManager(redisConnectionFactory: RedisConnectionFactory): CacheManager {
         var redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-        val mapper = JsonMapper.builder().changeDefaultVisibility {
-            it.withVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
-        }.build()
-        val serializer = JacksonJsonRedisSerializer(mapper, Any::class.java)
         redisCacheConfiguration = redisCacheConfiguration.disableCachingNullValues()
-            .serializeKeysWith(
-                RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer())
-            )
-            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer))
         return RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
             .cacheDefaults(redisCacheConfiguration).build()
     }
